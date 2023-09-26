@@ -7,6 +7,7 @@ class RecipeSerializer < ActiveModel::Serializer
   def total_time 
     object.prep_time + object.cooking_time
   end 
+  
   def username 
     object.user&.username
   end

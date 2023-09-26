@@ -1,18 +1,6 @@
 class IngredientsController < ApplicationController
   before_action :set_ingredient, only: %i[ show update destroy ]
 
-  # GET /ingredients
-  def index
-    @ingredients = Ingredient.all
-
-    render json: @ingredients
-  end
-
-  # GET /ingredients/1
-  def show
-    render json: @ingredient
-  end
-
   # POST /ingredients
   def create
     @ingredient = Ingredient.new(ingredient_params)
