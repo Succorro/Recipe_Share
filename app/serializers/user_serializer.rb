@@ -3,7 +3,7 @@ class UserSerializer < ActiveModel::Serializer
 
   
   def recipes 
-    @recipes = object.recipes.all.map {|recipe| {"title" => recipe.title, "prep_time" => recipe.prep_time, "cooking_time" => recipe.cooking_time }}
+    @recipes = object.recipes.all.map {|recipe| {"title" => recipe.title, "total_time" => recipe.prep_time + recipe.cooking_time }}
   end 
-  
+
 end
