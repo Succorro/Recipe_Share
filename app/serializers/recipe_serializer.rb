@@ -1,11 +1,12 @@
 class RecipeSerializer < ActiveModel::Serializer
-  attributes :id, :title, :description, :instructions, :prep_time, :cooking_time, :username
+  attributes :id, :title, :description, :instructions, :prep_time, :cooking_time, :total_time, :username
   has_many :ingredients
 
-  def tags 
-    object.tag.all
+  has_many :tags
+
+  def total_time 
+    object.prep_time + object.cooking_time
   end 
-  
   def username 
     object.user&.username
   end
