@@ -1,14 +1,23 @@
 Rails.application.routes.draw do
-  resources :recipe_tags
   resources :ingredients
-  resources :recipes
-  resources :users
+ 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get '/tags', to: 'tag#index'
-  # Defines the root path route ("/")
-  # root "articles#index"
-  get '/hello', to: 'application#hello_world'
+ 
+  # Recipes 
+  resources :recipes
+  
+  # recipe_tags 
+  post '/recipe_tags', to: 'recipe_tags#create'
+  delete '/recipe_tags/:id', to: 'recipe_tags#delete'
 
+  # Users 
+  get '/users/:id', to: 'users#show'
+  get '/users/me', to: 'users#me'
+  patch '/users/me', to: 'users#update'
+  delete  '/users/me', to: 'users#destroy'
+
+  # fallback controller
   get '*path' ,
     to: 'fallback#index', 
     constraints: ->(req) { !req.xhr? && req.format.html?}

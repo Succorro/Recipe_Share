@@ -2,18 +2,16 @@ class RecipeTagsController < ApplicationController
 
   # POST /recipe_tags
   def create
-    @recipe_tag = RecipeTag.new(recipe_tag_params)
+    recipe_tag = RecipeTag.create!(recipe_tag_params)
+    render json: recipe_tag, status: :created
 
-    if @recipe_tag.save
-      render json: @recipe_tag, status: :created, location: @recipe_tag
-    else
-      render json: @recipe_tag.errors, status: :unprocessable_entity
-    end
   end
 
-  # DELETE /recipe_tags/1
+  # DELETE /recipe_tags/:id
   def destroy
-    @recipe_tag.destroy
+    recipe_tag = @current_user.recipe.recipe_tag.find_by(id: params[:id]) 
+    recipe_tag.destroy
+    head :no_content, status: :delete
   end
 
   private
@@ -22,4 +20,5 @@ class RecipeTagsController < ApplicationController
     def recipe_tag_params
       params.require(:recipe_tag).permit(:recipe_id, :tag_id)
     end
+
 end

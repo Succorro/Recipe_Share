@@ -1,16 +1,6 @@
 class IngredientsController < ApplicationController
   before_action :set_ingredient, only: %i[ show update destroy ]
 
-  # POST /ingredients
-  def create
-    @ingredient = Ingredient.new(ingredient_params)
-
-    if @ingredient.save
-      render json: @ingredient, status: :created, location: @ingredient
-    else
-      render json: @ingredient.errors, status: :unprocessable_entity
-    end
-  end
 
   # PATCH/PUT /ingredients/1
   def update

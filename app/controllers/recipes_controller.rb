@@ -1,51 +1,51 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: %i[ show update destroy ]
+  skip_before_action :authorize, only: [:index, :show]
 
   # GET /recipes
   def index
     @recipes = Recipe.all
 
-    render json: @recipes
+    render json: @recipes, status: :ok
   end
 
   # GET /recipes/1
   def show
-    render json: @recipe
+    recipe = Recipe.find_by(id: params[:id])
+    render json: recipe, status: :ok
   end
 
   # POST /recipes
   def create
-    @recipe = Recipe.new(recipe_params)
-
-    if @recipe.save
-      render json: @recipe, status: :created, location: @recipe
-    else
-      render json: @recipe.errors, status: :unprocessable_entity
-    end
+    recipe = @current_user.recipes.create!(recipe_params)
+    render json: recipe, status: :created
   end
 
   # PATCH/PUT /recipes/1
   def update
-    if @recipe.update(recipe_params)
-      render json: @recipe
+    recipe = @current_user.recipes.find_by(id: params[:id])
+    if recipe.exists?
+      @recipe.update(recipe_params)
+      render json: @recipe, status: :accepted
     else
-      render json: @recipe.errors, status: :unprocessable_entity
+      render json: { errors: ["Not authorized to update recipe"] }, status: :unprocessable_entity
     end
   end
 
   # DELETE /recipes/1
   def destroy
-    @recipe.destroy
+    recipe = @current_user.recipes.find_by(id: params[:id])
+    if @current_user.recipes.include?(recipe)
+      recipe&.destroy 
+      head :no_content 
+    else
+      render json: { errors: ["Not authorized to delete recipe"] }, status: :unauthorized
+    end 
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_recipe
-      @recipe = Recipe.find(params[:id])
-    end
-
     # Only allow a list of trusted parameters through.
     def recipe_params
-      params.require(:recipe).permit(:title, :description, :instructions, :prep_time, :cooking_time, :user_id)
+      params.require(:recipe).permit(:title, :description, :instructions, :prep_time, :cooking_time, :user_id, :ingredients)
     end
 end

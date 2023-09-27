@@ -1,36 +1,39 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show update destroy ]
+  skip_before_action :authorize, only: [:show]
+  # # GET /users
+  # def index
+  #   @users = User.all
 
-  # GET /users
-  def index
-    @users = User.all
+  #   render json: @users
+  # end
+  # GET /users/me
+  def me 
+    render json: @current_user, status: :ok
+  end 
 
-    render json: @users
-  end
-
-  # GET /users/1
+  # GET /users/:id
   def show
-    render json: @user
+    user = User.find_by(id: params[:id])
+    render json: user, status: :ok 
   end
 
   # POST /users
   def create
-    @user = User.new(user_params)
-    render json: @user, status: :created, location: @user
+    user = User.create!(user_params)
+    session[:user_id] = user.id 
+    render json: user, status: :created 
   end
 
-  # PATCH/PUT /users/1
+  # PATCH/PUT /users/me
   def update
-    if @user.update(user_params)
-      render json: @user
-    else
-      render json: @user.errors, status: :unprocessable_entity
-    end
+    @current_user.update!(user_params)
+    render json: @current_user, status: :accepted
   end
 
-  # DELETE /users/1
+  # DELETE /users/me
   def destroy
-    @user.destroy
+    @current_user.destroy
   end
 
   private
