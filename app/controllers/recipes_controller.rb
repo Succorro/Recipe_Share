@@ -37,15 +37,15 @@ class RecipesController < ApplicationController
     recipe = @current_user.recipes.find_by(id: params[:id])
     if @current_user.recipes.include?(recipe)
       recipe&.destroy 
-      head :no_content 
+      head :no_content , status: :no_content
     else
       render json: { errors: ["Not authorized to delete recipe"] }, status: :unauthorized
     end 
   end
 
   private
-    # Only allow a list of trusted parameters through.
+    # Only allow a list of trusted parameters through. Include associated data: ingredients, recipe_tags
     def recipe_params
-      params.require(:recipe).permit(:title, :description, :instructions, :prep_time, :cooking_time, :user_id, :ingredients)
+      params.require(:recipe).permit(:title, :description, :instructions, :prep_time, :cooking_time, :user_id, ingredients_attributes: [:name, :qty, :unit, :_destroy], recipe_tags_attributes: [:recipe_id, :tag_id, :_destroy] )
     end
 end

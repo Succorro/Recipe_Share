@@ -5,5 +5,6 @@ class Recipe < ApplicationRecord
   has_many :tags, through: :recipe_tags
   has_one_attached :image
 
-  accepts_nested_attributes_for :ingredients
+  accepts_nested_attributes_for :ingredients, reject_if: ->(attributes){ attributes['name'].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :recipe_tags, reject_if: ->(attributes){ attributes['name'].blank? }, allow_destroy: true
 end
