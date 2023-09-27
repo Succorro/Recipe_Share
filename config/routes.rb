@@ -1,15 +1,10 @@
 Rails.application.routes.draw do
-  # resources :ingredients
  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get '/tags', to: 'tag#index'
  
   # Recipes 
   resources :recipes
-  
-  # # recipe_tags 
-  # post '/recipe_tags', to: 'recipe_tags#create'
-  # delete '/recipe_tags/:id', to: 'recipe_tags#delete'
 
   # Sessions 
   post '/login', to: 'sessions#create'
