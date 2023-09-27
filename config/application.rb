@@ -41,6 +41,5 @@ module RecipeShare
 
     # Use SameSite=Strict for all cookies to help protect against CSRF
     config.action_dispatch.cookies_same_site_protection = :strict
-    
   end
 end

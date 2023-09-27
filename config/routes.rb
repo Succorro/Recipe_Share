@@ -11,9 +11,14 @@ Rails.application.routes.draw do
   # post '/recipe_tags', to: 'recipe_tags#create'
   # delete '/recipe_tags/:id', to: 'recipe_tags#delete'
 
+  # Sessions 
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
+
   # Users 
   get '/users/:id', to: 'users#show'
   get '/users/profile', to: 'users#profile'
+  post '/users', to: "users#create"
   patch '/users/profile', to: 'users#update'
   delete  '/users/profile', to: 'users#destroy'
 

@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :username, :password_digest, :email, :first_name, :last_name, :bio, :image, :recipes
+  attributes :id, :username, :email, :first_name, :last_name, :bio, :image, :recipes
 
   
   def recipes 

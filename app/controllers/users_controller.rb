@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show update destroy ]
-  skip_before_action :authorize, only: [:show]
+  skip_before_action :authorize, only: [:show, :create]
 
   # # GET /users
   # def index
@@ -41,6 +40,6 @@ class UsersController < ApplicationController
   private
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username, :password_digest, :email, :first_name, :last_name, :bio)
+      params.permit(:username, :password, :password_confirmation, :email, :first_name, :last_name, :bio)
     end
 end

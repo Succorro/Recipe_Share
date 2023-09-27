@@ -1,6 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: %i[ show update destroy ]
-  skip_before_action :authorize, only: [:index, :show]
+  skip_before_action :authorize, only: [:index, :show, :create]
 
   # GET /recipes
   def index
@@ -17,7 +16,7 @@ class RecipesController < ApplicationController
 
   # POST /recipes
   def create
-    recipe = @current_user.recipes.create!(recipe_params)
+    recipe = Recipe.create!(recipe_params)
     render json: recipe, status: :created
   end
 
@@ -46,6 +45,6 @@ class RecipesController < ApplicationController
   private
     # Only allow a list of trusted parameters through. Include associated data: ingredients, recipe_tags
     def recipe_params
-      params.require(:recipe).permit(:title, :description, :instructions, :prep_time, :cooking_time, :user_id, ingredients_attributes: [:name, :qty, :unit, :_destroy], recipe_tags_attributes: [:recipe_id, :tag_id, :_destroy] )
+      params.require(:recipe).permit(:title, :description, :instructions, :prep_time, :cooking_time, :user_id, ingredients_attributes: [:name, :qty, :unit, :_destroy], recipe_tags_attributes: [:tag_id, :_destroy] )
     end
 end
