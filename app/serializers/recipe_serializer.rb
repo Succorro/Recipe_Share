@@ -3,11 +3,6 @@ class RecipeSerializer < ActiveModel::Serializer
   has_many :ingredients
   has_many :tags
 
-  # def tags
-  #   @tags = [] 
-  #   object.tags.all.map {|tag| @tags << tag.name}
-  #   @tags
-  # end 
   def total_time 
     object.prep_time + object.cooking_time
   end 

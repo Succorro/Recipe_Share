@@ -7,4 +7,5 @@ class Recipe < ApplicationRecord
 
   accepts_nested_attributes_for :ingredients, reject_if: ->(attributes){ attributes['name'].blank? }, allow_destroy: true
   accepts_nested_attributes_for :recipe_tags, reject_if: ->(attributes){ attributes['tag_id'].blank? }, allow_destroy: true
+  
 end
