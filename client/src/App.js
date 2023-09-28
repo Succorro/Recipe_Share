@@ -8,6 +8,7 @@ import NewRecipe from "./pages/NewRecipe";
 import User from "./pages/User";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
+import Navigation from "./Navigation";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -21,6 +22,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <Navigation />
         <Switch>
           <Route path="/login">
             <Login />

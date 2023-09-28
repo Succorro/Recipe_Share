@@ -32,8 +32,8 @@ function About() {
         <section>
           <h2>Contact Us</h2>
           <p>
-            We value your feedback and questions. Feel free to reach out to us
-            at <a href="mailto:stevengbmv@gmail.com">stevengbmv@gmail.com</a>.
+            We value your feedback and questions. Feel free to reach out at{" "}
+            <a href="mailto:stevengbmv@gmail.com">stevengbmv@gmail.com</a>.
           </p>
         </section>
       </main>
