@@ -15,5 +15,4 @@ class Recipe < ApplicationRecord
   validates :prep_time, presence: true, numericality: {only_integer: true}
   validates :cooking_time, presence: true, numericality: {only_integer: true}
   validates :user_id, presence: true
-  
 end

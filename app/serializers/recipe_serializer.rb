@@ -8,6 +8,6 @@ class RecipeSerializer < ActiveModel::Serializer
   end 
 
   def username 
-    object.user&.username
+    object.user.username
   end
 end
