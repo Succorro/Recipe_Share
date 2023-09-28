@@ -42,11 +42,13 @@ function Login() {
             </div>
           </>
         )}
-        <button type="submit">{isLogin ? "Login" : "Sign Up"}</button>
+        <button class="btn btn-primary" type="submit">
+          {isLogin ? "Login" : "Sign Up"}
+        </button>
       </form>
       <p>
         {isLogin ? "Don't have an account? " : "Already have an account? "}
-        <button type="button" onClick={toggleForm}>
+        <button class="btn btn-primary" type="button" onClick={toggleForm}>
           {isLogin ? "Sign Up" : "Login"}
         </button>
       </p>
