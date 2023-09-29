@@ -5,8 +5,10 @@ function Navigation() {
   const [login, setLogin] = useState(false);
 
   return (
-    <div>
-      <Link to="/">Home</Link>
+    <div style={{ backgroundColor: "black" }}>
+      <Link class="link-secondary" to="/">
+        Home
+      </Link>
       <Link to="/about">About</Link>
       <Link to="/recipes">Discover Page</Link>
       {login ? (
