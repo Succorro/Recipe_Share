@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { logoutUser } from "./features/user/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { clickLogin } from "./features/navigationSlice";
 
 function Navigation() {
-  const [login, setLogin] = useState(true);
   const dispatch = useDispatch();
-
+  const login = useSelector((state) => state.login.login);
   return (
     <div className="navbar text-secondary">
       <Link to="/">Home</Link>
@@ -18,7 +18,7 @@ function Navigation() {
           <button
             className="btn btn-secondary"
             onClick={() => {
-              setLogin(false);
+              dispatch(clickLogin(false));
               fetch("/logout", {
                 method: "DELETE",
               }).then((r) => {

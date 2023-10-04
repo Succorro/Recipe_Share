@@ -1,4 +1,4 @@
-// import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -10,7 +10,13 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Navigation from "./Navigation";
 
+import { useDispatch } from "react-redux";
+import { fetchUser } from "./features/user/userSlice";
+
 function App() {
+  const dispatch = useDispatch();
+  dispatch(fetchUser());
+
   return (
     <BrowserRouter>
       <div className="prose">

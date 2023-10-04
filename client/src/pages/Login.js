@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Signup from "../Signup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/user/userSlice";
+import { clickLogin } from "../features/navigationSlice";
 
 function Login() {
   const [isLogin, setIsLogin] = useState(true);
@@ -23,7 +24,6 @@ function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(login);
     fetch("/login", {
       method: "POST",
       headers: {
@@ -32,7 +32,10 @@ function Login() {
       body: JSON.stringify(login),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((user) => dispatch(loginUser(user)));
+        r.json().then((user) => {
+          dispatch(loginUser(user));
+          dispatch(clickLogin(true));
+        });
       }
       // } else {
       //   r.json().then((error) => setErrors(error.errors));

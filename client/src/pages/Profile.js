@@ -5,10 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 function Profile() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  console.log(user);
-  useEffect(() => {
-    dispatch(fetchUser());
-  }, []);
 
   return (
     <div>
