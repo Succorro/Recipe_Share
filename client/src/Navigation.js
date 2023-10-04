@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { logoutUser } from "./features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { clickLogin } from "./features/navigationSlice";
 
 function Navigation() {
   const dispatch = useDispatch();
-  const login = useSelector((state) => state.login.login);
+  const login = useSelector((state) => state.user.login);
+  console.log(login);
   return (
     <div className="navbar text-secondary">
       <Link to="/">Home</Link>
@@ -18,7 +18,6 @@ function Navigation() {
           <button
             className="btn btn-secondary"
             onClick={() => {
-              dispatch(clickLogin(false));
               fetch("/logout", {
                 method: "DELETE",
               }).then((r) => {

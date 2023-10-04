@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "./features/user/userSlice";
-import { clickLogin } from "./features/navigationSlice";
 
 function Signup({ toggleForm }) {
   const [login, setLogin] = useState({});
@@ -37,7 +36,6 @@ function Signup({ toggleForm }) {
       if (r.ok) {
         r.json().then((user) => {
           dispatch(loginUser(user));
-          dispatch(clickLogin(true));
         });
       } else {
         r.json().then((error) => setErrors(error.errors));

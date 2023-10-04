@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import Signup from "../Signup";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginUser } from "../features/user/userSlice";
-import { clickLogin } from "../features/navigationSlice";
 
 function Login() {
   const [isLogin, setIsLogin] = useState(true);
@@ -34,7 +33,6 @@ function Login() {
       if (r.ok) {
         r.json().then((user) => {
           dispatch(loginUser(user));
-          dispatch(clickLogin(true));
         });
       }
       // } else {

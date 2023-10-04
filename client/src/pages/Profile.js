@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
-import { fetchUser } from "../features/user/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 
 function Profile() {
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
   return (

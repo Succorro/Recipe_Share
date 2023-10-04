@@ -19,6 +19,7 @@ const initialState = {
     },
   },
   status: "idle",
+  login: false,
 };
 
 export const userSlice = createSlice({
@@ -27,9 +28,11 @@ export const userSlice = createSlice({
   reducers: {
     loginUser: (state, action) => {
       state.user = action.payload;
+      state.login = true;
     },
     logoutUser: (state) => {
-      state = initialState;
+      state.user = initialState.user;
+      state.login = false;
     },
   },
   extraReducers: (builder) => {
