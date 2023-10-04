@@ -15,7 +15,10 @@ import { fetchUser } from "./features/user/userSlice";
 
 function App() {
   const dispatch = useDispatch();
-  dispatch(fetchUser());
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
