@@ -1,7 +1,11 @@
+import userReducer from "../features/user/userSlice";
+// import thunk from "redux-thunk";
 import { configureStore } from "@reduxjs/toolkit";
 
-export default configureStore({
+const store = configureStore({
   reducer: {
-    recipes: {},
+    user: userReducer,
   },
 });
+
+export default store;

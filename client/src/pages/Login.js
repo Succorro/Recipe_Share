@@ -9,7 +9,7 @@ function Login() {
   return (
     <div>
       <h2>{isLogin ? "Login" : "Sign Up"}</h2>
-      <form>
+      <form class="form">
         <div>
           <label htmlFor="username">Username</label>
           <input type="text" id="username" name="username" />

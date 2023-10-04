@@ -21,7 +21,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="App">
+      <div class="prose">
         <Navigation />
         <Switch>
           <Route path="/login">
