@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     render json: user, status: :ok 
   end
   
-  # GET /users/me
+  # GET /users/profile
   def profile 
     render json: @current_user, status: :ok
   end 
@@ -26,13 +26,13 @@ class UsersController < ApplicationController
     render json: user, status: :created 
   end
 
-  # PATCH/PUT /users/me
+  # PATCH/PUT /users/profile
   def update
     @current_user.update!(user_params)
     render json: @current_user, status: :accepted
   end
 
-  # DELETE /users/me
+  # DELETE /users/profile
   def destroy
     @current_user.destroy
   end

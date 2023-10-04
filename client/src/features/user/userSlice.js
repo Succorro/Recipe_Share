@@ -1,20 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchUser = createAsyncThunk("user/fetchUser", () => {
-  return fetch("/users/1")
+  return fetch("/users/profile")
     .then((r) => r.json())
     .then((data) => data);
 });
 
 const initialState = {
   user: {
-    username: "User",
-    email: "email",
-    first_name: "first",
-    last_name: "last",
-    bio: "bio",
+    username: "",
+    email: "",
+    first_name: "",
+    last_name: "",
+    bio: "",
     image: {
-      name: "nameofimage",
+      name: "",
       record: { id: 1 },
     },
   },
@@ -24,19 +24,26 @@ const initialState = {
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
-  extraReducers: {
-    [fetchUser.pending](state) {
-      state.status = "loading";
+  reducers: {
+    loginUser: (state, action) => {
+      state.user = action.payload;
     },
-    [fetchUser.fulfilled](state, action) {
+    logoutUser: (state) => {
+      state = initialState;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchUser.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(fetchUser.fulfilled, (state, action) => {
       state.user = action.payload;
       state.status = "idle";
-    },
+    });
   },
 });
 
 // Action creators are generated for each case reducer function
 // export const { userLoaded, userEdit } = userSlice.actions;
-
+export const { loginUser, logoutUser } = userSlice.actions;
 export default userSlice.reducer;

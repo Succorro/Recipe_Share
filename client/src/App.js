@@ -11,17 +11,9 @@ import Login from "./pages/Login";
 import Navigation from "./Navigation";
 
 function App() {
-  // const [count, setCount] = useState(0);
-
-  // useEffect(() => {
-  //   fetch("/hello")
-  //     .then((r) => r.json())
-  //     .then((data) => setCount(data.count));
-  // }, []);
-
   return (
     <BrowserRouter>
-      <div class="prose">
+      <div className="prose">
         <Navigation />
         <Switch>
           <Route path="/login">

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { logoutUser } from "./features/user/userSlice";
+import { useDispatch } from "react-redux";
 
 function Navigation() {
   const [login, setLogin] = useState(true);
+  const dispatch = useDispatch();
 
   return (
-    <div class="navbar text-secondary">
+    <div className="navbar text-secondary">
       <Link to="/">Home</Link>
       <Link to="/about">About</Link>
       <Link to="/recipes">Discover Page</Link>
@@ -13,16 +16,26 @@ function Navigation() {
         <div>
           <Link to="/users/profile">Profile</Link>
           <button
-            class="btn btn-secondary"
+            className="btn btn-secondary"
             onClick={() => {
               setLogin(false);
+              fetch("/logout", {
+                method: "DELETE",
+              }).then((r) => {
+                if (r.ok) {
+                  dispatch(logoutUser());
+                }
+                // } else {
+                //   r.json().then((error) => setErrors(error.errors));
+                // }
+              });
             }}
           >
             Logout
           </button>
         </div>
       ) : (
-        <Link class="btn btn-secondary" to="/login">
+        <Link className="btn btn-secondary" to="/login">
           Login
         </Link>
       )}

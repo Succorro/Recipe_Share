@@ -1,16 +1,11 @@
 import React, { useState } from "react";
-import Signup from "../Signup";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../features/user/userSlice";
+import { loginUser } from "./features/user/userSlice";
 
-function Login() {
-  const [isLogin, setIsLogin] = useState(true);
+function Signup({ toggleForm }) {
   const [login, setLogin] = useState({});
   const dispatch = useDispatch();
 
-  const toggleForm = () => {
-    setIsLogin(!isLogin);
-  };
   function handleChange(event) {
     const name = event.target.name;
     const value = event.target.value;
@@ -24,7 +19,7 @@ function Login() {
   function handleSubmit(e) {
     e.preventDefault();
     console.log(login);
-    fetch("/login", {
+    fetch("/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,11 +34,10 @@ function Login() {
       // }
     });
   }
-  if (!isLogin) return <Signup toggleForm={toggleForm} />;
   return (
-    <div>
-      <h2>Login</h2>
+    <>
       <form className="form" onSubmit={handleSubmit}>
+        <h2>Sign Up</h2>
         <div>
           <label htmlFor="username">Username</label>
           <input
@@ -62,18 +56,49 @@ function Login() {
             onChange={handleChange}
           />
         </div>
+        <div>
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input type="email" id="email" name="email" onChange={handleChange} />
+        </div>
         <button className="btn btn-primary" type="submit">
-          login
+          Sign Up
         </button>
       </form>
       <p>
-        Don't have an account?
+        Already have an account?
         <button className="btn btn-primary" type="button" onClick={toggleForm}>
-          Sign Up
+          Login
         </button>
       </p>
-    </div>
+    </>
   );
 }
 
-export default Login;
+export default Signup;
