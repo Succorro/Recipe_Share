@@ -35,6 +35,7 @@ class UsersController < ApplicationController
   # DELETE /users/profile
   def destroy
     @current_user.destroy
+    head :no_content
   end
 
   private

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get '/users/:id', to: 'users#show'
   post '/users', to: "users#create"
   patch '/users/:id', to: 'users#update'
-  delete  '/users/profile', to: 'users#destroy'
+  delete  '/users/:id', to: 'users#destroy'
 
   # fallback controller
   get '*path' ,

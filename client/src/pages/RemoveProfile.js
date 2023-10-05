@@ -12,6 +12,8 @@ function RemoveProfile() {
     }).then((r) => {
       if (r.ok) {
         dispatch(logoutUser());
+        console.log("deleted user ");
+        history.push("/");
       }
       // } else {
       //   r.json().then((error) => setErrors(error.errors));
@@ -21,7 +23,7 @@ function RemoveProfile() {
   return (
     <div>
       <h1>Are you sure you want to delete your account? </h1>
-      <button className="btn btn-error" onClick={() => handleDelete}>
+      <button className="btn btn-error" onClick={handleDelete}>
         YES
       </button>
       <button
