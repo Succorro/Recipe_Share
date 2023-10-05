@@ -1,12 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { logoutUser } from "./features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function Navigation() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const login = useSelector((state) => state.user.login);
-  console.log(login);
   return (
     <div className="navbar text-secondary">
       <Link to="/">Home</Link>
@@ -16,17 +16,15 @@ function Navigation() {
         <div>
           <Link to="/users/profile">Profile</Link>
           <button
-            className="btn btn-secondary"
+            className="btn btn-outline btn-error"
             onClick={() => {
               fetch("/logout", {
                 method: "DELETE",
               }).then((r) => {
                 if (r.ok) {
+                  history.push("/login");
                   dispatch(logoutUser());
                 }
-                // } else {
-                //   r.json().then((error) => setErrors(error.errors));
-                // }
               });
             }}
           >
@@ -34,7 +32,7 @@ function Navigation() {
           </button>
         </div>
       ) : (
-        <Link className="btn btn-secondary" to="/login">
+        <Link className="btn btn-outline btn-secondary" to="/login">
           Login
         </Link>
       )}

@@ -1,16 +1,27 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Signup from "../Signup";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../features/user/userSlice";
 
 function Login() {
   const [isLogin, setIsLogin] = useState(true);
+  const [errors, setErrors] = useState([]);
   const [login, setLogin] = useState({});
+
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
   };
+
+  const displayErrors = errors.map((error) => (
+    <p className="text-danger" key={error}>
+      {error}
+    </p>
+  ));
+
   function handleChange(event) {
     const name = event.target.name;
     const value = event.target.value;
@@ -32,12 +43,12 @@ function Login() {
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => {
+          history.push("/");
           dispatch(loginUser(user));
         });
+      } else {
+        r.json().then((error) => setErrors(error.errors));
       }
-      // } else {
-      //   r.json().then((error) => setErrors(error.errors));
-      // }
     });
   }
   if (!isLogin) return <Signup toggleForm={toggleForm} />;
@@ -67,6 +78,7 @@ function Login() {
           login
         </button>
       </form>
+      {displayErrors}
       <p>
         Don't have an account?
         <button className="btn btn-primary" type="button" onClick={toggleForm}>

@@ -1,12 +1,16 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import ProfileInfo from "../ProfileInfo";
+import ProfileForm from "../ProfileForm";
 
 function Profile() {
-  const user = useSelector((state) => state.user);
-
+  const [form, setForm] = useState(true);
   return (
     <div>
-      Profile <p>{user.user.username}</p>
+      {form ? (
+        <ProfileInfo setForm={setForm} />
+      ) : (
+        <ProfileForm setForm={setForm} />
+      )}
     </div>
   );
 }
