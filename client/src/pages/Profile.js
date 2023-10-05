@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ProfileInfo from "../ProfileInfo";
-import ProfileForm from "../ProfileForm";
+import ProfileInfo from "../features/user/ProfileInfo";
+import ProfileForm from "../features/user/ProfileForm";
 
 function Profile() {
   const [form, setForm] = useState(true);

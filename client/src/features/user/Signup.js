@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginUser } from "./features/user/userSlice";
+import { loginUser } from "./userSlice";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function Signup({ toggleForm }) {
   const [login, setLogin] = useState({});
   const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const displayErrors = errors.map((error) => (
     <p className="text-danger" key={error}>
@@ -36,6 +38,7 @@ function Signup({ toggleForm }) {
       if (r.ok) {
         r.json().then((user) => {
           dispatch(loginUser(user));
+          history.push("/");
         });
       } else {
         r.json().then((error) => setErrors(error.errors));

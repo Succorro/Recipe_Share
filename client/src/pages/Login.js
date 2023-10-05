@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import Signup from "../Signup";
+import Signup from "../features/user/Signup";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../features/user/userSlice";
 

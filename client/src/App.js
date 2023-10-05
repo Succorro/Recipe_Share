@@ -13,12 +13,14 @@ import Navigation from "./Navigation";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "./features/user/userSlice";
 import RemoveProfile from "./pages/RemoveProfile";
+import { fetchRecipes } from "./features/recipes/recipeSlice";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchUser());
+    dispatch(fetchRecipes());
   }, [dispatch]);
 
   return (
