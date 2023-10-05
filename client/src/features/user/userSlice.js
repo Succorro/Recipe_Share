@@ -45,6 +45,7 @@ export const userSlice = createSlice({
     builder.addCase(fetchUser.fulfilled, (state, action) => {
       state.user = action.payload;
       state.status = "idle";
+      state.login = true;
     });
   },
 });

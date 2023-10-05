@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "./features/user/userSlice";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function ProfileForm({ setForm }) {
   const dispatch = useDispatch();
@@ -96,13 +97,15 @@ function ProfileForm({ setForm }) {
         />
       </label>
       {displayErrors}
-
-      <button className="btn btn-success" type="submit">
-        Edit Profile
-      </button>
-      <button className="btn btn-error" onClick={() => setForm(true)}>
-        Cancel
-      </button>
+      <div>
+        <button className="btn btn-success" type="submit">
+          Edit Profile
+        </button>
+        <button className="btn btn-error" onClick={() => setForm(true)}>
+          Cancel
+        </button>
+      </div>
+      <Link to="/users/profile/remove">Delete Profile</Link>
     </form>
   );
 }

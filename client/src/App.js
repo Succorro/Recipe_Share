@@ -12,6 +12,7 @@ import Navigation from "./Navigation";
 
 import { useDispatch } from "react-redux";
 import { fetchUser } from "./features/user/userSlice";
+import RemoveProfile from "./pages/RemoveProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +28,9 @@ function App() {
         <Switch>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/users/profile/remove">
+            <RemoveProfile />
           </Route>
           <Route path="/users/profile">
             <Profile />
