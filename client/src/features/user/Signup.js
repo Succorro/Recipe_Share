@@ -4,7 +4,9 @@ import { loginUser } from "./userSlice";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function Signup({ toggleForm }) {
-  const [login, setLogin] = useState({});
+  const [login, setLogin] = useState({
+    bio: "",
+  });
   const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();

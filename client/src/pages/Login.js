@@ -79,6 +79,7 @@ function Login() {
         </button>
       </form>
       {displayErrors}
+
       <p>
         Don't have an account?
         <button className="btn btn-primary" type="button" onClick={toggleForm}>
