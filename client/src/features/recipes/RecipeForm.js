@@ -1,189 +1,195 @@
 import React, { useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+import IngredientsForm from "./IngredientsForm";
 function RecipeForm() {
   const [recipeTags, setRecipeTags] = useState([]);
   const [recipe, setRecipe] = useState({});
-  //   console.log(recipe);
-  //   console.log(recipeTags);
+  const [ingredients, setIngredients] = useState([]);
 
   const tags = [
     {
-      id: 1,
+      tag_id: 1,
       name: "Mexican",
     },
     {
-      id: 2,
+      tag_id: 2,
       name: "Italian",
     },
     {
-      id: 3,
+      tag_id: 3,
       name: "Vegetarian",
     },
     {
-      id: 4,
+      tag_id: 4,
       name: "Chinese",
     },
     {
-      id: 5,
+      tag_id: 5,
       name: "Indian",
     },
     {
-      id: 6,
+      tag_id: 6,
       name: "Japanese",
     },
     {
-      id: 7,
+      tag_id: 7,
       name: "Thai",
     },
     {
-      id: 8,
+      tag_id: 8,
       name: "Mediterranean",
     },
     {
-      id: 9,
+      tag_id: 9,
       name: "American",
     },
     {
-      id: 10,
+      tag_id: 10,
       name: "French",
     },
     {
-      id: 11,
+      tag_id: 11,
       name: "Greek",
     },
     {
-      id: 12,
+      tag_id: 12,
       name: "Korean",
     },
     {
-      id: 13,
+      tag_id: 13,
       name: "Spanish",
     },
     {
-      id: 14,
+      tag_id: 14,
       name: "Vietnamese",
     },
     {
-      id: 15,
+      tag_id: 15,
       name: "Cajun",
     },
     {
-      id: 16,
+      tag_id: 16,
       name: "Middle Eastern",
     },
     {
-      id: 17,
+      tag_id: 17,
       name: "Tex-Mex",
     },
     {
-      id: 18,
+      tag_id: 18,
       name: "Caribbean",
     },
     {
-      id: 19,
+      tag_id: 19,
       name: "Sushi",
     },
     {
-      id: 20,
+      tag_id: 20,
       name: "Vegan",
     },
     {
-      id: 21,
+      tag_id: 21,
       name: "Brazilian",
     },
     {
-      id: 22,
+      tag_id: 22,
       name: "Russian",
     },
     {
-      id: 23,
+      tag_id: 23,
       name: "African",
     },
     {
-      id: 24,
+      tag_id: 24,
       name: "Irish",
     },
     {
-      id: 25,
+      tag_id: 25,
       name: "Scandinavian",
     },
     {
-      id: 26,
+      tag_id: 26,
       name: "Portuguese",
     },
     {
-      id: 27,
+      tag_id: 27,
       name: "Lebanese",
     },
     {
-      id: 28,
+      tag_id: 28,
       name: "Polish",
     },
     {
-      id: 29,
+      tag_id: 29,
       name: "German",
     },
     {
-      id: 30,
+      tag_id: 30,
       name: "Turkish",
     },
     {
-      id: 31,
+      tag_id: 31,
       name: "Cuban",
     },
     {
-      id: 32,
+      tag_id: 32,
       name: "Peruvian",
     },
     {
-      id: 33,
+      tag_id: 33,
       name: "Argentinian",
     },
     {
-      id: 34,
+      tag_id: 34,
       name: "Hawaiian",
     },
     {
-      id: 35,
+      tag_id: 35,
       name: "Fusion",
     },
     {
-      id: 36,
+      tag_id: 36,
       name: "Soul Food",
     },
     {
-      id: 37,
+      tag_id: 37,
       name: "Jamaican",
     },
     {
-      id: 38,
+      tag_id: 38,
       name: "British",
     },
     {
-      id: 39,
+      tag_id: 39,
       name: "Moroccan",
     },
     {
-      id: 40,
+      tag_id: 40,
       name: "Ethiopian",
     },
     {
-      id: 41,
+      tag_id: 41,
       name: "Pescatarian",
     },
   ];
-  function handleChange(event) {
-    const name = event.target.name;
-    const value = event.target.value;
-    const newRecipe = { ...recipe, [name]: value, tags: recipeTags };
+
+  function handleChange(name, value) {
+    const newRecipe = {
+      ...recipe,
+      [name]: value,
+    };
     setRecipe(newRecipe);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    console.log(recipe);
+    const newRecipe = {
+      ...recipe,
+      ingredients_atttributes: ingredients,
+      recipe_tags_attributes: recipeTags,
+    };
+    console.log(newRecipe);
   }
   return (
     <form className="form-control" onSubmit={handleSubmit}>
@@ -191,6 +197,8 @@ function RecipeForm() {
         multiple
         id="tags-standard"
         options={tags}
+        limitTags={3}
+        isOptionEqualToValue={(option, value) => option.id === value.id}
         getOptionLabel={(option) => option.name}
         onChange={(event, newValue) => {
           setRecipeTags(newValue);
@@ -204,50 +212,57 @@ function RecipeForm() {
           />
         )}
       />
-      <label className="label">
-        Title
-        <input type="text" name="title" onChange={(e) => handleChange(e)} />
-      </label>
-      <label className="label">
-        Description
-        <textarea
-          type="text"
-          name="description"
-          onChange={(e) => handleChange(e)}
-        />
-      </label>
-      <label className="label">
-        Instructions
-        <textarea
-          type="text"
-          name="instructions"
-          onChange={(e) => handleChange(e)}
-        />
-      </label>
-      <label className="label">
-        Prep Time
-        <input
-          type="number"
-          name="prep_time"
-          onChange={(e) => handleChange(e)}
-        />
-      </label>
-      <label className="label">
-        Cook Time
-        <input
-          type="number"
-          name="cooking_time"
-          onChange={(e) => handleChange(e)}
-        />
-      </label>
-      <label className="label">
-        Ingredients
-        <input
-          type="text"
-          name="ingredients"
-          onChange={(e) => handleChange(e)}
-        />
-      </label>
+      <label className="label">Title </label>
+      <input
+        type="text"
+        name="title"
+        onChange={(e) => {
+          const value = e.target.value;
+          handleChange("title", value);
+        }}
+      />
+
+      <label className="label">Description </label>
+      <textarea
+        type="text"
+        name="description"
+        onChange={(e) => {
+          const value = e.target.value;
+          handleChange("description", value);
+        }}
+      />
+
+      <label className="label">Instructions</label>
+      <textarea
+        type="text"
+        name="instructions"
+        onChange={(e) => {
+          const value = e.target.value;
+          handleChange("instructions", value);
+        }}
+      />
+
+      <label className="label">Prep Time</label>
+      <input
+        type="number"
+        name="prep_time"
+        onChange={(e) => handleChange("prep_time", e.target.value)}
+      />
+
+      <label className="label">Cook Time</label>
+      <input
+        type="number"
+        name="cooking_time"
+        onChange={(e) => {
+          const value = e.target.value;
+          handleChange("cooking_time", value);
+        }}
+      />
+
+      <IngredientsForm
+        ingredients={ingredients}
+        setIngredients={setIngredients}
+      />
       <button type="submit" className="btn btn-success">
         Submit
       </button>
