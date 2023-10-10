@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  useHistory,
+  useParams,
+} from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import RecipeError from "../RecipeError";
 import RecipeDisplay from "../RecipeDisplay";
 import RecipeUpdateForm from "../RecipeUpdateForm";
+import { deleteRecipes } from "../features/recipes/recipeSlice";
+import { useDispatch } from "react-redux";
+
 function Recipe() {
   const user = useSelector((state) => state.user.user);
   const recipes = useSelector((state) => state.recipes.recipes);
@@ -12,7 +18,8 @@ function Recipe() {
   const recipe = recipes.find((recipe) => recipe.id === recipeId);
   const [showDelete, setShowDelete] = useState(true);
   const [showForm, setShowForm] = useState(false);
-
+  const history = useHistory();
+  const dispatch = useDispatch();
   if (!recipe) return <RecipeError />;
 
   const {
@@ -40,8 +47,14 @@ function Recipe() {
     </p>
   ));
 
-  function handleDelete() {
+  function handleDelete(deletedRecipe) {
     console.log("delete");
+    fetch(`/recipes/${deletedRecipe.id}`, {
+      method: "DELETE",
+    }).then((r) => {
+      if (r.ok) history.push("/");
+      dispatch(deleteRecipes(deletedRecipe));
+    });
   }
   if (user.username === username)
     return (
@@ -87,7 +100,10 @@ function Recipe() {
             ) : (
               <>
                 <h4>Are you sure you want to delete?</h4>
-                <button className="btn btn-error" onClick={handleDelete}>
+                <button
+                  className="btn btn-error"
+                  onClick={() => handleDelete(recipe)}
+                >
                   Yes
                 </button>
                 <button
