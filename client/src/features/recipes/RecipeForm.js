@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import IngredientsForm from "./IngredientsForm";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useDispatch } from "react-redux";
+import { postRecipes } from "./recipeSlice";
+
 function RecipeForm() {
+  const [errors, setErrors] = useState([]);
   const [recipeTags, setRecipeTags] = useState([]);
   const [recipe, setRecipe] = useState({});
   const [ingredients, setIngredients] = useState([]);
-
+  const history = useHistory();
+  const dispatch = useDispatch();
   const tags = [
     {
       tag_id: 1,
@@ -173,6 +179,18 @@ function RecipeForm() {
       name: "Pescatarian",
     },
   ];
+  const displayErrors = errors.map((error) => (
+    <p className="text-danger" key={error}>
+      {error}
+    </p>
+  ));
+  function handleTags(newValue) {
+    const value = newValue.map((tag) => {
+      const s = { tag_id: tag.tag_id };
+      return s;
+    });
+    setRecipeTags(value);
+  }
 
   function handleChange(name, value) {
     const newRecipe = {
@@ -186,10 +204,29 @@ function RecipeForm() {
     e.preventDefault();
     const newRecipe = {
       ...recipe,
-      ingredients_atttributes: ingredients,
+      ingredients_attributes: ingredients,
       recipe_tags_attributes: recipeTags,
     };
-    console.log(newRecipe);
+    console.log(recipe, newRecipe);
+    console.log(recipeTags, ingredients);
+    fetch("/recipes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newRecipe),
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((r) => {
+          console.log(r);
+          history.push(`/recipes/${r.id}`);
+          dispatch(postRecipes(r));
+        });
+      } else {
+        r.json().then((error) => setErrors(error.errors));
+      }
+    });
+    // dispatch(something));
   }
   return (
     <form className="form-control" onSubmit={handleSubmit}>
@@ -197,11 +234,10 @@ function RecipeForm() {
         multiple
         id="tags-standard"
         options={tags}
-        limitTags={3}
-        isOptionEqualToValue={(option, value) => option.id === value.id}
+        isOptionEqualToValue={(option, value) => option.tag_id === value.tag_id}
         getOptionLabel={(option) => option.name}
         onChange={(event, newValue) => {
-          setRecipeTags(newValue);
+          handleTags(newValue);
         }}
         renderInput={(params) => (
           <TextField
@@ -263,6 +299,7 @@ function RecipeForm() {
         ingredients={ingredients}
         setIngredients={setIngredients}
       />
+      {displayErrors}
       <button type="submit" className="btn btn-success">
         Submit
       </button>

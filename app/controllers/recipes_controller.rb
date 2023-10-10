@@ -45,6 +45,6 @@ class RecipesController < ApplicationController
   private
     # Only allow a list of trusted parameters through. Include associated data: ingredients, recipe_tags
     def recipe_params
-      params.permit(:title, :description, :instructions, :prep_time, :cooking_time, :user_id, ingredients_attributes: [:id, :name, :qty, :unit, :_destroy], recipe_tags_attributes: [:id, :tag_id, :_destroy] )
+      params.permit(:title, :description, :instructions, :prep_time, :cooking_time, :user_id, :ingredients_attributes => [:name, :qty, :unit, :_destroy], :recipe_tags_attributes => [:tag_id, :_destroy] )
     end
 end
