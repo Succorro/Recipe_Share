@@ -7,23 +7,23 @@ function Recipes() {
   const displayRecipes = recipes.map((recipe) => {
     return (
       <div
+        key={recipe.id}
         className="card w-96 bg-secondary pt-0 m-10 shadow-xl"
         onClick={() => history.push(`/recipes/${recipe.id}`)}
       >
         <div className="card-body">
           <h2 className="card-title">{recipe.title}</h2>
-          <p>
-            {recipe.tags.map((tag) => (
-              <p>{tag.name}</p>
-            ))}
-          </p>
+
+          {recipe.tags.map((tag) => (
+            <p key={tag.id}>{tag.name}</p>
+          ))}
         </div>
       </div>
     );
   });
   return (
     <div>
-      Recipes page <ul>{displayRecipes}</ul>{" "}
+      <h1>Discover new Recipes</h1> <ul>{displayRecipes}</ul>{" "}
     </div>
   );
 }

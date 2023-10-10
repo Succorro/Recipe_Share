@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { fetchUser } from "./features/user/userSlice";
 import RemoveProfile from "./pages/RemoveProfile";
 import { fetchRecipes } from "./features/recipes/recipeSlice";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,10 @@ function App() {
     dispatch(fetchUser());
     dispatch(fetchRecipes());
   }, [dispatch]);
+
+  const recipes = useSelector((state) => state.recipes.recipes);
+  if (recipes.length === 0)
+    return <span className="loading loading-spinner loading-lg"></span>;
 
   return (
     <BrowserRouter>
