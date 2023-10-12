@@ -23,10 +23,9 @@ export const recipeSlice = createSlice({
         (recipe) => recipe.id !== action.payload.id
       );
     },
-    updateRecipes: (state, action) => {
-      state.recipes = state.recipes.find((recipe) => {
-        recipe = action.payload;
-        return recipe;
+    patchRecipes: (state, action) => {
+      state.recipes = state.recipes.map((recipe) => {
+        return recipe.id === action.payload.id ? action.payload : recipe;
       });
     },
   },
@@ -42,5 +41,5 @@ export const recipeSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { postRecipes, deleteRecipes } = recipeSlice.actions;
+export const { postRecipes, deleteRecipes, patchRecipes } = recipeSlice.actions;
 export default recipeSlice.reducer;

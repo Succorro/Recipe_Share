@@ -226,7 +226,6 @@ function RecipeForm() {
         r.json().then((error) => setErrors(error.errors));
       }
     });
-    // dispatch(something));
   }
   return (
     <form className="form-control" onSubmit={handleSubmit}>

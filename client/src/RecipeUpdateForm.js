@@ -4,240 +4,94 @@ import TextField from "@mui/material/TextField";
 import IngredientsForm from "./features/recipes/IngredientsForm";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch } from "react-redux";
-// import { postRecipes } from "./recipeSlice";
+import { patchRecipes } from "./features/recipes/recipeSlice";
+import allTagOptions from "./allTagOptions";
 
-function RecipeUpdateForm() {
-  const [errors, setErrors] = useState([]);
-  const [recipeTags, setRecipeTags] = useState([]);
-  const [recipe, setRecipe] = useState({});
-  const [ingredients, setIngredients] = useState([]);
+function RecipeUpdateForm({ currentRecipe }) {
+  const { ingredients, tags, ...recipe } = currentRecipe;
+  const formattedTags = tags.map((tag) => {
+    return { tag_id: tag.id, name: tag.name };
+  });
+  console.log(tags);
+  const [modifiedRecipe, setModifiedRecipe] = useState(recipe);
+  const [modifiedTags, setModifiedTags] = useState(formattedTags);
+  const [modifiedIngredients, setModifiedIngredients] = useState(ingredients);
+
   const history = useHistory();
   const dispatch = useDispatch();
-  const tags = [
-    {
-      tag_id: 1,
-      name: "Mexican",
-    },
-    {
-      tag_id: 2,
-      name: "Italian",
-    },
-    {
-      tag_id: 3,
-      name: "Vegetarian",
-    },
-    {
-      tag_id: 4,
-      name: "Chinese",
-    },
-    {
-      tag_id: 5,
-      name: "Indian",
-    },
-    {
-      tag_id: 6,
-      name: "Japanese",
-    },
-    {
-      tag_id: 7,
-      name: "Thai",
-    },
-    {
-      tag_id: 8,
-      name: "Mediterranean",
-    },
-    {
-      tag_id: 9,
-      name: "American",
-    },
-    {
-      tag_id: 10,
-      name: "French",
-    },
-    {
-      tag_id: 11,
-      name: "Greek",
-    },
-    {
-      tag_id: 12,
-      name: "Korean",
-    },
-    {
-      tag_id: 13,
-      name: "Spanish",
-    },
-    {
-      tag_id: 14,
-      name: "Vietnamese",
-    },
-    {
-      tag_id: 15,
-      name: "Cajun",
-    },
-    {
-      tag_id: 16,
-      name: "Middle Eastern",
-    },
-    {
-      tag_id: 17,
-      name: "Tex-Mex",
-    },
-    {
-      tag_id: 18,
-      name: "Caribbean",
-    },
-    {
-      tag_id: 19,
-      name: "Sushi",
-    },
-    {
-      tag_id: 20,
-      name: "Vegan",
-    },
-    {
-      tag_id: 21,
-      name: "Brazilian",
-    },
-    {
-      tag_id: 22,
-      name: "Russian",
-    },
-    {
-      tag_id: 23,
-      name: "African",
-    },
-    {
-      tag_id: 24,
-      name: "Irish",
-    },
-    {
-      tag_id: 25,
-      name: "Scandinavian",
-    },
-    {
-      tag_id: 26,
-      name: "Portuguese",
-    },
-    {
-      tag_id: 27,
-      name: "Lebanese",
-    },
-    {
-      tag_id: 28,
-      name: "Polish",
-    },
-    {
-      tag_id: 29,
-      name: "German",
-    },
-    {
-      tag_id: 30,
-      name: "Turkish",
-    },
-    {
-      tag_id: 31,
-      name: "Cuban",
-    },
-    {
-      tag_id: 32,
-      name: "Peruvian",
-    },
-    {
-      tag_id: 33,
-      name: "Argentinian",
-    },
-    {
-      tag_id: 34,
-      name: "Hawaiian",
-    },
-    {
-      tag_id: 35,
-      name: "Fusion",
-    },
-    {
-      tag_id: 36,
-      name: "Soul Food",
-    },
-    {
-      tag_id: 37,
-      name: "Jamaican",
-    },
-    {
-      tag_id: 38,
-      name: "British",
-    },
-    {
-      tag_id: 39,
-      name: "Moroccan",
-    },
-    {
-      tag_id: 40,
-      name: "Ethiopian",
-    },
-    {
-      tag_id: 41,
-      name: "Pescatarian",
-    },
-  ];
+  console.log(tags);
+  const [errors, setErrors] = useState([]);
   const displayErrors = errors.map((error) => (
     <p className="text-danger" key={error}>
       {error}
     </p>
   ));
-  function handleTags(newValue) {
-    const value = newValue.map((tag) => {
-      const s = { tag_id: tag.tag_id };
-      return s;
-    });
-    setRecipeTags(value);
-  }
 
-  function handleChange(name, value) {
-    const newRecipe = {
-      ...recipe,
-      [name]: value,
-    };
-    setRecipe(newRecipe);
-  }
+  const handleChange = (name, value) => {
+    setModifiedRecipe({ ...modifiedRecipe, [name]: value });
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
-    const newRecipe = {
-      ...recipe,
-      ingredients_attributes: ingredients,
-      recipe_tags_attributes: recipeTags,
+
+    const uniqueIngredients = Array.from(new Set(modifiedIngredients));
+    const uniqueTags = Array.from(new Set(modifiedTags));
+
+    // Handle removed ingredients and tags
+    const oldIngredients = ingredients
+      .filter((ing) => !uniqueIngredients.includes(ing))
+      .map((ing) => ({ ...ing, _destroy: true }));
+
+    const oldTags = tags
+      .filter((tag) => !uniqueTags.some((utag) => utag.tag_id === tag.tag_id))
+      .map((tag) => ({ ...tag, _destroy: true }));
+
+    const tagArray = oldTags.concat(uniqueTags);
+    const ingredientsArray = oldIngredients.concat(uniqueIngredients);
+
+    const updatedRecipe = {
+      ...modifiedRecipe,
+      ingredients_attributes: modifiedIngredients,
+      recipe_tags_attributes: tagArray,
     };
-    console.log(recipe, newRecipe);
-    console.log(recipeTags, ingredients);
-    // fetch("/recipes", {
-    //   method: "POST",
+    console.log(updatedRecipe);
+    console.log("tags:", tagArray);
+    console.log("ingredients:", ingredientsArray);
+
+    // fetch(`/recipes/${updatedRecipe.id}`, {
+    //   method: "PATCH",
     //   headers: {
     //     "Content-Type": "application/json",
     //   },
-    //   body: JSON.stringify(newRecipe),
+    //   body: JSON.stringify(updatedRecipe),
     // }).then((r) => {
     //   if (r.ok) {
     //     r.json().then((r) => {
     //       console.log(r);
     //       history.push(`/recipes/${r.id}`);
-    //       dispatch(postRecipes(r));
+    //       dispatch(patchRecipes(r));
     //     });
     //   } else {
-    //     r.json().then((error) => setErrors(error.errors));
+    //     r.json().then((error) => {
+    //       console.log(error);
+    //       setErrors(error.errors);
+    //     });
     //   }
     // });
-    // dispatch(something));
   }
   return (
     <form className="form-control" onSubmit={handleSubmit}>
       <Autocomplete
         multiple
         id="tags-standard"
-        options={tags}
+        options={allTagOptions}
         isOptionEqualToValue={(option, value) => option.tag_id === value.tag_id}
         getOptionLabel={(option) => option.name}
+        value={modifiedTags}
         onChange={(event, newValue) => {
-          handleTags(newValue);
+          console.log(event.target.value);
+          console.log("val:", newValue);
+          setModifiedTags(newValue);
         }}
         renderInput={(params) => (
           <TextField
@@ -252,6 +106,7 @@ function RecipeUpdateForm() {
       <input
         type="text"
         name="title"
+        value={modifiedRecipe.title}
         onChange={(e) => {
           const value = e.target.value;
           handleChange("title", value);
@@ -262,6 +117,7 @@ function RecipeUpdateForm() {
       <textarea
         type="text"
         name="description"
+        value={modifiedRecipe.description}
         onChange={(e) => {
           const value = e.target.value;
           handleChange("description", value);
@@ -272,6 +128,7 @@ function RecipeUpdateForm() {
       <textarea
         type="text"
         name="instructions"
+        value={modifiedRecipe.instructions}
         onChange={(e) => {
           const value = e.target.value;
           handleChange("instructions", value);
@@ -282,6 +139,7 @@ function RecipeUpdateForm() {
       <input
         type="number"
         name="prep_time"
+        value={modifiedRecipe.prep_time}
         onChange={(e) => handleChange("prep_time", e.target.value)}
       />
 
@@ -289,6 +147,7 @@ function RecipeUpdateForm() {
       <input
         type="number"
         name="cooking_time"
+        value={modifiedRecipe.cooking_time}
         onChange={(e) => {
           const value = e.target.value;
           handleChange("cooking_time", value);
@@ -296,8 +155,8 @@ function RecipeUpdateForm() {
       />
 
       <IngredientsForm
-        ingredients={ingredients}
-        setIngredients={setIngredients}
+        ingredients={modifiedIngredients}
+        setIngredients={setModifiedIngredients}
       />
       {displayErrors}
       <button type="submit" className="btn btn-success">

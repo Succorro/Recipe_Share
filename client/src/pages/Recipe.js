@@ -20,6 +20,7 @@ function Recipe() {
   const [showForm, setShowForm] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
+
   if (!recipe) return <RecipeError />;
 
   const {
@@ -61,7 +62,7 @@ function Recipe() {
       <>
         {showForm ? (
           <>
-            <RecipeUpdateForm />
+            <RecipeUpdateForm currentRecipe={recipe} />
             <button
               onClick={() => setShowForm(!showForm)}
               className="btn btn-warning"
@@ -120,19 +121,17 @@ function Recipe() {
     );
 
   return (
-    <>
-      <RecipeDisplay
-        title={title}
-        description={description}
-        instructions={numberedList}
-        prep_time={prep_time}
-        cooking_time={cooking_time}
-        total_time={total_time}
-        username={username}
-        tags={tagsList}
-        ingredients={ingredientsList}
-      />
-    </>
+    <RecipeDisplay
+      title={title}
+      description={description}
+      instructions={numberedList}
+      prep_time={prep_time}
+      cooking_time={cooking_time}
+      total_time={total_time}
+      username={username}
+      tags={tagsList}
+      ingredients={ingredientsList}
+    />
   );
 }
 
