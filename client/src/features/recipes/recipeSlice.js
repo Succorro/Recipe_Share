@@ -16,7 +16,7 @@ export const recipeSlice = createSlice({
   initialState,
   reducers: {
     postRecipes: (state, action) => {
-      state.recipes = state += action.payload;
+      state.recipes.push(action.payload);
     },
     deleteRecipes: (state, action) => {
       state.recipes = state.recipes.filter(
@@ -24,9 +24,14 @@ export const recipeSlice = createSlice({
       );
     },
     patchRecipes: (state, action) => {
-      state.recipes = state.recipes.map((recipe) => {
-        return recipe.id === action.payload.id ? action.payload : recipe;
-      });
+      const { id, ...updatedRecipe } = action.payload;
+      const recipeIndex = state.recipes.findIndex((recipe) => recipe.id === id);
+      if (recipeIndex !== -1) {
+        state.recipes[recipeIndex] = {
+          ...state.recipes[recipeIndex],
+          ...updatedRecipe,
+        };
+      }
     },
   },
   extraReducers: (builder) => {
@@ -36,6 +41,9 @@ export const recipeSlice = createSlice({
     builder.addCase(fetchRecipes.fulfilled, (state, action) => {
       state.recipes = action.payload;
       state.status = "idle";
+    });
+    builder.addCase(fetchRecipes.rejected, (state) => {
+      state.status = "failed";
     });
   },
 });

@@ -62,7 +62,11 @@ function Recipe() {
       <>
         {showForm ? (
           <>
-            <RecipeUpdateForm currentRecipe={recipe} />
+            <RecipeUpdateForm
+              setShowForm={setShowForm}
+              showForm={showForm}
+              currentRecipe={recipe}
+            />
             <button
               onClick={() => setShowForm(!showForm)}
               className="btn btn-warning"

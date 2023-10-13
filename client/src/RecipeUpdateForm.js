@@ -2,31 +2,29 @@ import React, { useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import IngredientsForm from "./features/recipes/IngredientsForm";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch } from "react-redux";
 import { patchRecipes } from "./features/recipes/recipeSlice";
 import allTagOptions from "./allTagOptions";
 
-function RecipeUpdateForm({ currentRecipe }) {
-  const { ingredients, tags, ...recipe } = currentRecipe;
-  const formattedTags = tags.map((tag) => {
-    return { tag_id: tag.id, name: tag.name };
+function RecipeUpdateForm({ currentRecipe, setShowForm, showForm }) {
+  const { ingredients, recipe_tags, tags, ...recipe } = currentRecipe;
+  const formattedTags = recipe_tags.map((tag) => {
+    const name = tags.find((t) => t.id === tag.tag_id).name;
+    const updatedTag = { ...tag, name: name };
+    return updatedTag;
   });
-  console.log(tags);
+
   const [modifiedRecipe, setModifiedRecipe] = useState(recipe);
   const [modifiedTags, setModifiedTags] = useState(formattedTags);
   const [modifiedIngredients, setModifiedIngredients] = useState(ingredients);
 
-  const history = useHistory();
   const dispatch = useDispatch();
-  console.log(tags);
   const [errors, setErrors] = useState([]);
   const displayErrors = errors.map((error) => (
     <p className="text-danger" key={error}>
       {error}
     </p>
   ));
-
   const handleChange = (name, value) => {
     setModifiedRecipe({ ...modifiedRecipe, [name]: value });
   };
@@ -38,46 +36,48 @@ function RecipeUpdateForm({ currentRecipe }) {
     const uniqueTags = Array.from(new Set(modifiedTags));
 
     // Handle removed ingredients and tags
-    const oldIngredients = ingredients
+    const deleteIngredients = ingredients
       .filter((ing) => !uniqueIngredients.includes(ing))
       .map((ing) => ({ ...ing, _destroy: true }));
 
-    const oldTags = tags
-      .filter((tag) => !uniqueTags.some((utag) => utag.tag_id === tag.tag_id))
-      .map((tag) => ({ ...tag, _destroy: true }));
+    const tagArray = recipe_tags.map((tag) => {
+      const existingTag = uniqueTags.find((utag) => utag.tag_id === tag.tag_id);
+      if (existingTag) {
+        uniqueTags.splice(uniqueTags.indexOf(existingTag), 1); // Remove the tag from the new tags
+        return tag; // Tag exists in the updated list
+      } else {
+        return { ...tag, _destroy: true }; // Tag is marked for deletion
+      }
+    });
 
-    const tagArray = oldTags.concat(uniqueTags);
-    const ingredientsArray = oldIngredients.concat(uniqueIngredients);
+    const ingredientsArray = deleteIngredients.concat(uniqueIngredients);
+    tagArray.push(...uniqueTags);
 
     const updatedRecipe = {
       ...modifiedRecipe,
-      ingredients_attributes: modifiedIngredients,
+      ingredients_attributes: ingredientsArray,
       recipe_tags_attributes: tagArray,
     };
-    console.log(updatedRecipe);
-    console.log("tags:", tagArray);
-    console.log("ingredients:", ingredientsArray);
 
-    // fetch(`/recipes/${updatedRecipe.id}`, {
-    //   method: "PATCH",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(updatedRecipe),
-    // }).then((r) => {
-    //   if (r.ok) {
-    //     r.json().then((r) => {
-    //       console.log(r);
-    //       history.push(`/recipes/${r.id}`);
-    //       dispatch(patchRecipes(r));
-    //     });
-    //   } else {
-    //     r.json().then((error) => {
-    //       console.log(error);
-    //       setErrors(error.errors);
-    //     });
-    //   }
-    // });
+    fetch(`/recipes/${updatedRecipe.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedRecipe),
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((r) => {
+          dispatch(patchRecipes(r));
+          setShowForm(!showForm);
+        });
+      } else {
+        r.json().then((error) => {
+          console.log(error);
+          setErrors(error.errors);
+        });
+      }
+    });
   }
   return (
     <form className="form-control" onSubmit={handleSubmit}>

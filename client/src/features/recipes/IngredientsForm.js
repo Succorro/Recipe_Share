@@ -1,10 +1,13 @@
 import React from "react";
 
 function IngredientsForm({ ingredients, setIngredients }) {
-  const handleIngredientChange = (index, field, value) => {
-    const newIngredients = [...ingredients];
-    newIngredients[index][field] = value;
-    setIngredients(newIngredients);
+  //   console.log(ingredients);
+  const handleIngredientChange = (index, field, value, id) => {
+    const updatedObj = { ...ingredients[index] };
+    updatedObj[field] = value;
+    const updatedIngredients = [...ingredients];
+    updatedIngredients[index] = updatedObj;
+    setIngredients(updatedIngredients);
   };
   const handleRemoveIngredient = (index) => {
     const newIngredients = [...ingredients];
