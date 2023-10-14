@@ -50,47 +50,68 @@ function ProfileForm({ setForm }) {
       }
     });
   }
+  console.log(updateForm.image);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username:
+    <form className="form m-2 p-2" onSubmit={handleSubmit}>
+      <label className="input-group m-2 p-2 ">
+        <span>Username:</span>
         <input
+          class="input input-bordered bg-white w-full max-w-xs"
+          type="text"
           name="username"
           value={updateForm.username}
           onChange={(e) => handleChange(e)}
         />
       </label>
-      <label>
-        Email:
+
+      <label className="input-group m-2 p-2 ">
+        <span>Image:</span>{" "}
         <input
+          type="file"
+          name="image"
+          class="file-input file-input-bordered file-input-accent w-full max-w-xs"
+        />
+        {/* <input
+          name="image"
+          value={updateForm.image}
+          onChange={(e) => handleChange(e)}
+        /> */}
+      </label>
+      <label className="input-group m-2 p-2 ">
+        <span> Email:</span>
+        <input
+          class="input input-bordered w-full max-w-xs"
           name="email"
           value={updateForm.email}
           onChange={(e) => handleChange(e)}
         />
       </label>
 
-      <label>
+      <label className="input-group m-2 p-2 ">
         {" "}
-        Bio:
+        <span>Bio:</span>
         <textarea
+          class="input input-bordered w-full max-w-xs"
           rows="3"
           name="bio"
           value={updateForm.bio}
           onChange={(e) => handleChange(e)}
         />
       </label>
-      <label>
-        First Name:
+      <label className="input-group m-2 p-2 ">
+        <span>First Name:</span>
         <input
+          class="input input-bordered w-full max-w-xs"
           name="first_name"
           value={updateForm.first_name}
           onChange={(e) => handleChange(e)}
         />
       </label>
-      <label>
-        Last Name:
+      <label className="input-group m-2 p-2 ">
+        <span>Last Name:</span>
         <input
+          class="input input-bordered w-full max-w-xs"
           name="last_name"
           value={updateForm.last_name}
           onChange={(e) => handleChange(e)}

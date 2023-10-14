@@ -2,7 +2,7 @@ import React from "react";
 
 function Home() {
   return (
-    <div className="prose prose-lg">
+    <div>
       <section id="welcome">
         <div>
           <h1>Welcome</h1>

@@ -7,6 +7,15 @@ function ProfileInfo({ setForm }) {
   return (
     <div>
       <div>
+        <div className="avatar">
+          <div className="w-24 rounded-full not-prose">
+            <img
+              src="https://static.wikia.nocookie.net/disney/images/5/56/Profile_-_Rex.jpeg"
+              alt="look"
+            />
+          </div>
+        </div>
+
         <img style={{ maxWidth: "200px" }} src={image} alt="user" />
         <h1>{username}</h1>
       </div>

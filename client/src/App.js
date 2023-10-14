@@ -30,8 +30,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="prose">
-        <Navigation />
+      <Navigation />
+      <div className="prose max-w-none">
         <Switch>
           <Route path="/login">
             <Login />

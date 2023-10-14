@@ -89,8 +89,6 @@ function RecipeUpdateForm({ currentRecipe, setShowForm, showForm }) {
         getOptionLabel={(option) => option.name}
         value={modifiedTags}
         onChange={(event, newValue) => {
-          console.log(event.target.value);
-          console.log("val:", newValue);
           setModifiedTags(newValue);
         }}
         renderInput={(params) => (
