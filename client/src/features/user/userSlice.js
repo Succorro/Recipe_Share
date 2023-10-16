@@ -1,9 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const fetchUser = createAsyncThunk("user/fetchUser", () => {
-  return fetch("/users/profile")
-    .then((r) => r.json())
-    .then((data) => data);
+export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
+  try {
+    const response = await fetch("/users/profile");
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    // Handle fetch errors here
+    console.error("Error fetching user:", error);
+    throw error;
+  }
 });
 
 const initialState = {
@@ -32,6 +41,7 @@ export const userSlice = createSlice({
     },
     logoutUser: (state) => {
       state.user = initialState.user;
+      state.status = "idle";
       state.login = false;
     },
     updateUser: (state, action) => {

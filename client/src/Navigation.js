@@ -7,20 +7,27 @@ function Navigation() {
   const dispatch = useDispatch();
   const history = useHistory();
   const login = useSelector((state) => state.user.login);
+  console.log(login);
   return (
     <div className="navbar text-secondary">
       <div className="flex-1">
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/recipes">Discover Page</Link>
+        <Link className="btn btn-ghost p-1" to="/">
+          Home
+        </Link>
+        <Link className="link link-hover p-1" to="/about">
+          About
+        </Link>
+        <Link className="link link-hover p-1" to="/recipes">
+          Discover Page
+        </Link>
       </div>
-      <div className="flex-none navbar-end">
+      <div className=" navbar-end">
         {login ? (
-          <div className="flex-none gap-2">
-            <Link className="btn btn-outline btn-warning" to="/recipes/new">
+          <div className="flex items-center">
+            <Link className="btn btn-outline btn-warning m-3" to="/recipes/new">
               Post
             </Link>
-            <div className="dropdown dropdown-end">
+            <div className="dropdown dropdown-end m-3">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
                   <img
@@ -46,8 +53,9 @@ function Navigation() {
                         method: "DELETE",
                       }).then((r) => {
                         if (r.ok) {
-                          history.push("/login");
+                          console.log(r);
                           dispatch(logoutUser());
+                          history.push("/login");
                         }
                       });
                     }}

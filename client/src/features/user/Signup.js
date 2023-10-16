@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "./userSlice";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-function Signup({ toggleForm }) {
+function Signup({ toggleForm, words }) {
   const [login, setLogin] = useState({
     bio: "",
   });
@@ -48,70 +48,126 @@ function Signup({ toggleForm }) {
     });
   }
   return (
-    <>
-      <form className="form" onSubmit={handleSubmit}>
-        <h2>Sign Up</h2>
-        <div>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            onChange={handleChange}
-          />
+    <div className="card w-2/5 glass items-center m-auto">
+      <div className="flex flex-1 flex-col  px-6 py-12 lg:px-8 ">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <h2 className="mt-0 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Create a New Account
+          </h2>{" "}
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            onChange={handleChange}
-          />
+        <div className="mt-5 w-auto ">
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            <div>
+              <label
+                className="block text-sm font-medium leading-6 text-gray-900"
+                htmlFor="username"
+              >
+                Username
+              </label>
+              <input
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                type="text"
+                id="username"
+                name="username"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label
+                className="block text-sm font-medium leading-6 text-gray-900"
+                htmlFor="password"
+              >
+                Password
+              </label>
+              <input
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                type="password"
+                id="password"
+                name="password"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label
+                className="block text-sm font-medium leading-6 text-gray-900"
+                htmlFor="confirmPassword"
+              >
+                Confirm Password
+              </label>
+              <input
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label
+                className="block text-sm font-medium leading-6 text-gray-900"
+                htmlFor="firstName"
+              >
+                First Name
+              </label>
+              <input
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                type="text"
+                id="firstName"
+                name="first_name"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label
+                className="block text-sm font-medium leading-6 text-gray-900"
+                htmlFor="lastName"
+              >
+                Last Name
+              </label>
+              <input
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                type="text"
+                id="lastName"
+                name="last_name"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label
+                className="block text-sm font-medium leading-6 text-gray-900"
+                htmlFor="email"
+              >
+                Email
+              </label>
+              <input
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                type="email"
+                id="email"
+                name="email"
+                onChange={handleChange}
+              />
+            </div>
+            <button
+              className="flex w-full justify-center rounded-md bg-warning px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-yellow-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600"
+              type="submit"
+            >
+              Sign Up
+            </button>
+          </form>
         </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            onChange={handleChange}
-          />
+        {displayErrors}
+        <div className="text-center">
+          <p>Already have an account?</p>
         </div>
-        <div>
-          <label htmlFor="firstName">First Name</label>
-          <input
-            type="text"
-            id="firstName"
-            name="first_name"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            type="text"
-            id="lastName"
-            name="last_name"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" name="email" onChange={handleChange} />
-        </div>
-        <button className="btn btn-primary" type="submit">
-          Sign Up
-        </button>
-      </form>
-      {displayErrors}
-      <p>
-        Already have an account?
-        <button className="btn btn-primary" type="button" onClick={toggleForm}>
+        <button
+          className="flex w-full justify-center rounded-md bg-info px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          type="button"
+          onClick={toggleForm}
+        >
           Login
         </button>
-      </p>
-    </>
+      </div>
+    </div>
   );
 }
 
