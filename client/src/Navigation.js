@@ -1,27 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { logoutUser } from "./features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import SearchIcon from "@mui/icons-material/Search";
 
 function Navigation() {
   const dispatch = useDispatch();
   const history = useHistory();
   const login = useSelector((state) => state.user.login);
-  console.log(login);
+  const [visibleSearch, setVisibleSearch] = useState(false);
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("hi");
+    history.push("/search");
+  }
+  function handleMouseEnter() {
+    setVisibleSearch(true);
+  }
+  function handleMouseLeave() {
+    setVisibleSearch(false);
+  }
+  const linkStyle = "link link-hover p-2 ml-2 ";
+  const visibleStyle =
+    " placeholder:italic placeholder:text-slate-400 focus:outline-none ";
+  const searchStyle = visibleSearch ? visibleStyle : "invisible";
+
   return (
     <div className="navbar text-secondary">
       <div className="flex-1">
-        <Link className="btn btn-ghost p-1" to="/">
+        <Link className={linkStyle} to="/">
           Home
         </Link>
-        <Link className="link link-hover p-1" to="/about">
+        <Link className={linkStyle} to="/about">
           About
         </Link>
-        <Link className="link link-hover p-1" to="/recipes">
+        <Link className={linkStyle} to="/recipes">
           Discover Page
         </Link>
       </div>
-      <div className=" navbar-end">
+      <div className="navbar-end">
+        <div className="inline-block rounded-md bg-ghost hover:bg-white hover:shadow-sm  text-gray-800  w-lg">
+          <form
+            className="p-1"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onSubmit={handleSubmit}
+          >
+            <input
+              className={searchStyle}
+              type="search"
+              name="search"
+              placeholder="Search recipes..."
+            />
+            <button type="submit">
+              <SearchIcon />
+            </button>
+          </form>
+        </div>
         {login ? (
           <div className="flex items-center">
             <Link className="btn btn-outline btn-warning m-3" to="/recipes/new">
