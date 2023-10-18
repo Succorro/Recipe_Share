@@ -7,9 +7,9 @@ function Recipes() {
   return (
     <div>
       <h1>Discover new Recipes</h1>{" "}
-      <ul className="grid grid-cols-2">
+      <ul className="grid grid-cols-3">
         {recipes.map((recipe) => (
-          <RecipeCard recipe={recipe} />
+          <RecipeCard key={recipe.id} recipe={recipe} />
         ))}
       </ul>{" "}
     </div>

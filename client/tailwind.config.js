@@ -5,6 +5,11 @@ module.exports = {
     fontFamily: {
       sans: ["Helvetica", "Arial", "sans-serif"],
     },
+    extend: {
+      colors: {
+        honey: "#85655a",
+      },
+    },
   },
   daisyui: {
     themes: [
