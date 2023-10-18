@@ -3,15 +3,21 @@ import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { logoutUser } from "./features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import SearchIcon from "@mui/icons-material/Search";
+import { searchRecipes } from "./features/search/searchSlice";
 
 function Navigation() {
   const dispatch = useDispatch();
   const history = useHistory();
   const login = useSelector((state) => state.user.login);
   const [visibleSearch, setVisibleSearch] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("hi");
+    console.log(searchValue);
+    const search = `search=${searchValue}`;
+    console.log(typeof search);
+
+    // dispatch(searchRecipes(search))
     history.push("/search");
   }
   function handleMouseEnter() {
@@ -51,6 +57,8 @@ function Navigation() {
               type="search"
               name="search"
               placeholder="Search recipes..."
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
             />
             <button type="submit">
               <SearchIcon />
