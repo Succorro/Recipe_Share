@@ -15,6 +15,7 @@ import { fetchUser } from "./features/user/userSlice";
 import RemoveProfile from "./pages/RemoveProfile";
 import { fetchRecipes } from "./features/recipes/recipeSlice";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import Search from "./pages/Search";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,9 @@ function App() {
         <Switch>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/search">
+            <Search />
           </Route>
           <Route path="/users/profile/remove">
             <RemoveProfile />

@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
 function RecipeCard({ recipe }) {
+  const history = useHistory();
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const { title, description, total_time, username, tags } = recipe;
   const tagsList = tags.map((tag) => ` ${tag.name}`);
   const dispalyCard = (
@@ -21,8 +24,6 @@ function RecipeCard({ recipe }) {
       </div>
     </div>
   );
-  const history = useHistory();
-  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleMouseEnter = () => {
     setIsExpanded(true);

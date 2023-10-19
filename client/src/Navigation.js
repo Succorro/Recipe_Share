@@ -15,8 +15,6 @@ function Navigation() {
     e.preventDefault();
     console.log(searchValue);
     const search = `search=${searchValue}`;
-    console.log(typeof search);
-
     // dispatch(searchRecipes(search))
     history.push("/search");
   }
