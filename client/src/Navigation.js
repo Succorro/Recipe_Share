@@ -14,8 +14,8 @@ function Navigation() {
   function handleSubmit(e) {
     e.preventDefault();
     console.log(searchValue);
-    const search = `search=${searchValue}`;
-    // dispatch(searchRecipes(search))
+    // const search = `search=${searchValue}`;
+    dispatch(searchRecipes(searchValue));
     history.push("/recipes/search");
   }
   function handleMouseEnter() {

@@ -2,8 +2,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const searchRecipes = createAsyncThunk(
   "search/searchRecipes",
-  (search) => {
-    return fetch(`/search?${search}`)
+  async (search) => {
+    const params = new URLSearchParams();
+    params.append("search", search);
+
+    return fetch(`/recipes/search?${params}`)
       .then((r) => r.json())
       .then((data) => data);
   }

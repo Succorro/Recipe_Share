@@ -4,9 +4,10 @@ import RecipeCard from "../RecipeCard";
 import RecipeError from "../RecipeError";
 function Search() {
   const searchResults = useSelector((state) => state.search.recipes);
-
+  console.log("hi");
   console.log(searchResults);
-  if (!searchResults) return <RecipeError />;
+
+  //   if (!searchResults) return <RecipeError />;
   return (
     <div>
       <h1>Search Results</h1>

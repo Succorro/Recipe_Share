@@ -17,7 +17,7 @@ class RecipesController < ApplicationController
   # GET /recipes/search 
   def search 
     search = params[:search]
-    recipes = Recipe.where("title LIKE ?", "%#{search}%").limit(10)
+    recipes = Recipe.where("LOWER(title) LIKE ?", "%#{search.downcase}%").limit(10)
     render json: recipes, status: :ok
   end 
 
