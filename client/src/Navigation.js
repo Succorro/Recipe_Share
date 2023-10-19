@@ -16,7 +16,7 @@ function Navigation() {
     console.log(searchValue);
     const search = `search=${searchValue}`;
     // dispatch(searchRecipes(search))
-    history.push("/search");
+    history.push("/recipes/search");
   }
   function handleMouseEnter() {
     setVisibleSearch(true);

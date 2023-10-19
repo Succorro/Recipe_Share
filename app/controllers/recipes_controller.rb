@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  skip_before_action :authorize, only: [:index, :show]
+  skip_before_action :authorize, only: [:index, :show, :search]
 
   # GET /recipes
   def index
@@ -13,6 +13,13 @@ class RecipesController < ApplicationController
     recipe = Recipe.find_by(id: params[:id])
     render json: recipe, status: :ok
   end
+
+  # GET /recipes/search 
+  def search 
+    search = params[:search]
+    recipes = Recipe.where("title LIKE ?", "%#{search}%").limit(10)
+    render json: recipes, status: :ok
+  end 
 
   # POST /recipes
   def create

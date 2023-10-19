@@ -37,9 +37,7 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
-          <Route path="/search">
-            <Search />
-          </Route>
+
           <Route path="/users/profile/remove">
             <RemoveProfile />
           </Route>
@@ -48,6 +46,9 @@ function App() {
           </Route>
           <Route path="/users/:id">
             <User />
+          </Route>
+          <Route path="recipes/search">
+            <Search />
           </Route>
           <Route path="/recipes/new">
             <NewRecipe />

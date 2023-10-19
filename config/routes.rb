@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   get '/tags', to: 'tag#index'
  
   # Recipes 
+  get '/recipes/search', to: 'recipes#search'
   resources :recipes
+
 
   # Sessions 
   post '/login', to: 'sessions#create'
