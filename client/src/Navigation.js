@@ -14,7 +14,6 @@ function Navigation() {
   function handleSubmit(e) {
     e.preventDefault();
     console.log(searchValue);
-    // const search = `search=${searchValue}`;
     dispatch(searchRecipes(searchValue));
     history.push("/recipes/search");
   }
@@ -28,7 +27,11 @@ function Navigation() {
   const visibleStyle =
     " placeholder:italic placeholder:text-slate-400 focus:outline-none ";
   const searchStyle = visibleSearch ? visibleStyle : "invisible";
-
+  const hoverDiv =
+    "inline-block rounded-md bg-white shadow-sm  text-gray-800  w-lg";
+  const divStyle = visibleSearch
+    ? hoverDiv
+    : "inline-block rounded-md bg-ghost text-gray-800  w-lg";
   return (
     <div className="navbar text-secondary">
       <div className="flex-1">
@@ -43,11 +46,10 @@ function Navigation() {
         </Link>
       </div>
       <div className="navbar-end">
-        <div className="inline-block rounded-md bg-ghost hover:bg-white hover:shadow-sm  text-gray-800  w-lg">
+        <div className={divStyle}>
           <form
             className="p-1"
             onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
             onSubmit={handleSubmit}
           >
             <input
