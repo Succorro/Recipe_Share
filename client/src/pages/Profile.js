@@ -3,13 +3,13 @@ import ProfileInfo from "../features/user/ProfileInfo";
 import ProfileForm from "../features/user/ProfileForm";
 
 function Profile() {
-  const [form, setForm] = useState(true);
+  const [showForm, setShowForm] = useState(true);
   return (
-    <div>
-      {form ? (
-        <ProfileInfo setForm={setForm} />
+    <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
+      {showForm ? (
+        <ProfileInfo setForm={setShowForm} />
       ) : (
-        <ProfileForm setForm={setForm} />
+        <ProfileForm setForm={setShowForm} />
       )}
     </div>
   );

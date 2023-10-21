@@ -1,14 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import RecipeCard from "../RecipeCard";
-import RecipeError from "../RecipeError";
 function Search() {
   const searchResults = useSelector((state) => state.search.recipes);
   const searchStatus = useSelector((state) => state.search.status);
-  console.log("hi");
-  console.log(searchResults);
 
-  if (!searchResults) return <RecipeError />;
   if (searchStatus === "loading")
     return (
       <div className="h-screen flex items-center justify-center">

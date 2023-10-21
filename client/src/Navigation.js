@@ -23,7 +23,7 @@ function Navigation() {
   function handleMouseLeave() {
     setVisibleSearch(false);
   }
-  const linkStyle = "link link-hover p-2 ml-2 ";
+  const linkStyle = "link link-hover p-2 ml-2 text-honey font-bold ";
   const visibleStyle =
     " placeholder:italic placeholder:text-slate-400 focus:outline-none ";
   const searchStyle = visibleSearch ? visibleStyle : "invisible";
