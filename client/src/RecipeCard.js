@@ -35,7 +35,7 @@ function RecipeCard({ recipe }) {
   const style = isExpanded ? hoverStyle : articleStyle;
   const hidden = isExpanded ? popupStyle : hiddenStyle;
   return (
-    <div>
+    <div className="hover:cursor-pointer">
       <div
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}

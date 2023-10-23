@@ -51,18 +51,20 @@ function ProfileForm({ setForm }) {
     });
   }
   console.log(updateForm.image);
-  const inputStyle = "input-group input-group-vertical mb-4";
-  const spanStyle = "bg-secondary";
+  const labelStyle = "input-group input-group-vertical mb-4";
+  const spanStyle = "bg-white font-bold text-lg";
+  const inputStyle = "input input-bordered bg-white w-full";
   return (
     <div className=" w-full rounded-lg lg:rounded-l-lg shadow-2xl bg-white opacity-75 mx-6 lg:mx-0 pt-3 ">
+      <h1 className="text-center mb-0 mt-3">Update Profile: </h1>
       <form
         className="container mx-auto  w-1/2 p-4 md:p-12  "
         onSubmit={handleSubmit}
       >
-        <label className={inputStyle}>
+        <label className={labelStyle}>
           <span className={spanStyle}>Username:</span>
           <input
-            class="input input-bordered bg-white w-full"
+            className={inputStyle}
             type="text"
             name="username"
             value={updateForm.username}
@@ -70,12 +72,12 @@ function ProfileForm({ setForm }) {
           />
         </label>
 
-        <label className={inputStyle}>
+        <label className={labelStyle}>
           <span className={spanStyle}>Image:</span>{" "}
           <input
             type="file"
             name="image"
-            class="file-input file-input-bordered file-input-accent w-full max-w-xs"
+            className="file-input file-input-bordered file-input-info bg-white w-full"
           />
           {/* <input
           name="image"
@@ -83,51 +85,54 @@ function ProfileForm({ setForm }) {
           onChange={(e) => handleChange(e)}
         /> */}
         </label>
-        <label className={inputStyle}>
+        <label className={labelStyle}>
           <span className={spanStyle}> Email:</span>
           <input
-            class="input input-bordered w-full max-w-xs"
+            className={inputStyle}
             name="email"
             value={updateForm.email}
             onChange={(e) => handleChange(e)}
           />
         </label>
 
-        <label className={inputStyle}>
+        <label className={labelStyle}>
           {" "}
           <span className={spanStyle}>Bio:</span>
           <textarea
-            class="input input-bordered w-full max-w-xs"
+            className={inputStyle}
             rows="3"
             name="bio"
             value={updateForm.bio}
             onChange={(e) => handleChange(e)}
           />
         </label>
-        <label className={inputStyle}>
+        <label className={labelStyle}>
           <span className={spanStyle}>First Name:</span>
           <input
-            class="input input-bordered w-full max-w-xs"
+            className={inputStyle}
             name="first_name"
             value={updateForm.first_name}
             onChange={(e) => handleChange(e)}
           />
         </label>
-        <label className={inputStyle}>
+        <label className={labelStyle}>
           <span className={spanStyle}>Last Name:</span>
           <input
-            class="input input-bordered w-full max-w-xs"
+            className={inputStyle}
             name="last_name"
             value={updateForm.last_name}
             onChange={(e) => handleChange(e)}
           />
         </label>
         {displayErrors}
-        <div>
-          <button className="btn btn-success" type="submit">
+        <div className="flex justify-center">
+          <button className="btn btn-success m-1 lg:mr-5" type="submit">
             Edit Profile
           </button>
-          <button className="btn btn-error" onClick={() => setForm(true)}>
+          <button
+            className="btn btn-error m-1 lg:ml-5"
+            onClick={() => setForm(true)}
+          >
             Cancel
           </button>
         </div>

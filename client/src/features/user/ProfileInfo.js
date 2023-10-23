@@ -5,7 +5,7 @@ function ProfileInfo({ setForm }) {
   const user = useSelector((state) => state.user.user);
   const { username, image, email, first_name, last_name, bio } = user;
   return (
-    <div className="w-full rounded-lg lg:rounded-l-lg  shadow-2xl bg-white opacity-75 mx-6 lg:mx-0 pt-3">
+    <div className="w-full sm:rounded-lg pt-3 shadow-2xl bg-white opacity-75 mx-6 lg:rounded-l-lg lg:w-2/3  lg:flex lg:items-center lg:justify-center lg:m-auto">
       <div className="p-4 md:p-12 text-center ">
         <div className="avatar">
           <div className="w-24 rounded-full not-prose">
