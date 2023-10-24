@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import RecipeCard from "../RecipeCard";
 import { useSelector } from "react-redux";
@@ -7,30 +7,9 @@ function Home() {
   const recipe1 = recipes[0];
   const recipe2 = recipes[1];
   const recipe3 = recipes[3];
-  const [scrollOpacity, setScrollOpacity] = useState(1);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const imageHeight = windowHeight / 2; // Adjust this value for the fading height
-
-      // Calculate the opacity based on the scroll position
-      const opacity = 0.2 + Math.min(1, scrollPosition / imageHeight);
-      setScrollOpacity(opacity);
-    };
-
-    // Attach the event listener
-    window.addEventListener("scroll", handleScroll);
-
-    // Detach the event listener on component unmount
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []); // Empty dependency array ensures the effect runs once after initial render
 
   const headerStyle = {
-    backgroundImage: `linear-gradient(to bottom, rgba(245, 245, 220, ${scrollOpacity}), transparent ), url('/fullsizebackground.jpg')`,
+    backgroundImage: `linear-gradient(to bottom, rgba(245, 245, 220, 1), transparent ), url('/fullsizebackground.jpg')`,
   };
   return (
     <div>
@@ -40,9 +19,9 @@ function Home() {
           style={headerStyle}
         >
           <div className="absolute top-0 left-0 w-full h-1/3 "></div>
-          <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
-            <h1 className="text-5xl font-bold mb-4">Welcome</h1>
-            <p className="text-lg">
+          <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
+            <h1 className="text-5xl font-bold mb-4 text-primary">Welcome</h1>
+            <p className="text-xl text-primary">
               Share your favorite recipes with the world!
             </p>
           </div>
@@ -76,6 +55,7 @@ function Home() {
           style={{ backgroundColor: "#f5f5dc", fontSize: "large" }}
         >
           <h2>Featured Cook:</h2>
+
           <h1 className="text-primary">Primary</h1>
           <h1 className="text-secondary">Secondary</h1>
           <h1 className="text-accent">Accent</h1>

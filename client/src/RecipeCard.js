@@ -7,7 +7,7 @@ function RecipeCard({ recipe }) {
 
   const { title, description, total_time, username, tags } = recipe;
   const tagsList = tags.map((tag) => ` ${tag.name}`);
-  const dispalyCard = (
+  const displayPopup = (
     <div>
       <h1>{title}</h1>
       <p>Made by: {username}</p>
@@ -32,43 +32,47 @@ function RecipeCard({ recipe }) {
   const handleMouseLeave = () => {
     setIsExpanded(false);
   };
-  const style = isExpanded ? hoverStyle : articleStyle;
+  const style = isExpanded ? hoverStyle : cardStyle;
   const hidden = isExpanded ? popupStyle : hiddenStyle;
   return (
-    <div className="hover:cursor-pointer">
+    <div
+      onClick={() => history.push(`/recipes/${recipe.id}`)}
+      className="hover:cursor-pointer p-0 m-0"
+    >
       <div
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={hidden}
-        onClick={() => history.push(`/recipes/${recipe.id}`)}
       >
-        {dispalyCard}
+        {displayPopup}
       </div>
       <article
         key={recipe.id}
-        style={style}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="card bg-honey max-w-[360px] m-5  h-[50vh]"
-        onClick={() => history.push(`/recipes/${recipe.id}`)}
+        style={style}
+        className="max-w-sm max-h-[400px] bg-amber-50 border border-gray-200 rounded-lg shadow dark:bg-amber-50 dark:border-honey"
       >
-        <div className="card-body max-w-[320px] p-0 ml-5">
-          {" "}
-          <img className="  pb-0 mb-0 block" src="/Steak.jpg" alt="food" />
-        </div>
-        <div className="card-body p-0 ml-1 mt-0 pt-0 ">
-          <h2 className="card-title text-white ml-3">{recipe.title}</h2>
+        {" "}
+        <img className="rounded-t-lg mt-0" src="/Steak.jpg" alt="food" />
+        <div className="p-5 pt-0">
+          <h2 className="mb-1 text-xl font-bold tracking-tight text-primary dark:text-primary">
+            {recipe.title}
+          </h2>
+          <p class="mb-3 font-normal text-primary">
+            Made by: {recipe.username}
+          </p>
         </div>
       </article>
     </div>
   );
 }
 
-const articleStyle = {
+const cardStyle = {
   transition: "transform 0.2s ease-in-out",
 };
 const hoverStyle = {
-  ...articleStyle,
+  ...cardStyle,
   transform: "scale(1.05)",
 };
 
