@@ -9,7 +9,6 @@ function Navigation() {
   const dispatch = useDispatch();
   const history = useHistory();
   const login = useSelector((state) => state.user.login);
-  const [visibleSearch, setVisibleSearch] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   function handleSubmit(e) {
     e.preventDefault();
@@ -17,21 +16,8 @@ function Navigation() {
     dispatch(searchRecipes(searchValue));
     history.push("/recipes/search");
   }
-  function handleMouseEnter() {
-    setVisibleSearch(true);
-  }
-  function handleMouseLeave() {
-    setVisibleSearch(false);
-  }
   const linkStyle = "link link-hover p-2 ml-2 text-honey font-bold ";
-  const visibleStyle =
-    " placeholder:italic placeholder:text-slate-400 focus:outline-none ";
-  const searchStyle = visibleSearch ? visibleStyle : "invisible";
-  const hoverDiv =
-    "inline-block rounded-md bg-white shadow-sm  text-gray-800  w-lg";
-  const divStyle = visibleSearch
-    ? hoverDiv
-    : "inline-block rounded-md bg-ghost text-gray-800  w-lg";
+
   return (
     <div className="navbar text-secondary">
       <div className="flex-1">
@@ -46,14 +32,10 @@ function Navigation() {
         </Link>
       </div>
       <div className="navbar-end">
-        <div className={divStyle}>
-          <form
-            className="p-1"
-            onMouseEnter={handleMouseEnter}
-            onSubmit={handleSubmit}
-          >
+        <div className=" group bg-amber-50 text-gray-800 rounded p-1.5 shadow-sm ">
+          <form className="p-1" onSubmit={handleSubmit}>
             <input
-              className={searchStyle}
+              className="bg-amber-50 invisible hover:visible focus:visible group-hover:visible focus:outline-none font-bold"
               type="search"
               name="search"
               placeholder="Search recipes..."

@@ -1,8 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import RecipeCard from "../RecipeCard";
-import { menuItemClasses } from "@mui/material";
-import { CardGiftcard } from "@mui/icons-material";
 function Recipes() {
   const recipes = useSelector((state) => state.recipes.recipes);
   const italianRecipes = recipes.filter((recipe) =>
