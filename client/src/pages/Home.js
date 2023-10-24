@@ -1,23 +1,75 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import RecipeCard from "../RecipeCard";
+import { useSelector } from "react-redux";
 function Home() {
+  const recipes = useSelector((state) => state.recipes.recipes);
+  const recipe1 = recipes[0];
+  const recipe2 = recipes[1];
+  const recipe3 = recipes[3];
+  const [scrollOpacity, setScrollOpacity] = useState(1);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const imageHeight = windowHeight / 2; // Adjust this value for the fading height
+
+      // Calculate the opacity based on the scroll position
+      const opacity = 0.2 + Math.min(1, scrollPosition / imageHeight);
+      setScrollOpacity(opacity);
+    };
+
+    // Attach the event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Detach the event listener on component unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []); // Empty dependency array ensures the effect runs once after initial render
+
+  const headerStyle = {
+    backgroundImage: `linear-gradient(to bottom, rgba(245, 245, 220, ${scrollOpacity}), transparent ), url('/fullsizebackground.jpg')`,
+  };
   return (
     <div>
-      <section id="welcome">
-        <div>
-          <h1>Welcome</h1>
-          <p>Intro message</p>
-        </div>
-        <div>image of food</div>
-      </section>
-      <section id="trending">
-        <div>
-          <h1>Treding Recipes</h1>
-          <div>Recipe1</div>
-          <div>Recipe2</div>
-          <div>Recipe3</div>
-        </div>
-      </section>
+      <div>
+        <header
+          className="relative bg-cover bg-center h-screen bg-image"
+          style={headerStyle}
+        >
+          <div className="absolute top-0 left-0 w-full h-1/3 "></div>
+          <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
+            <h1 className="text-5xl font-bold mb-4">Welcome</h1>
+            <p className="text-lg">
+              Share your favorite recipes with the world!
+            </p>
+          </div>
+        </header>
+
+        <section className="bg-amber-50 py-12">
+          <div className="container mx-auto">
+            <h2 className="text-3xl font-bold mb-8 text-center">
+              Trending Recipes
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+              <RecipeCard recipe={recipe1} />
+              <RecipeCard recipe={recipe2} />
+              <RecipeCard recipe={recipe3} />
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-beige py-8 text-center">
+          <div className="container mx-auto">
+            <p className="text-2xl font-bold mb-4">Ready to get cooking?</p>
+            <Link to="/recipes" className="btn">
+              Explore Recipes →
+            </Link>
+          </div>
+        </section>
+      </div>
       <section id="theme-reference">
         <div
           className="m-5 p-5"

@@ -49,7 +49,10 @@ function Navigation() {
         </div>
         {login ? (
           <div className="flex items-center">
-            <Link className="btn btn-outline btn-warning m-3" to="/recipes/new">
+            <Link
+              className="btn btn-outline btn-warning font-bold m-3"
+              to="/recipes/new"
+            >
               Post
             </Link>
             <div className="dropdown dropdown-end m-3">
