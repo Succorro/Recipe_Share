@@ -12,28 +12,42 @@ function RecipeDisplay({
   ingredients,
 }) {
   return (
-    <div>
-      <h1>{title}</h1>
-      <p>Made by: {username}</p>
-      <h4>Category</h4>
-      {tags}
-      <div>
+    <div className="bg-white p-4 shadow-md rounded-lg m-4">
+      <h1 className="text-3xl font-bold text-center mb-4">{title}</h1>
+      <p className="text-gray-600 text-center">Made by: {username}</p>
+
+      <div className="mt-6 flex space-x-4 justify-center">
         <div>
-          <h4>Description:</h4>
-          <p>{description}</p>
-          <h4>Instructions:</h4>
-          {instructions}
-          <h4>Prep Time:</h4>
-          <p>{prep_time}</p>
-          <h4>Cook Time:</h4>
-          <p>{cooking_time}</p>
-          <h4>Total Time:</h4>
-          <p>{total_time}</p>
+          <h4 className="text-lg font-semibold">Prep Time:</h4>
+          <p>{prep_time} minutes</p>
         </div>
         <div>
-          <h4>Ingredients:</h4>
-          {ingredients}
+          <h4 className="text-lg font-semibold">Cook Time:</h4>
+          <p>{cooking_time} minutes</p>
         </div>
+        <div>
+          <h4 className="text-lg font-semibold">Total Time:</h4>
+          <p>{total_time} minutes</p>
+        </div>
+      </div>
+      <div className="mt-4">
+        <h4 className="text-lg font-semibold">Category</h4>
+        <div className="flex space-x-2">{tags}</div>
+      </div>
+
+      <div className="mt-6">
+        <h4 className="text-lg font-semibold">Description:</h4>
+        <p>{description}</p>
+      </div>
+
+      <div className="mt-6">
+        <h4 className="text-lg font-semibold">Instructions:</h4>
+        <p>{instructions}</p>
+      </div>
+
+      <div className="mt-6">
+        <h4 className="text-lg font-semibold">Ingredients:</h4>
+        <ul>{ingredients}</ul>
       </div>
     </div>
   );
