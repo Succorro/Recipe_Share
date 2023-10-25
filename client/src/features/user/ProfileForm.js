@@ -6,12 +6,13 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 function ProfileForm({ setForm }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  const { id, username, image, bio, email, first_name, last_name } = user;
+  const { id, username, avatar, bio, email, first_name, last_name } = user;
+  console.log(avatar);
   const [updateForm, setUpdateForm] = useState({
     username: username,
     email: email,
-    image: image,
     bio: bio,
+    avatar: null,
     first_name: first_name,
     last_name: last_name,
   });
@@ -22,9 +23,20 @@ function ProfileForm({ setForm }) {
     </p>
   ));
 
+  // function handleImage(event) {
+  //   const file = event.target.files[0];
+  //   const formData = { ...updateForm, avatar: event.target.value, file };
+  //   setUpdateForm(formData);
+  // }
+
   function handleChange(event) {
     const name = event.target.name;
-    const value = event.target.value;
+    let value;
+    if (name === "avatar") {
+      value = event.target.files[0];
+    } else {
+      value = event.target.value;
+    }
     const newInfo = {
       ...updateForm,
       [name]: value,
@@ -34,26 +46,30 @@ function ProfileForm({ setForm }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(updateForm);
     setErrors([]);
+    const formData = new FormData();
+    formData.append("user[username]", updateForm.username);
+    formData.append("user[email]", updateForm.email);
+    formData.append("user[bio]", updateForm.bio);
+    formData.append("user[first_name]", updateForm.first_name);
+    formData.append("user[last_name]", updateForm.last_name);
+    formData.append("user[avatar]", updateForm.avatar);
+
+    console.log(formData);
     fetch(`/users/${id}`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updateForm),
+      body: formData,
     }).then((r) => {
       if (r.ok) {
-        setForm(true);
         r.json().then((user) => dispatch(updateUser(user)));
+        setForm(true);
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
     });
   }
-  console.log(updateForm.image);
-  const labelStyle = "input-group input-group-vertical mb-4";
-  const spanStyle = "bg-white font-bold text-lg";
-  const inputStyle = "input input-bordered bg-white w-full";
+
   return (
     <div className=" w-full rounded-lg lg:rounded-l-lg shadow-2xl bg-white opacity-75 mx-6 lg:mx-0 pt-3 ">
       <h1 className="text-center mb-0 mt-3">Update Profile: </h1>
@@ -71,19 +87,33 @@ function ProfileForm({ setForm }) {
             onChange={(e) => handleChange(e)}
           />
         </label>
+        <label className={labelStyle}>
+          <span className={spanStyle}>First Name:</span>
+          <input
+            className={inputStyle}
+            name="first_name"
+            value={updateForm.first_name}
+            onChange={(e) => handleChange(e)}
+          />
+        </label>
+        <label className={labelStyle}>
+          <span className={spanStyle}>Last Name:</span>
+          <input
+            className={inputStyle}
+            name="last_name"
+            value={updateForm.last_name}
+            onChange={(e) => handleChange(e)}
+          />
+        </label>
 
         <label className={labelStyle}>
           <span className={spanStyle}>Image:</span>{" "}
           <input
             type="file"
-            name="image"
+            name="avatar"
+            onChange={(e) => handleChange(e)}
             className="file-input file-input-bordered file-input-info bg-white w-full"
           />
-          {/* <input
-          name="image"
-          value={updateForm.image}
-          onChange={(e) => handleChange(e)}
-        /> */}
         </label>
         <label className={labelStyle}>
           <span className={spanStyle}> Email:</span>
@@ -106,24 +136,7 @@ function ProfileForm({ setForm }) {
             onChange={(e) => handleChange(e)}
           />
         </label>
-        <label className={labelStyle}>
-          <span className={spanStyle}>First Name:</span>
-          <input
-            className={inputStyle}
-            name="first_name"
-            value={updateForm.first_name}
-            onChange={(e) => handleChange(e)}
-          />
-        </label>
-        <label className={labelStyle}>
-          <span className={spanStyle}>Last Name:</span>
-          <input
-            className={inputStyle}
-            name="last_name"
-            value={updateForm.last_name}
-            onChange={(e) => handleChange(e)}
-          />
-        </label>
+
         {displayErrors}
         <div className="flex justify-center">
           <button className="btn btn-success m-1 lg:mr-5" type="submit">
@@ -145,5 +158,7 @@ function ProfileForm({ setForm }) {
     </div>
   );
 }
-
+const labelStyle = "input-group input-group-vertical mb-4";
+const spanStyle = "bg-white font-bold text-lg";
+const inputStyle = "input input-bordered bg-white w-full";
 export default ProfileForm;

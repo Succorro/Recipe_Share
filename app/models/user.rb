@@ -1,8 +1,10 @@
 class User < ApplicationRecord
-
     has_secure_password
     
-    has_one_attached :image
+    has_one_attached :avatar
+    def avatar_thumbnail 
+        avatar.variant(resize: '100x100').processed 
+    end 
     has_many :recipes, dependent: :destroy
 
     validates :username, presence: true, uniqueness: { case_sensitive: false }, length: {maximum: 15}

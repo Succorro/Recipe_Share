@@ -29,6 +29,8 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/profile
   def update
     @current_user.update!(user_params)
+    @current_user.avatar.attach(params[:user][:avatar])
+
     render json: @current_user, status: :accepted
   end
 
@@ -41,6 +43,6 @@ class UsersController < ApplicationController
   private
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:username, :password, :password_confirmation, :email, :first_name, :last_name, :bio)
+      params.require(:user).permit(:username, :password, :password_confirmation, :email, :first_name, :last_name, :bio, :avatar)
     end
 end
