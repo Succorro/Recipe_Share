@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    user = User.create!(user_params)
+    user = User.create!(create_params)
     session[:user_id] = user.id 
     render json: user, status: :created 
   end
@@ -42,6 +42,9 @@ class UsersController < ApplicationController
 
   private
     # Only allow a list of trusted parameters through.
+    def create_params
+      params.permit(:username, :password, :password_confirmation, :email, :first_name, :last_name, :bio, :avatar)
+    end
     def user_params
       params.require(:user).permit(:username, :password, :password_confirmation, :email, :first_name, :last_name, :bio, :avatar)
     end

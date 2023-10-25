@@ -10,13 +10,15 @@ function Navigation() {
   const history = useHistory();
   const login = useSelector((state) => state.user.login);
   const [searchValue, setSearchValue] = useState("");
+  const user = useSelector((state) => state.user.user);
+  const avatar = user.avatar_url;
+  console.log(avatar);
   function handleSubmit(e) {
     e.preventDefault();
     console.log(searchValue);
     dispatch(searchRecipes(searchValue));
     history.push("/recipes/search");
   }
-  const linkStyle = "link link-hover p-2 ml-2 text-honey font-bold ";
 
   return (
     <div className="navbar text-secondary">
@@ -58,10 +60,7 @@ function Navigation() {
             <div className="dropdown dropdown-end m-3">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
-                  <img
-                    src="https://static.wikia.nocookie.net/disney/images/5/56/Profile_-_Rex.jpeg"
-                    alt="rex"
-                  />
+                  <img src={avatar} alt="rex" />
                 </div>
               </label>
               <ul
@@ -103,5 +102,6 @@ function Navigation() {
     </div>
   );
 }
+const linkStyle = "link link-hover p-2 ml-2 text-honey font-bold ";
 
 export default Navigation;

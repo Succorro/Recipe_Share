@@ -59,7 +59,7 @@ function RecipeCard({ recipe }) {
           <h2 className="mb-1 text-xl font-bold tracking-tight text-primary dark:text-primary">
             {recipe.title}
           </h2>
-          <p class="mb-3 font-normal text-primary">
+          <p className="mb-3 font-normal text-primary">
             Made by: {recipe.username}
           </p>
         </div>

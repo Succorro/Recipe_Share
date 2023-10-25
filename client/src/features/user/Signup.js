@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 function Signup({ toggleForm, words }) {
   const [login, setLogin] = useState({
     bio: "",
+    avatar: null,
   });
   const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
@@ -30,6 +31,14 @@ function Signup({ toggleForm, words }) {
   function handleSubmit(e) {
     e.preventDefault();
     console.log(login);
+    const formData = new FormData();
+    formData.append("[username]", login.username);
+    formData.append("[email]", login.email);
+    formData.append("[bio]", login.bio);
+    formData.append("[first_name]", login.first_name);
+    formData.append("[last_name]", login.last_name);
+    formData.append("[avatar]", "/default_profile.jpeg");
+
     fetch("/users", {
       method: "POST",
       headers: {
@@ -98,7 +107,7 @@ function Signup({ toggleForm, words }) {
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 type="password"
                 id="confirmPassword"
-                name="confirmPassword"
+                name="password_confirmation"
                 onChange={handleChange}
               />
             </div>

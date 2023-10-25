@@ -10,7 +10,7 @@ class UserSerializer < ActiveModel::Serializer
     if object.avatar.attached? 
       Rails.application.routes.url_helpers.rails_blob_path(object.avatar_thumbnail, only_path: true)
     else 
-      ActivitiesController::Base.helpers.asset.url('https://static.wikia.nocookie.net/disney/images/5/56/Profile_-_Rex.jpeg')
+      'https://static.wikia.nocookie.net/disney/images/5/56/Profile_-_Rex.jpeg'
     end 
   end 
 end
