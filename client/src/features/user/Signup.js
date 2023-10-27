@@ -30,7 +30,6 @@ function Signup({ toggleForm, words }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(login);
     const formData = new FormData();
     formData.append("[username]", login.username);
     formData.append("[email]", login.email);
@@ -39,6 +38,7 @@ function Signup({ toggleForm, words }) {
     formData.append("[last_name]", login.last_name);
     formData.append("[avatar]", "/default_profile.jpeg");
 
+    console.log(formData);
     fetch("/users", {
       method: "POST",
       headers: {

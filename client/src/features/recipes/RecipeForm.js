@@ -12,6 +12,7 @@ function RecipeForm() {
   const [recipeTags, setRecipeTags] = useState([]);
   const [recipe, setRecipe] = useState({});
   const [ingredients, setIngredients] = useState([]);
+
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -20,6 +21,7 @@ function RecipeForm() {
       {error}
     </p>
   ));
+
   function handleTags(newValue) {
     const value = newValue.map((tag) => {
       const s = { tag_id: tag.tag_id };
@@ -28,7 +30,13 @@ function RecipeForm() {
     setRecipeTags(value);
   }
 
-  function handleChange(name, value) {
+  function handleChange(name, event) {
+    let value;
+    if (name === "image") {
+      value = event.target.files[0];
+    } else {
+      value = event.target.value;
+    }
     const newRecipe = {
       ...recipe,
       [name]: value,
@@ -38,19 +46,26 @@ function RecipeForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const newRecipe = {
-      ...recipe,
-      ingredients_attributes: ingredients,
-      recipe_tags_attributes: recipeTags,
-    };
-    console.log(recipe, newRecipe);
-    console.log(recipeTags, ingredients);
+    // const newRecipe = {
+    //   ...recipe,
+    //   ingredients_attributes: ingredients,
+    //   recipe_tags_attributes: recipeTags,
+    // };
+
+    const formData = new FormData();
+    formData.append("recipe[title]", recipe.title);
+    formData.append("recipe[image]", recipe.image);
+    formData.append("recipe[description]", recipe.description);
+    formData.append("recipe[instructions]", recipe.instructions);
+    formData.append("recipe[prep_time]", recipe.prep_time);
+    formData.append("recipe[cooking_time]", recipe.cooking_time);
+    formData.append("recipe[ingredients_attributes]", ingredients);
+    formData.append("recipe[recipe_tags_attributes]", recipeTags);
+
+    console.log(recipe, formData);
     fetch("/recipes", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newRecipe),
+      body: formData,
     }).then((r) => {
       if (r.ok) {
         r.json().then((r) => {
@@ -83,70 +98,66 @@ function RecipeForm() {
             variant="standard"
             label="Tags"
             placeholder="Categories"
-            className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+            className={inputStyle}
           />
         )}
       />
-      <label className="block mt-4 text-sm font-bold text-gray-700">
-        Title
+
+      <label className={labelStyle}>
+        Image:
+        <input
+          type="file"
+          name="image"
+          onChange={(e) => handleChange("image", e)}
+          className="file-input w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+        />
       </label>
+      <label className={labelStyle}>Title</label>
       <input
         type="text"
         name="title"
         onChange={(e) => {
-          const value = e.target.value;
-          handleChange("title", value);
+          handleChange("title", e);
         }}
-        className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+        className={inputStyle}
       />
 
-      <label className="block mt-4 text-sm font-bold text-gray-700">
-        Description
-      </label>
+      <label className={labelStyle}>Description</label>
       <textarea
         type="text"
         name="description"
         onChange={(e) => {
-          const value = e.target.value;
-          handleChange("description", value);
+          handleChange("description", e);
         }}
-        className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+        className={inputStyle}
       />
 
-      <label className="block mt-4 text-sm font-bold text-gray-700">
-        Instructions
-      </label>
+      <label className={labelStyle}>Instructions</label>
       <textarea
         type="text"
         name="instructions"
         onChange={(e) => {
-          const value = e.target.value;
-          handleChange("instructions", value);
+          handleChange("instructions", e);
         }}
-        className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+        className={inputStyle}
       />
 
-      <label className="block mt-4 text-sm font-bold text-gray-700">
-        Prep Time
-      </label>
+      <label className={labelStyle}>Prep Time</label>
       <input
         type="number"
         name="prep_time"
-        onChange={(e) => handleChange("prep_time", e.target.value)}
-        className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+        onChange={(e) => handleChange("prep_time", e)}
+        className={inputStyle}
       />
 
-      <label className="block mt-4 text-sm font-bold text-gray-700">
-        Cook Time
-      </label>
+      <label className={labelStyle}>Cook Time</label>
       <input
         type="number"
         name="cooking_time"
         onChange={(e) => {
-          const value = e.target.value;
-          handleChange("cooking_time", value);
+          handleChange("cooking_time", e);
         }}
-        className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+        className={inputStyle}
       />
 
       <IngredientsForm
@@ -163,5 +174,7 @@ function RecipeForm() {
     </form>
   );
 }
-
+const labelStyle = "block mt-4 text-sm font-bold text-gray-700";
+const inputStyle =
+  "w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300";
 export default RecipeForm;

@@ -41,12 +41,20 @@ function Recipe() {
       </p>
     );
   });
-  const tagsList = tags.map((tag) => <p key={tag.id}>{tag.name}</p>);
-  const ingredientsList = ingredients.map((ingredient) => (
-    <p key={ingredient.id}>
-      {ingredient.name} {ingredient.qty} {ingredient.unit}
-    </p>
+  const tagsList = tags.map((tag) => (
+    <span className="text-sm" key={tag.id}>
+      {tag.name}{" "}
+    </span>
   ));
+  const ingredientsList = ingredients.map((ingredient) => {
+    const capitalizedName =
+      ingredient.name.charAt(0).toUpperCase() + ingredient.name.slice(1);
+    return (
+      <p key={ingredient.id}>
+        {capitalizedName} {ingredient.qty} {ingredient.unit}
+      </p>
+    );
+  });
 
   function handleDelete(deletedRecipe) {
     console.log("delete");
