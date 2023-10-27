@@ -33,6 +33,7 @@ function Recipe() {
     username,
     tags,
     ingredients,
+    image_url,
   } = recipe;
   const numberedList = instructions.split(". ").map((word, index) => {
     return (
@@ -93,6 +94,7 @@ function Recipe() {
               total_time={total_time}
               username={username}
               tags={tagsList}
+              image={image_url}
               ingredients={ingredientsList}
             />
             {showDelete ? (
@@ -142,6 +144,7 @@ function Recipe() {
       total_time={total_time}
       username={username}
       tags={tagsList}
+      image={image_url}
       ingredients={ingredientsList}
     />
   );

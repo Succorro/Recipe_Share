@@ -13,7 +13,9 @@ class RecipeSerializer < ActiveModel::Serializer
 
   def image_url 
     if object.image.attached?
-      Rails.application.routes.url_helpers.rails_blob_path(object.image_size, only_path: true)
+      Rails.application.routes.url_helpers.rails_blob_path(object.image, only_path: true)
+    else 
+      '/Steak.jpg'
     end 
   end 
 

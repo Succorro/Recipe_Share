@@ -10,12 +10,12 @@ function RecipeDisplay({
   username,
   tags,
   ingredients,
+  image,
 }) {
   return (
-    <div className="bg-white p-4 shadow-md rounded-lg m-4">
-      <img src="/Steak.jpg" alt="food" />
-      <h1 className="text-3xl font-bold text-center mb-4">{title}</h1>
-      <p className="text-gray-600 text-center">Made by: {username}</p>
+    <div className="bg-white p-4 shadow-md rounded-lg m-10">
+      <h1 className="text-3xl font-bold text-center mb-4 mt-5">{title}</h1>
+      <p className="text-gray-600 text-center mt-5">Made by: {username}</p>
 
       <div className="mt-6 flex space-x-4 justify-center">
         <div>
@@ -34,6 +34,7 @@ function RecipeDisplay({
           </h4>
         </div>
       </div>
+      <img className="max:w-4/12" src={image} alt="food" />
       <div className="mt-4">
         <h4 className="text-lg font-semibold">Category: {tags}</h4>
       </div>

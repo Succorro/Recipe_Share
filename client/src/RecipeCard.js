@@ -5,7 +5,7 @@ function RecipeCard({ recipe }) {
   const history = useHistory();
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const { title, description, total_time, username, tags } = recipe;
+  const { title, description, total_time, username, tags, image_url } = recipe;
   const tagsList = tags.map((tag) => ` ${tag.name}`);
   const displayPopup = (
     <div>
@@ -54,7 +54,7 @@ function RecipeCard({ recipe }) {
         className="max-w-sm max-h-[400px] bg-amber-50 border border-gray-200 rounded-lg shadow dark:bg-amber-50 dark:border-honey"
       >
         {" "}
-        <img className="rounded-t-lg mt-0" src="/Steak.jpg" alt="food" />
+        <img className="rounded-t-lg mt-0" src={image_url} alt="food" />
         <div className="p-5 pt-0">
           <h2 className="mb-1 text-xl font-bold tracking-tight text-primary dark:text-primary">
             {recipe.title}

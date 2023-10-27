@@ -6,7 +6,7 @@ class Recipe < ApplicationRecord
 
   has_one_attached :image
  def image_size 
-  image.variant(resize: '').processed 
+  image.variant(resize: '550x350').processed 
  end 
   accepts_nested_attributes_for :ingredients, reject_if: ->(attributes){ attributes['name'].blank? }, allow_destroy: true
   accepts_nested_attributes_for :recipe_tags, reject_if: ->(attributes){ attributes['tag_id'].blank? }, allow_destroy: true
