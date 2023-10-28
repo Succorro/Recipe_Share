@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 function ProfileInfo({ setForm }) {
   const user = useSelector((state) => state.user.user);
   const { username, avatar_url, email, first_name, last_name, bio } = user;
-  console.log(avatar_url);
   return (
     <div className="w-full sm:rounded-lg pt-3 shadow-2xl bg-white opacity-75 mx-6 lg:rounded-l-lg lg:w-2/3  lg:flex lg:items-center lg:justify-center lg:m-auto">
       <div className="p-4 md:p-12 text-center ">

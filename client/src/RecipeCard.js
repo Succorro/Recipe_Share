@@ -54,7 +54,11 @@ function RecipeCard({ recipe }) {
         className="max-w-sm max-h-[400px] bg-amber-50 border border-gray-200 rounded-lg shadow dark:bg-amber-50 dark:border-honey"
       >
         {" "}
-        <img className="rounded-t-lg mt-0" src={image_url} alt="food" />
+        <img
+          className="rounded-t-lg mt-0 max-h-64 w-full object-fill"
+          src={image_url}
+          alt="food"
+        />
         <div className="p-5 pt-0">
           <h2 className="mb-1 text-xl font-bold tracking-tight text-primary dark:text-primary">
             {recipe.title}

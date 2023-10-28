@@ -19,7 +19,7 @@ function Home() {
           style={headerStyle}
         >
           <div className="absolute top-0 left-0 w-full h-1/3 "></div>
-          <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
+          <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
             <h1 className="text-5xl font-bold mb-4 text-primary">Welcome</h1>
             <p className="text-xl text-primary">
               Share your favorite recipes with the world!

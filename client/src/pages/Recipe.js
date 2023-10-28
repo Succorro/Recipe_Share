@@ -76,12 +76,14 @@ function Recipe() {
               showForm={showForm}
               currentRecipe={recipe}
             />
-            <button
-              onClick={() => setShowForm(!showForm)}
-              className="btn btn-warning"
-            >
-              Cancel
-            </button>
+            <div className="flex justify-center">
+              <button
+                onClick={() => setShowForm(!showForm)}
+                className="btn btn-warning m-10"
+              >
+                Cancel
+              </button>
+            </div>
           </>
         ) : (
           <>
@@ -98,36 +100,41 @@ function Recipe() {
               ingredients={ingredientsList}
             />
             {showDelete ? (
-              <>
-                <button
-                  className="btn btn-info"
-                  onClick={() => setShowForm(!showForm)}
-                >
-                  Edit
-                </button>
-                <button
-                  className="btn btn-error"
-                  onClick={() => setShowDelete(!showDelete)}
-                >
-                  Delete
-                </button>{" "}
-              </>
+              <div className="text-center ">
+                <h4>Update your post</h4>
+                <div className="flex justify-center">
+                  <button
+                    className="btn btn-info  m-10 "
+                    onClick={() => setShowForm(!showForm)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="btn btn-error  m-10 "
+                    onClick={() => setShowDelete(!showDelete)}
+                  >
+                    Delete
+                  </button>{" "}
+                </div>
+              </div>
             ) : (
-              <>
+              <div className="text-center ">
                 <h4>Are you sure you want to delete?</h4>
-                <button
-                  className="btn btn-error"
-                  onClick={() => handleDelete(recipe)}
-                >
-                  Yes
-                </button>
-                <button
-                  className="btn btn-success"
-                  onClick={() => setShowDelete(!showDelete)}
-                >
-                  No
-                </button>
-              </>
+                <div className="flex justify-center">
+                  <button
+                    className="btn btn-error m-10 "
+                    onClick={() => handleDelete(recipe)}
+                  >
+                    Yes
+                  </button>
+                  <button
+                    className="btn btn-success  m-10 "
+                    onClick={() => setShowDelete(!showDelete)}
+                  >
+                    No
+                  </button>
+                </div>
+              </div>
             )}
           </>
         )}

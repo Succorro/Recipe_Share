@@ -12,7 +12,6 @@ function RecipeDisplay({
   ingredients,
   image,
 }) {
-  console.log(image);
   return (
     <div className="bg-white p-4 shadow-md rounded-lg m-10">
       <h1 className="text-3xl font-bold text-center mb-4 mt-5">{title}</h1>

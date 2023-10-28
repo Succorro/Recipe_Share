@@ -7,7 +7,6 @@ function ProfileForm({ setForm }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const { id, username, avatar, bio, email, first_name, last_name } = user;
-  console.log(avatar);
   const [updateForm, setUpdateForm] = useState({
     username: username,
     email: email,
@@ -46,7 +45,6 @@ function ProfileForm({ setForm }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(updateForm);
     setErrors([]);
     const formData = new FormData();
     formData.append("user[username]", updateForm.username);
@@ -56,7 +54,6 @@ function ProfileForm({ setForm }) {
     formData.append("user[last_name]", updateForm.last_name);
     formData.append("user[avatar]", updateForm.avatar);
 
-    console.log(formData);
     fetch(`/users/${id}`, {
       method: "PATCH",
       body: formData,
@@ -114,6 +111,9 @@ function ProfileForm({ setForm }) {
             onChange={(e) => handleChange(e)}
             className="file-input file-input-bordered file-input-info bg-white w-full"
           />
+          <p className="text-primary mt-0 mb-5">
+            By changing this value a new image will be shown on avatar
+          </p>
         </label>
         <label className={labelStyle}>
           <span className={spanStyle}> Email:</span>
