@@ -46,11 +46,6 @@ function RecipeForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const newRecipe = {
-      ...recipe,
-      ingredients_attributes: ingredients,
-      recipe_tags_attributes: recipeTags,
-    };
 
     const formData = new FormData();
     formData.append("recipe[title]", recipe.title);
@@ -59,7 +54,7 @@ function RecipeForm() {
     formData.append("recipe[instructions]", recipe.instructions);
     formData.append("recipe[prep_time]", recipe.prep_time);
     formData.append("recipe[cooking_time]", recipe.cooking_time);
-    newRecipe.ingredients_attributes.forEach((ingredient, index) => {
+    ingredients.forEach((ingredient, index) => {
       formData.append(
         `recipe[ingredients_attributes][${index}][name]`,
         ingredient.name
@@ -73,19 +68,15 @@ function RecipeForm() {
         ingredient.unit
       );
     });
-    newRecipe.recipe_tags_attributes.forEach((tag, index) => {
+    recipeTags.forEach((tag, index) => {
       formData.append(
         `recipe[recipe_tags_attributes][${index}][tag_id]`,
         tag.tag_id
       );
     });
-    console.log(recipeTags);
-    console.log(recipe);
-    console.log(newRecipe);
-    console.log(formData);
+
     fetch("/recipes", {
       method: "POST",
-
       body: formData,
     }).then((r) => {
       if (r.ok) {
