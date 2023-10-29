@@ -24,9 +24,9 @@ function App() {
     dispatch(fetchUser());
     dispatch(fetchRecipes());
   }, [dispatch]);
-
-  const recipes = useSelector((state) => state.recipes.recipes);
-  if (recipes.length === 0)
+  const status = useSelector((state) => state.recipes.status);
+  console.log(status);
+  if (status === "loading")
     return <span className="loading loading-spinner loading-lg"></span>;
 
   return (
