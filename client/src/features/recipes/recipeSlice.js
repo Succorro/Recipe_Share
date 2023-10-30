@@ -1,14 +1,27 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const fetchRecipes = createAsyncThunk("recipes/fetchRecipes", () => {
-  return fetch("/recipes")
-    .then((r) => r.json())
-    .then((data) => data);
-});
+export const fetchRecipes = createAsyncThunk(
+  "recipes/fetchRecipes",
+  async () => {
+    try {
+      const response = await fetch("/recipes");
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch recipes");
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
 
 const initialState = {
   recipes: [],
   status: "idle",
+  error: null, // Initialize the error field
 };
 
 export const recipeSlice = createSlice({
@@ -41,9 +54,11 @@ export const recipeSlice = createSlice({
     builder.addCase(fetchRecipes.fulfilled, (state, action) => {
       state.recipes = action.payload;
       state.status = "idle";
+      state.error = null; // Clear any previous errors on success
     });
-    builder.addCase(fetchRecipes.rejected, (state) => {
+    builder.addCase(fetchRecipes.rejected, (state, action) => {
       state.status = "failed";
+      state.error = action.error.message; // Store the error message
     });
   },
 });

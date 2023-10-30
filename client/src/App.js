@@ -21,10 +21,16 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUser());
     dispatch(fetchRecipes());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, [dispatch]);
+
   const status = useSelector((state) => state.recipes.status);
+  const recipes = useSelector((state) => state.recipes.recipes);
+  console.log(recipes);
   console.log(status);
   if (status === "loading")
     return <span className="loading loading-spinner loading-lg"></span>;

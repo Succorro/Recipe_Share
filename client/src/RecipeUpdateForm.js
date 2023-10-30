@@ -32,6 +32,8 @@ function RecipeUpdateForm({ currentRecipe, setShowForm, showForm }) {
   function handleSubmit(e) {
     e.preventDefault();
 
+    // Create arrays with some data: 'modifiedIngredients' and 'modifiedTags'.
+    // Remove duplicates and obtain unique arrays:
     const uniqueIngredients = Array.from(new Set(modifiedIngredients));
     const uniqueTags = Array.from(new Set(modifiedTags));
 

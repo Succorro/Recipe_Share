@@ -4,10 +4,11 @@ import RecipeCard from "../RecipeCard";
 import { useSelector } from "react-redux";
 function Home() {
   const recipes = useSelector((state) => state.recipes.recipes);
+  if (recipes.length === 0) return <div>loading...</div>;
   const recipe1 = recipes[0];
   const recipe2 = recipes[1];
   const recipe3 = recipes[3];
-
+  console.log(recipes);
   const headerStyle = {
     backgroundImage: `linear-gradient(to bottom, rgba(245, 245, 220, 1), transparent ), url('/fullsizebackground.jpg')`,
   };
