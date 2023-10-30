@@ -1,8 +1,9 @@
-Recipe.destroy_all 
-RecipeTag.destroy_all 
-Ingredient.destroy_all 
+# Recipe.destroy_all 
+# RecipeTag.destroy_all 
+# Ingredient.destroy_all 
 
 puts 'Seeding Data....'
+ActiveRecord::Base.transaction do
 Tag.create(name: 'Mexican')
 Tag.create(name: 'Italian')
 Tag.create(name: 'Vegetarian')
@@ -84,5 +85,5 @@ Ingredient.create(name: 'milk',unit: 'cups', qty: 1.5, recipe_id: 2)
 Ingredient.create(name: 'cheddar cheese',unit: 'cups', qty: 1.5, recipe_id: 2)
 Ingredient.create(name: 'chives',unit: 'tablespoons', qty: 0.25, recipe_id: 2)
 Ingredient.create(name: 'black pepper',unit: 'teaspoons', qty: 0.25, recipe_id: 2)
-
+end 
 puts 'Done Seeding!'

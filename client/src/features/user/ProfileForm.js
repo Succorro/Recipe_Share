@@ -6,7 +6,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 function ProfileForm({ setForm }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  const { id, username, avatar, bio, email, first_name, last_name } = user;
+  const { id, username, bio, email, first_name, last_name } = user;
   const [updateForm, setUpdateForm] = useState({
     username: username,
     email: email,
