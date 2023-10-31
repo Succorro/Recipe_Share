@@ -12,6 +12,7 @@ function RecipeForm() {
   const [recipeTags, setRecipeTags] = useState([]);
   const [recipe, setRecipe] = useState({});
   const [ingredients, setIngredients] = useState([]);
+  const [missingImage, setMissingImage] = useState("");
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -74,21 +75,24 @@ function RecipeForm() {
         tag.tag_id
       );
     });
-
-    fetch("/recipes", {
-      method: "POST",
-      body: formData,
-    }).then((r) => {
-      if (r.ok) {
-        r.json().then((r) => {
-          console.log(r);
-          history.push(`/recipes/${r.id}`);
-          dispatch(postRecipes(r));
-        });
-      } else {
-        r.json().then((error) => setErrors(error.errors));
-      }
-    });
+    if (recipe.image === undefined) {
+      setMissingImage("Image must be present!");
+    } else {
+      fetch("/recipes", {
+        method: "POST",
+        body: formData,
+      }).then((r) => {
+        if (r.ok) {
+          r.json().then((r) => {
+            console.log(r);
+            history.push(`/recipes/${r.id}`);
+            dispatch(postRecipes(r));
+          });
+        } else {
+          r.json().then((error) => setErrors(error.errors));
+        }
+      });
+    }
   }
   return (
     <form
@@ -123,6 +127,7 @@ function RecipeForm() {
           onChange={(e) => handleChange("image", e)}
           className="file-input w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
         />
+        <p className="text-error">{missingImage}</p>
       </label>
       <label className={labelStyle}>Title</label>
       <input
