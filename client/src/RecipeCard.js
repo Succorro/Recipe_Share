@@ -4,8 +4,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom";
 function RecipeCard({ recipe }) {
   const history = useHistory();
   const [isExpanded, setIsExpanded] = useState(false);
-  if (recipe === false)
-    return <span className="loading loading-spinner loading-lg"></span>;
+
   const { title, description, total_time, username, tags, image_url } = recipe;
   const tagsList = tags.map((tag) => ` ${tag.name}`);
   const displayPopup = (

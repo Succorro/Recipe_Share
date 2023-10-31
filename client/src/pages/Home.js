@@ -5,14 +5,19 @@ import { useSelector } from "react-redux";
 function Home() {
   const recipesState = useSelector((state) => state.recipes);
   const recipes = recipesState.recipes;
-  if (recipes.length === 0)
+  if (recipes.length !== 3)
     return <span className="loading loading-spinner loading-lg"></span>;
   const recipe1 = recipes[0];
-  const recipe2 = recipes[1];
+  const recipe2 = false;
   const recipe3 = recipes[3];
   if (recipesState.status === "failed") {
     console.log(recipesState.errors);
   }
+
+  if (recipe2 === false || recipe3 === false) {
+    return <span className="loading loading-spinner loading-lg"></span>;
+  }
+
   return (
     <div>
       <div>
