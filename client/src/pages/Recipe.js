@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import {
-  useHistory,
-  useParams,
-} from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import RecipeError from "../RecipeError";
 import RecipeDisplay from "../RecipeDisplay";
@@ -18,7 +15,7 @@ function Recipe() {
   const recipe = recipes.find((recipe) => recipe.id === recipeId);
   const [showDelete, setShowDelete] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   if (!recipe) return <RecipeError />;
@@ -62,7 +59,7 @@ function Recipe() {
     fetch(`/recipes/${deletedRecipe.id}`, {
       method: "DELETE",
     }).then((r) => {
-      if (r.ok) history.push("/");
+      if (r.ok) navigate.push("/");
       dispatch(deleteRecipes(deletedRecipe));
     });
   }

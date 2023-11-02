@@ -5,17 +5,13 @@ import { useSelector } from "react-redux";
 function Home() {
   const recipesState = useSelector((state) => state.recipes);
   const recipes = recipesState.recipes;
-  if (recipes.length !== 3)
+  if (recipes.length <= 3)
     return <span className="loading loading-spinner loading-lg"></span>;
   const recipe1 = recipes[0];
-  const recipe2 = false;
-  const recipe3 = recipes[3];
+  const recipe2 = recipes[1];
+  const recipe3 = recipes[2];
   if (recipesState.status === "failed") {
     console.log(recipesState.errors);
-  }
-
-  if (recipe2 === false || recipe3 === false) {
-    return <span className="loading loading-spinner loading-lg"></span>;
   }
 
   return (
@@ -56,7 +52,7 @@ function Home() {
           </div>
         </section>
       </div>
-      <section id="theme-reference">
+      {/* <section id="theme-reference">
         <div
           className="m-5 p-5"
           style={{ backgroundColor: "#f5f5dc", fontSize: "large" }}
@@ -72,7 +68,7 @@ function Home() {
           <h1 className="text-warning">Warning</h1>
           <h1 className="text-error">Error</h1>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

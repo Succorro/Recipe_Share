@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "./userSlice";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 
 function Signup({ toggleForm, words }) {
   const [login, setLogin] = useState({
@@ -10,7 +10,7 @@ function Signup({ toggleForm, words }) {
   });
   const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const displayErrors = errors.map((error) => (
     <p className="text-danger" key={error}>
@@ -49,7 +49,7 @@ function Signup({ toggleForm, words }) {
       if (r.ok) {
         r.json().then((user) => {
           dispatch(loginUser(user));
-          history.push("/");
+          navigate("/");
         });
       } else {
         r.json().then((error) => setErrors(error.errors));

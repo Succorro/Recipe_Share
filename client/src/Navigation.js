@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "./features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import SearchIcon from "@mui/icons-material/Search";
@@ -7,7 +7,7 @@ import { searchRecipes } from "./features/search/searchSlice";
 
 function Navigation() {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const login = useSelector((state) => state.user.login);
   const [searchValue, setSearchValue] = useState("");
   const user = useSelector((state) => state.user.user);
@@ -15,7 +15,7 @@ function Navigation() {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(searchRecipes(searchValue));
-    history.push("/recipes/search");
+    navigate("/recipes/search");
   }
 
   return (
@@ -80,7 +80,7 @@ function Navigation() {
                         if (r.ok) {
                           console.log(r);
                           dispatch(logoutUser());
-                          history.push("/login");
+                          navigate("/login");
                         }
                       });
                     }}

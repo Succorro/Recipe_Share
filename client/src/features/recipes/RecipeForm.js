@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import IngredientsForm from "./IngredientsForm";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { postRecipes } from "./recipeSlice";
 import allTagOptions from "../../allTagOptions";
@@ -12,9 +12,8 @@ function RecipeForm() {
   const [recipeTags, setRecipeTags] = useState([]);
   const [recipe, setRecipe] = useState({});
   const [ingredients, setIngredients] = useState([]);
-  const [missingImage, setMissingImage] = useState("");
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const displayErrors = errors.map((error) => (
@@ -75,24 +74,21 @@ function RecipeForm() {
         tag.tag_id
       );
     });
-    if (recipe.image === undefined) {
-      setMissingImage("Image must be present!");
-    } else {
-      fetch("/recipes", {
-        method: "POST",
-        body: formData,
-      }).then((r) => {
-        if (r.ok) {
-          r.json().then((r) => {
-            console.log(r);
-            history.push(`/recipes/${r.id}`);
-            dispatch(postRecipes(r));
-          });
-        } else {
-          r.json().then((error) => setErrors(error.errors));
-        }
-      });
-    }
+
+    fetch("/recipes", {
+      method: "POST",
+      body: formData,
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((r) => {
+          console.log(r);
+          navigate(`/recipes/${r.id}`);
+          dispatch(postRecipes(r));
+        });
+      } else {
+        r.json().then((error) => setErrors(error.errors));
+      }
+    });
   }
   return (
     <form
@@ -127,7 +123,6 @@ function RecipeForm() {
           onChange={(e) => handleChange("image", e)}
           className="file-input w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
         />
-        <p className="text-error">{missingImage}</p>
       </label>
       <label className={labelStyle}>Title</label>
       <input

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Recipes from "./pages/Recipes";
@@ -36,44 +36,32 @@ function App() {
     return <span className="loading loading-spinner loading-lg"></span>;
 
   return (
-    <BrowserRouter>
+    <Router>
       <Navigation />
       <div className="prose max-w-none">
-        <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
+        <Routes>
+          <Route path="/login" element={<Login />} />
 
-          <Route path="/users/profile/remove">
-            <RemoveProfile />
-          </Route>
-          <Route path="/users/profile">
-            <Profile />
-          </Route>
-          <Route path="/users/:id">
-            <User />
-          </Route>
-          <Route path="/recipes/search">
-            <Search />
-          </Route>
-          <Route path="/recipes/new">
-            <NewRecipe />
-          </Route>
-          <Route path="/recipes/:id">
-            <Recipe />
-          </Route>
-          <Route path="/recipes">
-            <Recipes />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
+          <Route path="/users/profile/remove" element={<RemoveProfile />} />
+
+          <Route path="/users/profile" element={<Profile />} />
+
+          <Route path="/users/:id" element={<User />} />
+
+          <Route path="/recipes/search" element={<Search />} />
+
+          <Route path="/recipes/new" element={<NewRecipe />} />
+
+          <Route path="/recipes/:id" element={<Recipe />} />
+
+          <Route path="/recipes" element={<Recipes />} />
+
+          <Route path="/about" element={<About />} />
+
+          <Route path="/" element={<Home />} />
+        </Routes>
       </div>
-    </BrowserRouter>
+    </Router>
   );
 }
 

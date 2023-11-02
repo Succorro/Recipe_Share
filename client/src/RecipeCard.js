@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function RecipeCard({ recipe }) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
 
   const { title, description, total_time, username, tags, image_url } = recipe;
@@ -36,7 +36,7 @@ function RecipeCard({ recipe }) {
   const hidden = isExpanded ? popupStyle : hiddenStyle;
   return (
     <div
-      onClick={() => history.push(`/recipes/${recipe.id}`)}
+      onClick={() => navigate(`/recipes/${recipe.id}`)}
       className="hover:cursor-pointer p-0 m-0"
     >
       <div

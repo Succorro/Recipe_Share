@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 import Signup from "../features/user/Signup";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../features/user/userSlice";
@@ -9,7 +9,7 @@ function Login() {
   const [errors, setErrors] = useState([]);
   const [login, setLogin] = useState({});
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const words = isLogin ? "checked" : "";
   const toggleForm = () => {
@@ -45,7 +45,7 @@ function Login() {
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => {
-          history.push("/");
+          navigate("/");
           dispatch(loginUser(user));
         });
       } else {
