@@ -29,9 +29,8 @@ function App() {
   }, [dispatch]);
 
   const status = useSelector((state) => state.recipes.status);
-  const recipes = useSelector((state) => state.recipes.recipes);
-  console.log(recipes);
-  console.log(status);
+  // const recipes = useSelector((state) => state.recipes.recipes);
+
   if (status === "loading")
     return <span className="loading loading-spinner loading-lg"></span>;
 

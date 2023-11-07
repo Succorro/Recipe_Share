@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import IngredientsForm from "./features/recipes/IngredientsForm";
@@ -7,6 +7,7 @@ import { patchRecipes } from "./features/recipes/recipeSlice";
 import allTagOptions from "./allTagOptions";
 
 function RecipeUpdateForm({ currentRecipe, setShowForm, showForm }) {
+  const imageFile = useRef(null);
   const { ingredients, recipe_tags, tags, ...recipe } = currentRecipe;
   const formattedTags = recipe_tags.map((tag) => {
     const name = tags.find((t) => t.id === tag.tag_id).name;
@@ -66,7 +67,10 @@ function RecipeUpdateForm({ currentRecipe, setShowForm, showForm }) {
     formData.append("recipe[instructions]", updatedRecipe.instructions);
     formData.append("recipe[prep_time]", updatedRecipe.prep_time);
     formData.append("recipe[cooking_time]", updatedRecipe.cooking_time);
-    formData.append("recipe[image]", updatedRecipe.image);
+    if (imageFile.current.files[0] !== undefined) {
+      formData.append("recipe[image]", imageFile.current.files[0]);
+    }
+
     ingredientsArray.forEach((ingredient, index) => {
       formData.append(
         `recipe[ingredients_attributes][${index}][name]`,
@@ -151,10 +155,7 @@ function RecipeUpdateForm({ currentRecipe, setShowForm, showForm }) {
         <input
           type="file"
           name="image"
-          onChange={(e) => {
-            const file = e.target.files[0];
-            handleChange("image", file);
-          }}
+          ref={imageFile}
           className="file-input w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
         />
         <p className="text-primary mt-0 mb-5">

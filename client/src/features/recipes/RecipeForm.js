@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import IngredientsForm from "./IngredientsForm";
@@ -8,6 +8,7 @@ import { postRecipes } from "./recipeSlice";
 import allTagOptions from "../../allTagOptions";
 
 function RecipeForm() {
+  const imageFile = useRef(null);
   const [errors, setErrors] = useState([]);
   const [recipeTags, setRecipeTags] = useState([]);
   const [recipe, setRecipe] = useState({});
@@ -46,10 +47,11 @@ function RecipeForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append("recipe[title]", recipe.title);
-    formData.append("recipe[image]", recipe.image);
+    if (imageFile.current.files[0] !== undefined) {
+      formData.append("recipe[image]", imageFile.current.files[0]);
+    }
     formData.append("recipe[description]", recipe.description);
     formData.append("recipe[instructions]", recipe.instructions);
     formData.append("recipe[prep_time]", recipe.prep_time);
@@ -120,7 +122,7 @@ function RecipeForm() {
         <input
           type="file"
           name="image"
-          onChange={(e) => handleChange("image", e)}
+          ref={imageFile}
           className="file-input w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
         />
       </label>

@@ -1,10 +1,16 @@
 class Recipe < ApplicationRecord
+  include Rails.application.routes.url_helpers
   belongs_to :user
   has_many :ingredients, -> { distinct }, dependent: :destroy
   has_many :recipe_tags, -> { distinct }, dependent: :destroy
   has_many :tags, through: :recipe_tags
 
   has_one_attached :image
+  
+  def image_url 
+    url_for(self.image)
+  end
+  
  def image_size 
   image.variant(resize: '550x350').processed 
  end 
@@ -17,4 +23,6 @@ class Recipe < ApplicationRecord
   validates :prep_time, presence: true, numericality: {only_integer: true}
   validates :cooking_time, presence: true, numericality: {only_integer: true}
   validates :user_id, presence: true
+
+
 end

@@ -30,8 +30,11 @@ function Recipe() {
     username,
     tags,
     ingredients,
-    image_url,
+    image_format,
   } = recipe;
+  let image_url;
+  image_format ? (image_url = image_format.url) : (image_url = "/Steak.jpg");
+  console.log(image_url);
   const numberedList = instructions.split(". ").map((word, index) => {
     return (
       <p key={index}>
@@ -59,7 +62,7 @@ function Recipe() {
     fetch(`/recipes/${deletedRecipe.id}`, {
       method: "DELETE",
     }).then((r) => {
-      if (r.ok) navigate.push("/");
+      if (r.ok) navigate("/");
       dispatch(deleteRecipes(deletedRecipe));
     });
   }
