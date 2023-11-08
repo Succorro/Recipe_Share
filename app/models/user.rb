@@ -1,7 +1,13 @@
 class User < ApplicationRecord
+    include Rails.application.routes.url_helpers
     has_secure_password
     
     has_one_attached :avatar
+
+    def avatar_url 
+      url_for(self.avatar)
+    end
+    
     def avatar_thumbnail 
         avatar.variant(resize: '100x100').processed 
     end 

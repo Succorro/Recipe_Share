@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "./userSlice";
 import { Link } from "react-router-dom";
@@ -11,10 +11,10 @@ function ProfileForm({ setForm }) {
     username: username,
     email: email,
     bio: bio,
-    avatar: null,
     first_name: first_name,
     last_name: last_name,
   });
+  const avatarFile = useRef();
   const [errors, setErrors] = useState([]);
   const displayErrors = errors.map((error) => (
     <p className="text-danger" key={error}>
@@ -22,20 +22,9 @@ function ProfileForm({ setForm }) {
     </p>
   ));
 
-  // function handleImage(event) {
-  //   const file = event.target.files[0];
-  //   const formData = { ...updateForm, avatar: event.target.value, file };
-  //   setUpdateForm(formData);
-  // }
-
   function handleChange(event) {
     const name = event.target.name;
-    let value;
-    if (name === "avatar") {
-      value = event.target.files[0];
-    } else {
-      value = event.target.value;
-    }
+    const value = event.target.value;
     const newInfo = {
       ...updateForm,
       [name]: value,
@@ -52,7 +41,7 @@ function ProfileForm({ setForm }) {
     formData.append("user[bio]", updateForm.bio);
     formData.append("user[first_name]", updateForm.first_name);
     formData.append("user[last_name]", updateForm.last_name);
-    formData.append("user[avatar]", updateForm.avatar);
+    formData.append("user[avatar]", avatarFile.current.files[0]);
 
     fetch(`/users/${id}`, {
       method: "PATCH",
@@ -108,8 +97,8 @@ function ProfileForm({ setForm }) {
           <input
             type="file"
             name="avatar"
-            onChange={(e) => handleChange(e)}
             className="file-input file-input-bordered file-input-info bg-white w-full"
+            ref={avatarFile}
           />
           <p className="text-primary mt-0 mb-5">
             By changing this value a new image will be shown on avatar

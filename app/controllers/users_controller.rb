@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/profile
   def update
     @current_user.update!(user_params)
-    @current_user.avatar.attach(params[:user][:avatar])
+    # @current_user.avatar.attach(params[:user][:avatar])
 
     render json: @current_user, status: :accepted
   end

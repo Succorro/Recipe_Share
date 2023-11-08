@@ -10,8 +10,9 @@ function Navigation() {
   const navigate = useNavigate();
   const login = useSelector((state) => state.user.login);
   const [searchValue, setSearchValue] = useState("");
-  const user = useSelector((state) => state.user.user);
-  const avatar = user.avatar_url;
+  const user = useSelector((state) => state.user);
+  if (user.login === false) return <div></div>;
+  const avatar = user.user.avatar_format.url;
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(searchRecipes(searchValue));

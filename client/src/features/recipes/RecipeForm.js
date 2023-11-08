@@ -83,7 +83,6 @@ function RecipeForm() {
     }).then((r) => {
       if (r.ok) {
         r.json().then((r) => {
-          console.log(r);
           navigate(`/recipes/${r.id}`);
           dispatch(postRecipes(r));
         });
