@@ -15,22 +15,31 @@ function ProfileInfo({ setForm }) {
     bio,
     recipes,
   } = user.user;
-  console.log(recipes);
   const avatar_url = avatar_format.url;
-  const displayRecipes = recipes.map((recipe) => {
-    console.log(recipe);
-    return (
-      <div onClick={() => navigate(`/recipes/${recipe.id}`)}>
-        <p className="font-bold text-gray-500 text-2xl flex flex-col hover:cursor-pointer">
-          {recipe.title}{" "}
-          <span className="text-sm">
-            {" "}
-            Cook Time: {recipe.total_time} minutes
-          </span>
-        </p>
-      </div>
-    );
-  });
+  let displayRecipes;
+  recipes
+    ? (displayRecipes = recipes.map((recipe) => {
+        return (
+          <div onClick={() => navigate(`/recipes/${recipe.id}`)}>
+            <p className="font-bold text-gray-500 text-2xl flex flex-col hover:cursor-pointer">
+              {recipe.title}{" "}
+              <span className="text-sm">
+                {" "}
+                Cook Time: {recipe.total_time} minutes
+              </span>
+            </p>
+          </div>
+        );
+      }))
+    : (displayRecipes = (
+        <h1 className="font-bold text-black text-2xl">
+          {" "}
+          <button className="btn" onClick={() => navigate("/recipes/new")}>
+            Start sharing &rarr;{" "}
+          </button>
+        </h1>
+      ));
+
   return (
     <div>
       <div className="max-w-4xl flex items-center h-auto lg:h-96 mb-0 flex-wrap mx-auto my-32 lg:my-0">
