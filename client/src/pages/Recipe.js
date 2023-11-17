@@ -8,18 +8,19 @@ import { deleteRecipes } from "../features/recipes/recipeSlice";
 import { useDispatch } from "react-redux";
 
 function Recipe() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [showDelete, setShowDelete] = useState(true);
+  const [showForm, setShowForm] = useState(false);
+
   const user = useSelector((state) => state.user.user);
   const recipes = useSelector((state) => state.recipes.recipes);
   const { id } = useParams();
   const recipeId = parseInt(id, 10);
+  if (!recipes) return <RecipeError />;
   const recipe = recipes.find((recipe) => recipe.id === recipeId);
-  const [showDelete, setShowDelete] = useState(true);
-  const [showForm, setShowForm] = useState(false);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
   if (!recipe) return <RecipeError />;
-
   const {
     title,
     description,

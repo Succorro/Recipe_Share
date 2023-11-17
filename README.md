@@ -103,14 +103,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
+We welcome contributions from the community. If you have ideas for new features, find bugs, or want to contribute in any way, please feel free to open an issue or submit a pull request.
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+This project is licensed under the MIT License - see the [LICENSE](https://choosealicense.com/licenses/mit/) file for details.
 
 ```
 

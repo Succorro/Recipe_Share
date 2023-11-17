@@ -3,17 +3,24 @@ import { Link } from "react-router-dom";
 import RecipeCard from "../RecipeCard";
 import { useSelector } from "react-redux";
 function Home() {
+  // Redux store selector to grab recipe state
   const recipesState = useSelector((state) => state.recipes);
   const recipes = recipesState.recipes;
-  if (recipes.length <= 3)
-    return <span className="loading loading-spinner loading-lg"></span>;
-  const recipe1 = recipes[0];
-  const recipe2 = recipes[1];
-  const recipe3 = recipes[2];
-  if (recipesState.status === "failed") {
-    console.log(recipesState.errors);
-  }
+  const status = recipesState.status;
+  let threeRecipes;
 
+  //ternary to handle false recipes state
+  recipes
+    ? (threeRecipes = recipes.slice(0, 3).map((recipe) => {
+        return <RecipeCard key={recipe.id} recipe={recipe} />;
+      }))
+    : (threeRecipes = (
+        <h1 className="font-bold text-black"> Coming soon...</h1>
+      ));
+
+  // error handling for temporary unavailable recipes while loading
+  if (status === "loading" || status === "failed")
+    return <span className="loading loading-spinner loading-lg"></span>;
   return (
     <div>
       <div>
@@ -36,9 +43,7 @@ function Home() {
               Trending Recipes
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-              <RecipeCard recipe={recipe1} />
-              <RecipeCard recipe={recipe2} />
-              <RecipeCard recipe={recipe3} />
+              {threeRecipes}
             </div>
           </div>
         </section>
@@ -52,23 +57,6 @@ function Home() {
           </div>
         </section>
       </div>
-      {/* <section id="theme-reference">
-        <div
-          className="m-5 p-5"
-          style={{ backgroundColor: "#f5f5dc", fontSize: "large" }}
-        >
-          <h2>Featured Cook:</h2>
-
-          <h1 className="text-primary">Primary</h1>
-          <h1 className="text-secondary">Secondary</h1>
-          <h1 className="text-accent">Accent</h1>
-
-          <h1 className="text-info">Info</h1>
-          <h1 className="text-success">Success</h1>
-          <h1 className="text-warning">Warning</h1>
-          <h1 className="text-error">Error</h1>
-        </div>
-      </section> */}
     </div>
   );
 }
