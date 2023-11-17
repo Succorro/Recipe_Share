@@ -5,7 +5,7 @@ import ProfileForm from "../features/user/ProfileForm";
 function Profile() {
   const [showForm, setShowForm] = useState(true);
   return (
-    <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
+    <div className="">
       {showForm ? (
         <ProfileInfo setForm={setShowForm} />
       ) : (

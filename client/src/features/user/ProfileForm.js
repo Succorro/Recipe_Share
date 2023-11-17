@@ -57,92 +57,94 @@ function ProfileForm({ setForm }) {
   }
 
   return (
-    <div className=" w-full rounded-lg lg:rounded-l-lg shadow-2xl bg-white opacity-75 mx-6 lg:mx-0 pt-3 ">
-      <h1 className="text-center mb-0 mt-3">Update Profile: </h1>
-      <form
-        className="container mx-auto  w-1/2 p-4 md:p-12  "
-        onSubmit={handleSubmit}
-      >
-        <label className={labelStyle}>
-          <span className={spanStyle}>Username:</span>
-          <input
-            className={inputStyle}
-            type="text"
-            name="username"
-            value={updateForm.username}
-            onChange={(e) => handleChange(e)}
-          />
-        </label>
-        <label className={labelStyle}>
-          <span className={spanStyle}>First Name:</span>
-          <input
-            className={inputStyle}
-            name="first_name"
-            value={updateForm.first_name}
-            onChange={(e) => handleChange(e)}
-          />
-        </label>
-        <label className={labelStyle}>
-          <span className={spanStyle}>Last Name:</span>
-          <input
-            className={inputStyle}
-            name="last_name"
-            value={updateForm.last_name}
-            onChange={(e) => handleChange(e)}
-          />
-        </label>
+    <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
+      <div className=" w-full rounded-lg lg:rounded-l-lg shadow-2xl bg-white opacity-75 mx-6 lg:mx-0 pt-3 ">
+        <h1 className="text-center mb-0 mt-3">Update Profile: </h1>
+        <form
+          className="container mx-auto  w-1/2 p-4 md:p-12  "
+          onSubmit={handleSubmit}
+        >
+          <label className={labelStyle}>
+            <span className={spanStyle}>Username:</span>
+            <input
+              className={inputStyle}
+              type="text"
+              name="username"
+              value={updateForm.username}
+              onChange={(e) => handleChange(e)}
+            />
+          </label>
+          <label className={labelStyle}>
+            <span className={spanStyle}>First Name:</span>
+            <input
+              className={inputStyle}
+              name="first_name"
+              value={updateForm.first_name}
+              onChange={(e) => handleChange(e)}
+            />
+          </label>
+          <label className={labelStyle}>
+            <span className={spanStyle}>Last Name:</span>
+            <input
+              className={inputStyle}
+              name="last_name"
+              value={updateForm.last_name}
+              onChange={(e) => handleChange(e)}
+            />
+          </label>
 
-        <label className={labelStyle}>
-          <span className={spanStyle}>Image:</span>{" "}
-          <input
-            type="file"
-            name="avatar"
-            className="file-input file-input-bordered file-input-info bg-white w-full"
-            ref={avatarFile}
-          />
-          <p className="text-primary mt-0 mb-5">
-            By changing this value a new image will be shown on avatar
-          </p>
-        </label>
-        <label className={labelStyle}>
-          <span className={spanStyle}> Email:</span>
-          <input
-            className={inputStyle}
-            name="email"
-            value={updateForm.email}
-            onChange={(e) => handleChange(e)}
-          />
-        </label>
+          <label className={labelStyle}>
+            <span className={spanStyle}>Image:</span>{" "}
+            <input
+              type="file"
+              name="avatar"
+              className="file-input file-input-bordered file-input-info bg-white w-full"
+              ref={avatarFile}
+            />
+            <p className="text-primary mt-0 mb-5">
+              By changing this value a new image will be shown on avatar
+            </p>
+          </label>
+          <label className={labelStyle}>
+            <span className={spanStyle}> Email:</span>
+            <input
+              className={inputStyle}
+              name="email"
+              value={updateForm.email}
+              onChange={(e) => handleChange(e)}
+            />
+          </label>
 
-        <label className={labelStyle}>
-          {" "}
-          <span className={spanStyle}>Bio:</span>
-          <textarea
-            className={inputStyle}
-            rows="3"
-            name="bio"
-            value={updateForm.bio}
-            onChange={(e) => handleChange(e)}
-          />
-        </label>
+          <label className={labelStyle}>
+            {" "}
+            <span className={spanStyle}>Bio:</span>
+            <textarea
+              className={inputStyle}
+              rows="3"
+              name="bio"
+              value={updateForm.bio}
+              onChange={(e) => handleChange(e)}
+            />
+          </label>
 
-        {displayErrors}
-        <div className="flex justify-center">
-          <button className="btn btn-success m-1 lg:mr-5" type="submit">
-            Edit Profile
-          </button>
-          <button
-            className="btn btn-error m-1 lg:ml-5"
-            onClick={() => setForm(true)}
-          >
-            Cancel
-          </button>
+          {displayErrors}
+          <div className="flex justify-center">
+            <button className="btn btn-success m-1 lg:mr-5" type="submit">
+              Edit Profile
+            </button>
+            <button
+              className="btn btn-error m-1 lg:ml-5"
+              onClick={() => setForm(true)}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+        <div className="flex justify-center  pb-5">
+          <Link className="text-error font-bold" to="/users/profile/remove">
+            Delete Profile
+          </Link>
         </div>
-      </form>
-      <div className="flex justify-center  pb-5">
-        <Link className="text-error font-bold" to="/users/profile/remove">
-          Delete Profile
-        </Link>
       </div>
     </div>
   );
