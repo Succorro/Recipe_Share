@@ -9,12 +9,9 @@ import RecipeError from "./RecipeError";
 function Navigation() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const login = useSelector((state) => state.user.login);
+  const login = useSelector((state) => state.user.login);
   const [searchValue, setSearchValue] = useState("");
   const user = useSelector((state) => state.user);
-  if (user.user === null) return <div></div>;
-  if (user.login === false) return <div></div>;
-  // console.log(user);
   let avatar;
   user.user ? (avatar = user.user.avatar_format.url) : (avatar = "");
   function handleSubmit(e) {
@@ -52,7 +49,7 @@ function Navigation() {
             </button>
           </form>
         </div>
-        {user ? (
+        {login ? (
           <div className="flex items-center">
             <Link
               className="btn btn-outline btn-warning font-bold m-3"
