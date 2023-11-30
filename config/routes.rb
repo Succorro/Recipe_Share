@@ -12,12 +12,9 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  # Users 
-  get '/users/profile', to: 'users#profile'
-  get '/users/:id', to: 'users#show'
-  post '/users', to: "users#create"
-  patch '/users/:id', to: 'users#update'
-  delete  '/users/:id', to: 'users#destroy'
+  # Users  
+  get '/users/profile', to: 'users#show'
+  resources :users, only: [:create, :update, :destory]
 
   # fallback controller
   get '*path' ,

@@ -1,24 +1,11 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize, only: [:show, :create]
+  skip_before_action :authorize, only: [:create]
 
-  # # GET /users
-  # def index
-  #   @users = User.all
-
-  #   render json: @users
-  # end
-
-  # GET /users/:id
+  # GET /users/profile
   def show
-    user = User.find_by(id: params[:id])
-    render json: user, status: :ok 
+    render json: @current_user, status: :ok
   end
   
-  # GET /users/profile
-  def profile 
-    render json: @current_user, status: :ok
-  end 
-
   # POST /users
   def create
     user = User.create!(create_params)

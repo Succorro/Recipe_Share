@@ -11,14 +11,17 @@ function Navigation() {
   const login = useSelector((state) => state.user.login);
   const [searchValue, setSearchValue] = useState("");
   const user = useSelector((state) => state.user);
+  if (user.user === null) return <div></div>;
   if (user.login === false) return <div></div>;
-  const avatar = user.user.avatar_format.url;
+  // console.log(user);
+  let avatar;
+  user.user ? (avatar = user.user.avatar_format.url) : (avatar = "");
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(searchRecipes(searchValue));
     navigate("/recipes/search");
   }
-
+  const displayImage = user.user ? <img src={avatar} alt="rex" /> : <></>;
   return (
     <div className="navbar text-secondary">
       <div className="flex-1">
@@ -58,9 +61,7 @@ function Navigation() {
             </Link>
             <div className="dropdown dropdown-end m-3">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full">
-                  <img src={avatar} alt="rex" />
-                </div>
+                <div className="w-10 rounded-full">{displayImage}</div>
               </label>
               <ul
                 tabIndex={0}

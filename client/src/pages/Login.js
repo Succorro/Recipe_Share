@@ -45,8 +45,8 @@ function Login() {
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => {
-          navigate("/");
           dispatch(loginUser(user));
+          navigate("/");
         });
       } else {
         r.json().then((error) => setErrors(error.errors));

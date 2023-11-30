@@ -33,6 +33,7 @@ function Recipe() {
     ingredients,
     image_format,
   } = recipe;
+  console.log(recipe);
   let image_url;
   image_format ? (image_url = image_format.url) : (image_url = "/Steak.jpg");
   const numberedList = instructions.split(". ").map((word, index) => {

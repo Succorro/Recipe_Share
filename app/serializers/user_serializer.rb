@@ -6,13 +6,6 @@ class UserSerializer < ActiveModel::Serializer
     @recipes = object.recipes.all.map {|recipe| {"title" => recipe.title, "total_time" => recipe.prep_time + recipe.cooking_time, "id" => recipe.id }}
   end 
 
-  # def avatar_url 
-  #   if object.avatar.attached? 
-  #     Rails.application.routes.url_helpers.rails_blob_path(object.avatar_thumbnail, only_path: true)
-  #   else 
-  #     '/default_profile.jpeg'
-  #   end 
-  # end 
   
   def avatar_format 
     return unless object.avatar.attached?

@@ -61,6 +61,11 @@ function RecipeUpdateForm({ currentRecipe, setShowForm, showForm }) {
       ingredients_attributes: ingredientsArray,
       recipe_tags_attributes: tagArray,
     };
+
+    console.log("ingredientsArray:", ingredientsArray);
+    console.log("deleteIngredients:", deleteIngredients);
+    console.log("uniqueIngredients:", uniqueIngredients);
+
     const formData = new FormData();
     formData.append("recipe[title]", updatedRecipe.title);
     formData.append("recipe[description]", updatedRecipe.description);
@@ -71,7 +76,17 @@ function RecipeUpdateForm({ currentRecipe, setShowForm, showForm }) {
       formData.append("recipe[image]", imageFile.current.files[0]);
     }
 
+    // Clear previous data before appending new data
+    formData.delete("recipe[ingredients_attributes][]");
+    formData.delete("recipe[recipe_tags_attributes][]");
+
     ingredientsArray.forEach((ingredient, index) => {
+      if (ingredient.id !== null && ingredient.id !== undefined) {
+        formData.append(
+          `recipe[ingredients_attributes][${index}][id]`,
+          ingredient.id
+        );
+      }
       formData.append(
         `recipe[ingredients_attributes][${index}][name]`,
         ingredient.name

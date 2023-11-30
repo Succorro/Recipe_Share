@@ -6,6 +6,7 @@ function ProfileInfo({ setForm }) {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   if (user.login === false) return <div></div>;
+  if (user.user === null) return <div></div>;
   const {
     username,
     avatar_format,

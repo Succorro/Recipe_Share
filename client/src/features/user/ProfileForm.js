@@ -16,11 +16,14 @@ function ProfileForm({ setForm }) {
   });
   const avatarFile = useRef();
   const [errors, setErrors] = useState([]);
-  const displayErrors = errors.map((error) => (
-    <p className="text-danger" key={error}>
-      {error}
-    </p>
-  ));
+  let displayErrors;
+  errors
+    ? (displayErrors = errors.map((error) => (
+        <p className="text-danger" key={error}>
+          {error}
+        </p>
+      )))
+    : (displayErrors = <></>);
 
   function handleChange(event) {
     const name = event.target.name;

@@ -16,17 +16,7 @@ export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
 });
 
 const initialState = {
-  user: {
-    username: "",
-    email: "",
-    first_name: "",
-    last_name: "",
-    bio: "",
-    image: {
-      name: "",
-      record: { id: 1 },
-    },
-  },
+  user: null,
   status: "idle",
   login: false,
 };
