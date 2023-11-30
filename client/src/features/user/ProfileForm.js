@@ -36,7 +36,6 @@ function ProfileForm({ setForm }) {
     };
     setUpdateForm(newInfo);
   }
-  console.log(user);
   function handleSubmit(e) {
     e.preventDefault();
     setErrors([]);
