@@ -6,6 +6,7 @@ import RecipeDisplay from "../RecipeDisplay";
 import RecipeUpdateForm from "../RecipeUpdateForm";
 import { deleteRecipes } from "../features/recipes/recipeSlice";
 import { useDispatch } from "react-redux";
+import { updateUser } from "../features/user/userSlice";
 
 function Recipe() {
   const navigate = useNavigate();
@@ -21,6 +22,8 @@ function Recipe() {
   if (!recipes) return <RecipeError />;
   const recipe = recipes.find((recipe) => recipe.id === recipeId);
   if (!recipe) return <RecipeError />;
+  if (!user) return <RecipeError />;
+
   const {
     title,
     description,
@@ -33,7 +36,7 @@ function Recipe() {
     ingredients,
     image_format,
   } = recipe;
-  console.log(recipe);
+
   let image_url;
   image_format ? (image_url = image_format.url) : (image_url = "/Steak.jpg");
   const numberedList = instructions.split(". ").map((word, index) => {
@@ -58,12 +61,19 @@ function Recipe() {
     );
   });
 
+  console.log(user);
   function handleDelete(deletedRecipe) {
+    const recipesToUpdate = user.recipes;
+    const updatedRecipes = recipesToUpdate.filter(
+      (recipe) => recipe.id !== deletedRecipe.id
+    );
+    const updatedUser = { ...user, recipes: updatedRecipes };
     fetch(`/recipes/${deletedRecipe.id}`, {
       method: "DELETE",
     }).then((r) => {
       if (r.ok) navigate("/");
       dispatch(deleteRecipes(deletedRecipe));
+      dispatch(updateUser(updatedUser));
     });
   }
   if (user.username === username)

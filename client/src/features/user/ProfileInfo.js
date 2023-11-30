@@ -21,7 +21,10 @@ function ProfileInfo({ setForm }) {
   recipes
     ? (displayRecipes = recipes.map((recipe) => {
         return (
-          <div onClick={() => navigate(`/recipes/${recipe.id}`)}>
+          <div
+            key={recipe.id}
+            onClick={() => navigate(`/recipes/${recipe.id}`)}
+          >
             <p className="font-bold text-gray-500 text-2xl flex flex-col hover:cursor-pointer">
               {recipe.title}{" "}
               <span className="text-sm">
