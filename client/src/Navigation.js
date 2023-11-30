@@ -4,11 +4,12 @@ import { logoutUser } from "./features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import SearchIcon from "@mui/icons-material/Search";
 import { searchRecipes } from "./features/search/searchSlice";
+import RecipeError from "./RecipeError";
 
 function Navigation() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const login = useSelector((state) => state.user.login);
+  // const login = useSelector((state) => state.user.login);
   const [searchValue, setSearchValue] = useState("");
   const user = useSelector((state) => state.user);
   if (user.user === null) return <div></div>;
@@ -51,7 +52,7 @@ function Navigation() {
             </button>
           </form>
         </div>
-        {login ? (
+        {user ? (
           <div className="flex items-center">
             <Link
               className="btn btn-outline btn-warning font-bold m-3"
