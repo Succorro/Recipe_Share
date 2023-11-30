@@ -6,15 +6,17 @@ import { Link } from "react-router-dom";
 function ProfileForm({ setForm }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  const { id, username, bio, email, first_name, last_name } = user;
+  const { id, username, bio, email, first_name, last_name, avatar_format } =
+    user;
   const [updateForm, setUpdateForm] = useState({
     username: username,
     email: email,
     bio: bio,
     first_name: first_name,
     last_name: last_name,
+    avatar: avatar_format,
   });
-  const avatarFile = useRef();
+  const avatarFile = useRef(undefined);
   const [errors, setErrors] = useState([]);
   let displayErrors;
   errors
@@ -34,7 +36,7 @@ function ProfileForm({ setForm }) {
     };
     setUpdateForm(newInfo);
   }
-
+  console.log(user);
   function handleSubmit(e) {
     e.preventDefault();
     setErrors([]);
@@ -44,8 +46,9 @@ function ProfileForm({ setForm }) {
     formData.append("user[bio]", updateForm.bio);
     formData.append("user[first_name]", updateForm.first_name);
     formData.append("user[last_name]", updateForm.last_name);
-    formData.append("user[avatar]", avatarFile.current.files[0]);
-
+    if (avatarFile.current.files[0] !== undefined) {
+      formData.append("user[avatar]", avatarFile.current.files[0]);
+    }
     fetch(`/users/${id}`, {
       method: "PATCH",
       body: formData,

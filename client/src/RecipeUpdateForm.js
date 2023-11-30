@@ -14,7 +14,7 @@ function RecipeUpdateForm({ currentRecipe, setShowForm, showForm }) {
     const updatedTag = { ...tag, name: name };
     return updatedTag;
   });
-
+  console.log(formattedTags);
   const [modifiedRecipe, setModifiedRecipe] = useState(recipe);
   const [modifiedTags, setModifiedTags] = useState(formattedTags);
   const [modifiedIngredients, setModifiedIngredients] = useState(ingredients);
@@ -61,11 +61,6 @@ function RecipeUpdateForm({ currentRecipe, setShowForm, showForm }) {
       ingredients_attributes: ingredientsArray,
       recipe_tags_attributes: tagArray,
     };
-
-    console.log("ingredientsArray:", ingredientsArray);
-    console.log("deleteIngredients:", deleteIngredients);
-    console.log("uniqueIngredients:", uniqueIngredients);
-
     const formData = new FormData();
     formData.append("recipe[title]", updatedRecipe.title);
     formData.append("recipe[description]", updatedRecipe.description);
@@ -106,6 +101,7 @@ function RecipeUpdateForm({ currentRecipe, setShowForm, showForm }) {
         );
       }
     });
+    console.log(tagArray);
     tagArray.forEach((tag, index) => {
       if (tag.id !== undefined) {
         formData.append(`recipe[recipe_tags_attributes][${index}][id]`, tag.id);

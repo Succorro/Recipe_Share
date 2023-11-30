@@ -61,7 +61,6 @@ function Recipe() {
     );
   });
 
-  console.log(user);
   function handleDelete(deletedRecipe) {
     const recipesToUpdate = user.recipes;
     const updatedRecipes = recipesToUpdate.filter(
