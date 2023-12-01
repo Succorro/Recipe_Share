@@ -17,7 +17,6 @@ function Login() {
       setIsLogin(!isLogin);
     }, 300);
   };
-  console.log(errors);
   let displayErrors;
   errors ? (
     (displayErrors = errors.map((error) => (

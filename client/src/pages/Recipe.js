@@ -17,12 +17,11 @@ function Recipe() {
 
   const user = useSelector((state) => state.user.user);
   const recipes = useSelector((state) => state.recipes.recipes);
+
   const { id } = useParams();
   const recipeId = parseInt(id, 10);
-  if (!recipes) return <RecipeError />;
   const recipe = recipes.find((recipe) => recipe.id === recipeId);
   if (!recipe) return <RecipeError />;
-  if (!user) return <RecipeError />;
 
   const {
     title,
@@ -75,7 +74,7 @@ function Recipe() {
       dispatch(updateUser(updatedUser));
     });
   }
-  if (user.username === username)
+  if (user !== null && user.username === username)
     return (
       <>
         {showForm ? (

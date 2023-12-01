@@ -11,9 +11,6 @@ function Navigation() {
   const login = useSelector((state) => state.user.login);
   const [searchValue, setSearchValue] = useState("");
   const user = useSelector((state) => state.user);
-  console.log(user);
-  // if (user.user === null) return <div></div>;
-  // if (user.login === false) return <div></div>;
   let avatar;
   user.user ? (avatar = user.user.avatar.url) : (avatar = "");
   function handleSubmit(e) {
@@ -80,7 +77,6 @@ function Navigation() {
                         method: "DELETE",
                       }).then((r) => {
                         if (r.ok) {
-                          console.log(r);
                           dispatch(logoutUser());
                           navigate("/login");
                         }
