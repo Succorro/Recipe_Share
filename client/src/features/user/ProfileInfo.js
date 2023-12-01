@@ -7,16 +7,11 @@ function ProfileInfo({ setForm }) {
   const user = useSelector((state) => state.user);
   if (user.login === false) return <div></div>;
   if (user.user === null) return <div></div>;
-  const {
-    username,
-    avatar_format,
-    email,
-    first_name,
-    last_name,
-    bio,
-    recipes,
-  } = user.user;
-  const avatar_url = avatar_format.url;
+  const { username, avatar, email, first_name, last_name, bio, recipes } =
+    user.user;
+  const avatar_url = avatar.url;
+  console.log(avatar_url);
+  console.log(user);
   let displayRecipes;
   recipes
     ? (displayRecipes = recipes.map((recipe) => {

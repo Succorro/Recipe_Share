@@ -13,7 +13,7 @@ function Signup({ toggleForm, words }) {
   const navigate = useNavigate();
 
   const displayErrors = errors.map((error) => (
-    <p className="text-danger" key={error}>
+    <p class="not-prose text-danger" key={error}>
       {error}
     </p>
   ));
@@ -38,7 +38,6 @@ function Signup({ toggleForm, words }) {
     formData.append("[last_name]", login.last_name);
     formData.append("[avatar]", "/default_profile.jpeg");
 
-    console.log(formData);
     fetch("/users", {
       method: "POST",
       headers: {

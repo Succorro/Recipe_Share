@@ -17,12 +17,17 @@ function Login() {
       setIsLogin(!isLogin);
     }, 300);
   };
-
-  const displayErrors = errors.map((error) => (
-    <p className="text-danger" key={error}>
-      {error}
-    </p>
-  ));
+  console.log(errors);
+  let displayErrors;
+  errors ? (
+    (displayErrors = errors.map((error) => (
+      <p className="text-danger" key={error}>
+        {error}
+      </p>
+    )))
+  ) : (
+    <></>
+  );
 
   function handleChange(event) {
     const name = event.target.name;

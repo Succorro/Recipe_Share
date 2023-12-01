@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   # Users  
   get '/users/profile', to: 'users#show'
-  resources :users, only: [:create, :update, :destory]
+  resources :users, only: [:create, :update, :destroy]
 
   # fallback controller
   get '*path' ,

@@ -4,7 +4,6 @@ import { logoutUser } from "./features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import SearchIcon from "@mui/icons-material/Search";
 import { searchRecipes } from "./features/search/searchSlice";
-import RecipeError from "./RecipeError";
 
 function Navigation() {
   const dispatch = useDispatch();
@@ -12,8 +11,11 @@ function Navigation() {
   const login = useSelector((state) => state.user.login);
   const [searchValue, setSearchValue] = useState("");
   const user = useSelector((state) => state.user);
+  console.log(user);
+  // if (user.user === null) return <div></div>;
+  // if (user.login === false) return <div></div>;
   let avatar;
-  user.user ? (avatar = user.user.avatar_format.url) : (avatar = "");
+  user.user ? (avatar = user.user.avatar.url) : (avatar = "");
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(searchRecipes(searchValue));
