@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "2.7.4"
 
 # AWS SDK 
-gem 'aws-sdk-s3'
+gem 'aws-sdk-s3', require: false
 gem 'dotenv-rails', "~>2.8"
 gem 'jsonapi-serializer', "~> 2.2"
 gem 'figaro'
