@@ -5,9 +5,7 @@ ruby "2.7.4"
 
 # AWS SDK 
 gem 'aws-sdk-s3', require: false
-# gem 'dotenv-rails', "~>2.8"
-# gem 'jsonapi-serializer', "~> 2.2"
-# gem 'figaro'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.7", ">= 7.0.7.2"
 

@@ -33,6 +33,9 @@ Rails.application.configure do
   
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :amazon
+
+  config.action_mailer.default_url_options = { host: 'https://recipes-5w18.onrender.com'}
+  Rails.application.routes.default_url_options[:host] = "https://recipes-5w18.onrender.com"
   
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -82,8 +85,6 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
   
-  config.action_mailer.default_url_options = { host: 'https://recipes-5w18.onrender.com/'}
-  Rails.application.routes.default_url_options[:host] = "https://recipes-5w18.onrender.com/"
   config.require_master_key = true 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
