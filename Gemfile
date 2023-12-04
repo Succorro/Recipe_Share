@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.7.4"
 
+gem 'rack-cors'
+
 # AWS SDK 
 gem 'aws-sdk-s3', require: false
 

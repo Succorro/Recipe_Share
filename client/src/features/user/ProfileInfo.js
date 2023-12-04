@@ -10,6 +10,7 @@ function ProfileInfo({ setForm }) {
   const { username, avatar, email, first_name, last_name, bio, recipes } =
     user.user;
   const avatar_url = avatar.url;
+  console.log(user);
   let displayRecipes;
   recipes
     ? (displayRecipes = recipes.map((recipe) => {
