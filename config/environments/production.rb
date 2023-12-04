@@ -36,6 +36,8 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'https://recipes-5w18.onrender.com'}
   Rails.application.routes.default_url_options[:host] = "https://recipes-5w18.onrender.com"
+  Rails.application.routes.default_url_options[:protocol] = 'https'
+
   
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
