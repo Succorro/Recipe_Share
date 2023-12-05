@@ -38,12 +38,13 @@ module RecipeShare
     # Adding back cookies and session middleware
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
+    config.asset_host = 'https://recipes-5w18.onrender.com'
 
     # Use SameSite=Strict for all cookies to help protect against CSRF
     config.action_dispatch.cookies_same_site_protection = :strict
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'https://recipes-5w18.onrender.com/' # Adjust this to your frontend's domain
+        origins 'https://recipes-5w18.onrender.com' # Adjust this to your frontend's domain
         resource '/rails/active_storage/blobs/*',
           headers: :any,
           methods: [:get, :post, :put, :delete, :options]

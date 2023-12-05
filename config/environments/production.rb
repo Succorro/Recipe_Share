@@ -35,7 +35,7 @@ Rails.application.configure do
   config.active_storage.service = :amazon
 
   config.action_mailer.default_url_options = { host: 'https://recipes-5w18.onrender.com'}
-  # Rails.application.routes.default_url_options[:protocol] = 'https'
+  Rails.application.routes.default_url_options[:protocol] = 'https'
   Rails.application.routes.default_url_options[:host] = "https://recipes-5w18.onrender.com"
 
   
