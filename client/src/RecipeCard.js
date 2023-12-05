@@ -13,7 +13,7 @@ function RecipeCard({ recipe }) {
   // } else {
   //   return (image_url = image_format.url);
   // };
-  image_format ? (image_url = image_format.url) : (image_url = "/Steak.jpg");
+  image_format ? (image_url = image_format) : (image_url = "/Steak.jpg");
   const tagsList = tags.map((tag) => ` ${tag.name}`);
   const displayPopup = (
     <div className="text-honey">
