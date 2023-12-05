@@ -62,16 +62,19 @@ function Navigation() {
               </label>
               <ul
                 tabIndex={0}
-                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-white rounded-box w-52"
               >
                 <li>
-                  <Link className="justify-between" to="/users/profile">
+                  <Link
+                    className="justify-between text-honey"
+                    to="/users/profile"
+                  >
                     Profile
                   </Link>{" "}
                 </li>
                 <li>
                   <button
-                    className=""
+                    className="text-honey"
                     onClick={() => {
                       fetch("/logout", {
                         method: "DELETE",

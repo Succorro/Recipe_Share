@@ -109,7 +109,7 @@ function Recipe() {
             />
             {showDelete ? (
               <div className="text-center ">
-                <h4>Update your post</h4>
+                <h4 className="text-2xl text-honey">Update your post</h4>
                 <div className="flex justify-center">
                   <button
                     className="btn btn-info  m-10 "
@@ -126,8 +126,8 @@ function Recipe() {
                 </div>
               </div>
             ) : (
-              <div className="text-center ">
-                <h4>Are you sure you want to delete?</h4>
+              <div className="text-center text-honey">
+                <h4 className="text-honey">Are you sure you want to delete?</h4>
                 <div className="flex justify-center">
                   <button
                     className="btn btn-error m-10 "

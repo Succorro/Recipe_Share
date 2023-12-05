@@ -49,17 +49,17 @@ function ProfileInfo({ setForm }) {
               </div>
             </div>
 
-            <h1 className="mt-5 mb-0">{username}</h1>
-            <h3>Name:</h3>
-            <p>
+            <h1 className="mt-5 text-honey mb-0">{username}</h1>
+            <h3 className="text-honey">Name:</h3>
+            <p className="text-honey">
               {first_name} {last_name}
             </p>
           </div>
           <div className="p-4 md:p-12 text-center pt-0">
-            <h3>Bio:</h3>
-            <p>{bio}</p>
-            <h3>Email:</h3>
-            <p>{email}</p>
+            <h3 className="text-honey">Bio:</h3>
+            <p className="text-honey">{bio}</p>
+            <h3 className="text-honey">Email:</h3>
+            <p className="text-honey">{email}</p>
 
             <button
               className="btn btn-warning "
@@ -74,7 +74,7 @@ function ProfileInfo({ setForm }) {
       <div className="max-w-4xl flex items-center h-auto lg:mt-16  flex-wrap mx-auto my-32 lg:my-0 ">
         <div className="w-full sm:rounded-lg pt-3 shadow-2xl bg-white opacity-75 mx-6 lg:rounded-l-lg lg:w-2/3  lg:flex lg:items-center lg:justify-center lg:m-auto">
           <div className="p-4 md:p-12 text-center ">
-            <h1>Recipes Created:</h1>
+            <h1 className="text-honey">Recipes Created:</h1>
             {displayRecipes}
           </div>
         </div>

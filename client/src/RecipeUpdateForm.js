@@ -167,7 +167,7 @@ function RecipeUpdateForm({ currentRecipe, setShowForm, showForm }) {
           ref={imageFile}
           className="file-input w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
         />
-        <p className="text-primary mt-0 mb-5">
+        <p className="text-honey mt-0 mb-5">
           By changing this value a new image will be shown on recipe
         </p>
       </label>
@@ -241,6 +241,6 @@ function RecipeUpdateForm({ currentRecipe, setShowForm, showForm }) {
 }
 const labelStyle = "block mt-4 text-sm font-bold text-gray-700";
 const inputStyle =
-  "w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300";
+  "w-full border text-honey rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300";
 
 export default RecipeUpdateForm;

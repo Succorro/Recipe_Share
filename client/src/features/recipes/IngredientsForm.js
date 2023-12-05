@@ -31,7 +31,7 @@ function IngredientsForm({ ingredients, setIngredients }) {
             onChange={(e) =>
               handleIngredientChange(index, "name", e.target.value)
             }
-            className="w-1/4 border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+            className="w-1/4 border text-honey rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
           />
           <input
             type="number"
@@ -40,7 +40,7 @@ function IngredientsForm({ ingredients, setIngredients }) {
             onChange={(e) =>
               handleIngredientChange(index, "qty", e.target.value)
             }
-            className="w-1/4 border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+            className="w-1/4 border text-honey rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
           />
           <input
             type="text"
@@ -49,7 +49,7 @@ function IngredientsForm({ ingredients, setIngredients }) {
             onChange={(e) =>
               handleIngredientChange(index, "unit", e.target.value)
             }
-            className="w-1/4 border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+            className="w-1/4 border text-honey rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
           />
           <button
             type="button"

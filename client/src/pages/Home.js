@@ -30,8 +30,8 @@ function Home() {
         >
           <div className="absolute top-0 left-0 w-full h-1/3 "></div>
           <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-            <h1 className="text-5xl font-bold mb-4 text-primary">Welcome</h1>
-            <p className="text-xl text-primary">
+            <h1 className="text-5xl font-bold mb-4 text-honey">Welcome</h1>
+            <p className="text-xl text-honey">
               Share your favorite recipes with the world!
             </p>
           </div>
@@ -39,7 +39,7 @@ function Home() {
 
         <section className="bg-amber-50 py-12">
           <div className="container mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-center">
+            <h2 className="text-3xl font-bold mb-8 text-center text-gray-500">
               Trending Recipes
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -50,7 +50,9 @@ function Home() {
 
         <section className="bg-beige py-8 text-center">
           <div className="container mx-auto">
-            <p className="text-2xl font-bold mb-4">Ready to get cooking?</p>
+            <p className="text-2xl text-gray-500 font-bold mb-4">
+              Ready to get cooking?
+            </p>
             <Link to="/recipes" className="btn">
               Explore Recipes →
             </Link>

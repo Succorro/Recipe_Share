@@ -64,7 +64,7 @@ function ProfileForm({ setForm }) {
   return (
     <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
       <div className=" w-full rounded-lg lg:rounded-l-lg shadow-2xl bg-white opacity-75 mx-6 lg:mx-0 pt-3 ">
-        <h1 className="text-center mb-0 mt-3">Update Profile: </h1>
+        <h1 className="text-center mb-0 mt-3 text-honey">Update Profile: </h1>
         <form
           className="container mx-auto  w-1/2 p-4 md:p-12  "
           onSubmit={handleSubmit}
@@ -106,7 +106,7 @@ function ProfileForm({ setForm }) {
               className="file-input file-input-bordered file-input-info bg-white w-full"
               ref={avatarFile}
             />
-            <p className="text-primary mt-0 mb-5">
+            <p className="text-honey mt-0 mb-5">
               By changing this value a new image will be shown on avatar
             </p>
           </label>
@@ -154,7 +154,7 @@ function ProfileForm({ setForm }) {
     </div>
   );
 }
-const labelStyle = "input-group input-group-vertical mb-4";
-const spanStyle = "bg-white font-bold text-lg";
-const inputStyle = "input input-bordered bg-white w-full";
+const labelStyle = "input-group input-group-vertical mb-4 text-honey";
+const spanStyle = "bg-white font-bold text-lg text-honey";
+const inputStyle = "input input-bordered bg-white w-full text-honey";
 export default ProfileForm;

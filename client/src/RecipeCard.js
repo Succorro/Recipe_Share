@@ -16,17 +16,17 @@ function RecipeCard({ recipe }) {
   image_format ? (image_url = image_format.url) : (image_url = "/Steak.jpg");
   const tagsList = tags.map((tag) => ` ${tag.name}`);
   const displayPopup = (
-    <div>
-      <h1>{title}</h1>
+    <div className="text-honey">
+      <h1 className="text-honey">{title}</h1>
       <p>Made by: {username}</p>
-      <h4>
+      <h4 className="text-honey">
         Total Time: <span className="">{total_time} minutes</span>
       </h4>
-      <h4>Categories: {tagsList}</h4>
+      <h4 className="text-honey">Categories: {tagsList}</h4>
 
       <div>
         <div>
-          <h4>Description:</h4>
+          <h4 className="text-honey">Description:</h4>
           <p>{description}</p>
         </div>
       </div>
@@ -68,10 +68,10 @@ function RecipeCard({ recipe }) {
           alt="food"
         />
         <div className="p-5 pt-0">
-          <h2 className="mb-1 text-xl font-bold tracking-tight text-primary dark:text-primary">
+          <h2 className="mb-1 text-xl font-bold tracking-tight text-honey dark:text-honey">
             {recipe.title}
           </h2>
-          <p className="mb-3 font-normal text-primary">
+          <p className="mb-3 font-normal text-honey">
             Made by: {recipe.username}
           </p>
         </div>

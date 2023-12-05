@@ -49,6 +49,7 @@ function Login() {
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => {
+          console.log(user);
           dispatch(loginUser(user));
           navigate("/");
         });
