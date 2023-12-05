@@ -9,7 +9,7 @@ function ProfileInfo({ setForm }) {
   if (user.user === null) return <div></div>;
   const { username, avatar, email, first_name, last_name, bio, recipes } =
     user.user;
-  const avatar_url = avatar.url;
+  const avatar_url = avatar;
   console.log(user);
   let displayRecipes;
   recipes
