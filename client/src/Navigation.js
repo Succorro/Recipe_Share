@@ -16,7 +16,7 @@ function Navigation() {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(searchRecipes(searchValue));
-    navigate("/recipes/search");
+    navigate("/~recipes/search");
   }
   const displayImage = user.user ? <img src={avatar} alt="rex" /> : <></>;
   return (
@@ -25,10 +25,10 @@ function Navigation() {
         <Link className={linkStyle} to="/">
           Home
         </Link>
-        <Link className={linkStyle} to="/about">
+        <Link className={linkStyle} to="/~about">
           About
         </Link>
-        <Link className={linkStyle} to="/recipes">
+        <Link className={linkStyle} to="/~recipes">
           Discover Page
         </Link>
       </div>
@@ -52,7 +52,7 @@ function Navigation() {
           <div className="flex items-center">
             <Link
               className="btn btn-outline btn-warning font-bold m-3"
-              to="/recipes/new"
+              to="/~recipes/new"
             >
               Post
             </Link>
@@ -67,7 +67,7 @@ function Navigation() {
                 <li>
                   <Link
                     className="justify-between text-honey"
-                    to="/users/profile"
+                    to="/~users/profile"
                   >
                     Profile
                   </Link>{" "}
@@ -81,7 +81,7 @@ function Navigation() {
                       }).then((r) => {
                         if (r.ok) {
                           dispatch(logoutUser());
-                          navigate("/login");
+                          navigate("/~login");
                         }
                       });
                     }}
@@ -93,7 +93,7 @@ function Navigation() {
             </div>
           </div>
         ) : (
-          <Link className="btn btn-outline btn-secondary" to="/login">
+          <Link className="btn btn-outline btn-secondary" to="/~login">
             Login
           </Link>
         )}

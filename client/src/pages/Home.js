@@ -53,7 +53,7 @@ function Home() {
             <p className="text-2xl text-gray-500 font-bold mb-4">
               Ready to get cooking?
             </p>
-            <Link to="/recipes" className="btn">
+            <Link to="/~recipes" className="btn">
               Explore Recipes →
             </Link>
           </div>

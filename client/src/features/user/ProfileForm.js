@@ -146,7 +146,7 @@ function ProfileForm({ setForm }) {
           </div>
         </form>
         <div className="flex justify-center  pb-5">
-          <Link className="text-error font-bold" to="/users/profile/remove">
+          <Link className="text-error font-bold" to="/~users/profile/remove">
             Delete Profile
           </Link>
         </div>

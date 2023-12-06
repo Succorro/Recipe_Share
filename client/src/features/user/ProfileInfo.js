@@ -17,7 +17,7 @@ function ProfileInfo({ setForm }) {
         return (
           <div
             key={recipe.id}
-            onClick={() => navigate(`/recipes/${recipe.id}`)}
+            onClick={() => navigate(`/~recipes/${recipe.id}`)}
           >
             <p className="font-bold text-gray-500 text-2xl flex flex-col hover:cursor-pointer">
               {recipe.title}{" "}
@@ -32,7 +32,7 @@ function ProfileInfo({ setForm }) {
     : (displayRecipes = (
         <h1 className="font-bold text-black text-2xl">
           {" "}
-          <button className="btn" onClick={() => navigate("/recipes/new")}>
+          <button className="btn" onClick={() => navigate("/~recipes/new")}>
             Start sharing &rarr;{" "}
           </button>
         </h1>

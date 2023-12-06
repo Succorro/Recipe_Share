@@ -44,7 +44,7 @@ function RecipeCard({ recipe }) {
   const hidden = isExpanded ? popupStyle : hiddenStyle;
   return (
     <div
-      onClick={() => navigate(`/recipes/${recipe.id}`)}
+      onClick={() => navigate(`/~recipes/${recipe.id}`)}
       className="hover:cursor-pointer p-0 m-0"
     >
       <div

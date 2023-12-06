@@ -83,7 +83,7 @@ function RecipeForm() {
     }).then((r) => {
       if (r.ok) {
         r.json().then((r) => {
-          navigate(`/recipes/${r.id}`);
+          navigate(`/~recipes/${r.id}`);
           dispatch(postRecipes(r));
         });
       } else {

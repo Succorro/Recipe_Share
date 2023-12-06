@@ -31,7 +31,7 @@ function RemoveProfile() {
         </button>
         <button
           className="btn btn-success"
-          onClick={() => navigate("/users/profile")}
+          onClick={() => navigate("/~users/profile")}
         >
           NO
         </button>

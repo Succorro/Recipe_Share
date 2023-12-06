@@ -5,7 +5,6 @@ import About from "./pages/About";
 import Recipes from "./pages/Recipes";
 import Recipe from "./pages/Recipe";
 import NewRecipe from "./pages/NewRecipe";
-import User from "./pages/User";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Navigation from "./Navigation";
@@ -37,23 +36,21 @@ function App() {
       <Navigation />
       <div className="prose max-w-none">
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/~login" element={<Login />} />
 
-          <Route path="/users/profile/remove" element={<RemoveProfile />} />
+          <Route path="/~users/profile/remove" element={<RemoveProfile />} />
 
-          <Route path="/users/profile" element={<Profile />} />
+          <Route path="/~users/profile" element={<Profile />} />
 
-          <Route path="/users/:id" element={<User />} />
+          <Route path="/~recipes/search" element={<Search />} />
 
-          <Route path="/recipes/search" element={<Search />} />
+          <Route path="/~recipes/new" element={<NewRecipe />} />
 
-          <Route path="/recipes/new" element={<NewRecipe />} />
+          <Route path="/~recipes/:id" element={<Recipe />} />
 
-          <Route path="/recipes/:id" element={<Recipe />} />
+          <Route path="/~recipes" element={<Recipes />} />
 
-          <Route path="/recipes" element={<Recipes />} />
-
-          <Route path="/about" element={<About />} />
+          <Route path="/~about" element={<About />} />
 
           <Route path="/" element={<Home />} />
         </Routes>
