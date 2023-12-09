@@ -155,7 +155,9 @@ function RecipeForm() {
         className={inputStyle}
       />
 
-      <label className={labelStyle}>Prep Time</label>
+      <label className={labelStyle}>
+        Prep Time <span className="text-xs">Min.</span>
+      </label>
       <input
         type="number"
         name="prep_time"
@@ -163,7 +165,9 @@ function RecipeForm() {
         className={inputStyle}
       />
 
-      <label className={labelStyle}>Cook Time</label>
+      <label className={labelStyle}>
+        Cook Time <span className="text-xs">Min.</span>
+      </label>
       <input
         type="number"
         name="cooking_time"

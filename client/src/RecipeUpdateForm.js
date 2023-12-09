@@ -207,7 +207,9 @@ function RecipeUpdateForm({ currentRecipe, setShowForm, showForm }) {
         }}
       />
 
-      <label className={labelStyle}>Prep Time</label>
+      <label className={labelStyle}>
+        Prep Time <span className="text-xs">Min.</span>
+      </label>
       <input
         className={inputStyle}
         type="number"
@@ -216,7 +218,9 @@ function RecipeUpdateForm({ currentRecipe, setShowForm, showForm }) {
         onChange={(e) => handleChange("prep_time", e.target.value)}
       />
 
-      <label className={labelStyle}>Cook Time</label>
+      <label className={labelStyle}>
+        Cook Time <span className="text-xs">Min.</span>
+      </label>
       <input
         className={inputStyle}
         type="number"
