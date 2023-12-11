@@ -34,11 +34,6 @@ function Home() {
             <p className="text-xl text-honey">
               Share your favorite recipes with the world!
             </p>
-            <p>
-              For no search results, show a message, so we know the search was
-              completed Have a default avatar for the time in between signing up
-              and adding a profile image
-            </p>
           </div>
         </header>
 
