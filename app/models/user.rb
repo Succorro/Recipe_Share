@@ -11,6 +11,15 @@ class User < ApplicationRecord
     def avatar_thumbnail 
         avatar.variant(resize: '100x100').processed 
     end 
+
+    def update_without_password(params)
+      if params[:password].blank?
+        update(params.except(:password))
+      else
+        update(params)
+      end
+    end
+
     has_many :recipes, dependent: :destroy
 
     validates :password, length: { minimum: 8, message: "must be at least 8 characters long" }, format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}\z/, message: "must include at least one uppercase letter, one lowercase letter, one digit, and one special character" }, confirmation: true

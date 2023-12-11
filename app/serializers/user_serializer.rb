@@ -20,7 +20,7 @@ class UserSerializer < ActiveModel::Serializer
       #   .tap { |attrs| attrs['name'] = attrs.delete('filename') }
     else
       # Return default values or handle the case when the avatar is not attached
-      {url: '/default_profile.jpeg' }
+       '/default_profile.jpeg' 
     end
   end
   

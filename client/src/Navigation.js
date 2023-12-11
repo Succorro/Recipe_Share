@@ -12,16 +12,20 @@ function Navigation() {
   const [searchValue, setSearchValue] = useState("");
   const user = useSelector((state) => state.user);
   let avatar;
-  user.user ? (avatar = user.user.avatar) : (avatar = "");
+  user.user ? (avatar = user.user.avatar) : (avatar = "/default_profile.jpeg");
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(searchRecipes(searchValue));
     navigate("/~recipes/search");
   }
-  const displayImage = user.user ? <img src={avatar} alt="rex" /> : <></>;
+  const displayImage = user.user ? (
+    <img src={avatar} alt="rex" />
+  ) : (
+    <img src="/default_profile.jpeg" alt="rex" />
+  );
   return (
     <div className="navbar text-secondary">
-      <div className="flex-1">
+      <div className="flex-1 ">
         <Link className={linkStyle} to="/">
           Home
         </Link>

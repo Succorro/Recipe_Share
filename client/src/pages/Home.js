@@ -36,13 +36,8 @@ function Home() {
             </p>
             <p>
               For no search results, show a message, so we know the search was
-              completed Display password requirements before submission of sign
-              up form Have a default avatar for the time in between signing up
-              and adding a profile image Password validations were getting in
-              the way of editing my profile Times on recipe submission form
-              don’t have units - I assume these are minutes? Make it clear
-              Ingredient validation doesn’t allow “pieces” - may consider adding
-              this as an unit option
+              completed Have a default avatar for the time in between signing up
+              and adding a profile image
             </p>
           </div>
         </header>
