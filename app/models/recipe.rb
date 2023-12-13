@@ -33,7 +33,6 @@ class Recipe < ApplicationRecord
 
     ingredients.each do |ingredient|
       validate_presence_of_ingredient_attributes(ingredient)
-      validate_uniqueness_of_ingredient_name(ingredient)
       validate_valid_measurement_units(ingredient)
       validate_quantity_format(ingredient)
     end
@@ -41,12 +40,6 @@ class Recipe < ApplicationRecord
 
   def validate_presence_of_ingredient_attributes(ingredient)
     errors.add(:ingredients, "must have a name, quantity, and unit") unless ingredient['name'].present? && ingredient['qty'].present? && ingredient['unit'].present?
-  end
-
-  def validate_uniqueness_of_ingredient_name(ingredient)
-    # You might want to customize this based on your application's requirements.
-    existing_ingredient = Ingredient.where(name: ingredient['name']).where.not(recipe_id: id).first
-    errors.add(:ingredients, "must have unique names") if existing_ingredient.present?
   end
 
   def validate_valid_measurement_units(ingredient)
