@@ -50,7 +50,7 @@ class Recipe < ApplicationRecord
   end
 
   def validate_valid_measurement_units(ingredient)
-    valid_units = %w(teaspoon tablespoon cup fluid_ounce pint quart gallon milliliter liter ounce pound pinch dash drop gram kilogram piece)
+    valid_units = %w(teaspoon tablespoon cup fluid_ounce pint quart gallon milliliter liter ounce pound pinch dash drop gram kilogram piece whole bunch)
     unit = ingredient['unit'].singularize.downcase
     errors.add(:ingredients, "must have a valid unit of measurement such as: teaspoon, tablespoon, cup, fluid_ounce, pint, quart, gallon, milliliter, liter, ounce, pound, pinch, dash, drop, gram, kilogram, piece") unless valid_units.include?(unit)
   end

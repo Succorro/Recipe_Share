@@ -47,7 +47,7 @@ Tag.create(name: 'Ethiopian')
 Tag.create(name: 'Pescatarian')
 Tag.create(name: 'Fusion')
 
-User.create(username: 'Base', email: 'sample@gmail.com', first_name: "sample", last_name: 'data', bio: 'null' , password: 'password',  password_confirmation: 'password')
+User.create(username: 'Base', email: 'base@gmail.com', first_name: "base", last_name: 'data', bio: 'This is a test.' , password: 'passworD123!',  password_confirmation: 'passworD123!')
 
 Recipe.create(title: 'Skirt Steak and Grilled Onions', description: 'Juicy thinly sliced skirt steak paired with grilled onion. Try this authentic homemade Mexican dish for your next barbeque meal.', 
     instructions: "Pound beef with a meat mallet to tenderize. In a large bowl, mix beer, lime juice and 2 tablespoons oil until blended. Add beef to marinade; turn to coat. Refrigerate, covered, at least 30 minutes.
