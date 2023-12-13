@@ -20,11 +20,5 @@ Rails.application.routes.draw do
   get '*path' ,
     to: 'fallback#index', 
     constraints: ->(req) { !req.xhr? && req.format.html?}
-    
-    # if Rails.env.development?
-    #   mount Rails.application.routes => '/rails'
-    # else
-    #   mount Rails.application.routes => '/'
-    # end
 
 end

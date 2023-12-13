@@ -6,12 +6,8 @@ class UserSerializer < ActiveModel::Serializer
   def recipes 
     @recipes = object.recipes.all.map {|recipe| {"title" => recipe.title, "total_time" => recipe.prep_time + recipe.cooking_time, "id" => recipe.id }}
   end 
-
+ 
   def avatar
-    avatar_format(object)  # Pass the user object to the method
-  end
-  private 
-  def avatar_format(user)
     if object.avatar.attached?
       rails_blob_path(object.avatar, only_path: true)
       # object.avatar.blob.attributes
