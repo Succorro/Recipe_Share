@@ -2,25 +2,32 @@ import React from "react";
 import { Link } from "react-router-dom";
 import RecipeCard from "../RecipeCard";
 import { useSelector } from "react-redux";
+
 function Home() {
   // Redux store selector to grab recipe state
   const recipesState = useSelector((state) => state.recipes);
   const recipes = recipesState.recipes;
   const status = recipesState.status;
-  let threeRecipes;
+  let displayRecipes;
 
   //ternary to handle false recipes state
   recipes
-    ? (threeRecipes = recipes.slice(0, 3).map((recipe) => {
+    ? (displayRecipes = recipes.map((recipe) => {
         return <RecipeCard key={recipe.id} recipe={recipe} />;
       }))
-    : (threeRecipes = (
+    : (displayRecipes = (
         <h1 className="font-bold text-black"> Coming soon...</h1>
       ));
 
   // error handling for temporary unavailable recipes while loading
-  if (status === "loading" || status === "failed")
-    return <span className="loading loading-spinner loading-lg"></span>;
+  if (status === "loading" || status === "failed") {
+    displayRecipes = (
+      <div className=" flex items-center justify-center">
+        <h1 className="flex text-honey">Recipes are loading</h1>
+        <span className="loading loading-dots loading-lg text-honey"> </span>
+      </div>
+    );
+  }
   return (
     <div>
       <div>
@@ -39,11 +46,11 @@ function Home() {
 
         <section className="bg-amber-50 py-12">
           <div className="container mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-center text-gray-500">
-              Trending Recipes
+            <h2 className="text-4xl font-bold mb-10 text-center text-honey">
+              New Recipes
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-              {threeRecipes}
+              {displayRecipes}
             </div>
           </div>
         </section>

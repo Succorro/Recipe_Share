@@ -1,9 +1,9 @@
 class RecipesController < ApplicationController
   skip_before_action :authorize, only: [:index, :show, :search]
 
-  # GET /recipes
+  # GET /recipes used as a trending recipes feature
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.all.order(created_at: :desc).limit(6)
 
     render json: @recipes, status: :ok
   end

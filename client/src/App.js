@@ -27,10 +27,6 @@ function App() {
     dispatch(fetchUser());
   }, [dispatch]);
 
-  const status = useSelector((state) => state.recipes.status);
-  if (status === "loading" || status === "failed")
-    return <span className="loading loading-spinner loading-lg"></span>;
-
   return (
     <Router>
       <Navigation />

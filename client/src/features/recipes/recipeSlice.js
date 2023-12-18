@@ -29,7 +29,7 @@ export const recipeSlice = createSlice({
   initialState,
   reducers: {
     postRecipes: (state, action) => {
-      state.recipes.push(action.payload);
+      state.recipes.unshift(action.payload);
     },
     deleteRecipes: (state, action) => {
       state.recipes = state.recipes.filter(
