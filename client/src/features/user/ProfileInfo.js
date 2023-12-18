@@ -36,7 +36,6 @@ function ProfileInfo({ setForm }) {
           </button>
         </h1>
       ));
-  console.log(user);
   return (
     <div>
       <div className="max-w-4xl flex items-center h-auto lg:h-96 mb-0 flex-wrap mx-auto my-32 lg:my-0">

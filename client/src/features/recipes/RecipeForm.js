@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { postRecipes } from "./recipeSlice";
 import allTagOptions from "../../allTagOptions";
+import { updateUser } from "../user/userSlice";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 function RecipeForm() {
   const imageFile = useRef(null);
@@ -13,6 +15,8 @@ function RecipeForm() {
   const [recipeTags, setRecipeTags] = useState([]);
   const [recipe, setRecipe] = useState({});
   const [ingredients, setIngredients] = useState([]);
+  const user = useSelector((state) => state.user.user);
+  const recipes = user.recipes;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -76,7 +80,6 @@ function RecipeForm() {
         tag.tag_id
       );
     });
-
     fetch("/recipes", {
       method: "POST",
       body: formData,
@@ -85,6 +88,11 @@ function RecipeForm() {
         r.json().then((r) => {
           navigate(`/~recipes/${r.id}`);
           dispatch(postRecipes(r));
+          const updatedUser = {
+            ...user,
+            recipes: [...recipes, r],
+          };
+          dispatch(updateUser(updatedUser));
         });
       } else {
         r.json().then((error) => setErrors(error.errors));
