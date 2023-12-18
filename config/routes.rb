@@ -5,6 +5,7 @@ Rails.application.routes.draw do
  
   # Recipes 
   get '/recipes/search', to: 'recipes#search'
+  get 'recipes/discover', to: 'recipes#discover'
   resources :recipes
 
 

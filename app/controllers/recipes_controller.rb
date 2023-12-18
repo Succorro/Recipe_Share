@@ -21,6 +21,13 @@ class RecipesController < ApplicationController
     render json: recipes, status: :ok
   end 
 
+  # GET /recipes/discover 
+  def discover 
+    discover = params[:discover]
+    recipes = Recipe.joins(:tags).where(tags:{name: discover}).limit(10)
+    render json: recipes, status: :ok
+  end 
+
   # POST /recipes
   def create
     recipe = @current_user.recipes.create!(recipe_params)
