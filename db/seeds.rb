@@ -2,7 +2,7 @@
 # RecipeTag.destroy_all 
 # Ingredient.destroy_all 
 
-puts 'No seed data..'
+puts 'No seed data...'
 
 # puts 'Seeding Data....'
 # ActiveRecord::Base.transaction do

@@ -50,7 +50,9 @@ This will start the development server and open the app in your default web brow
 bundle install
 ```
 
-5. Create and seed the database:
+5. Uncomment and seed the database:
+
+The db/seed.rb file is commented out, however feel free to include your own seed data.
 
 ```bash
 rails db:create db:seed
