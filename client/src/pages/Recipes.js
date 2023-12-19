@@ -17,14 +17,18 @@ function Recipes() {
   const discoverState = useSelector((state) => state.discover);
   const recipes = discoverState.recipes;
   const status = discoverState.status;
+  const offset = discoverState.offset;
   const [category, setCategory] = useState("Italian");
-
   let categoryRecipes;
   let resultsDiv;
 
   useEffect(() => {
-    dispatch(discoverRecipes(category));
+    dispatch(discoverRecipes({ discover: category, offset: 10 }));
   }, [category]);
+
+  function handleClick() {
+    dispatch(discoverRecipes({ discover: category, offset: offset + 10 }));
+  }
 
   if (!recipes[0]) {
     categoryRecipes = (
@@ -98,6 +102,14 @@ function Recipes() {
         />
       </div>
       {resultsDiv}
+      {recipes.length > 0 && (
+        <button
+          className="bg-success text-white px-4 py-2 rounded-md mt-4 ml-44 sm:ml-96"
+          onClick={handleClick}
+        >
+          Load More
+        </button>
+      )}
     </div>
   );
 }

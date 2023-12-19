@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "2.7.4"
 
 # gem 'rack-cors'
-
+gem 'kaminari'
 # AWS SDK 
 gem 'aws-sdk-s3', require: false
 

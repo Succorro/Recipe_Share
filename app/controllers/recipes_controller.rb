@@ -24,12 +24,29 @@ class RecipesController < ApplicationController
   
 
   # GET /recipes/discover 
-  def discover 
+  def discover
     discover = params[:discover]
-    recipes = Recipe.joins(:tags).where(tags:{name: discover}).limit(10)
+    offset = params[:offset].to_i || 10
+    limit = offset 
+  
+    # Cache key based on the discover parameter and offset
+    cache_key = "recipes_#{discover}_#{offset}"
+  
+    # Fetch from cache or query the database
+    recipes = Rails.cache.fetch(cache_key, expires_in: 1.hour) do
+      if discover.present? && discover != "null"
+        Recipe.joins(:tags)
+              .where(tags: { name: discover })
+              .page(1).per(limit)
+              .map { |recipe|  RecipeSerializer.new(recipe).as_json }
+      else
+        Recipe.includes(:user, :tags).all.page(1).per(limit).map{RecipeSerializer.new(recipe).as_json}
+      end
+    end
+  
     render json: recipes, status: :ok
-  end 
-
+  end
+  
   # POST /recipes
   def create
     recipe = @current_user.recipes.create!(recipe_params)

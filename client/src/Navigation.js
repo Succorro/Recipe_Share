@@ -43,7 +43,7 @@ function Navigation() {
               className="bg-amber-50 invisible hover:visible focus:visible group-hover:visible focus:outline-none font-bold"
               type="search"
               name="search"
-              placeholder="Search recipes..."
+              placeholder="Search by name..."
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
             />

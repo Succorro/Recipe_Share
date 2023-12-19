@@ -2,21 +2,28 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const discoverRecipes = createAsyncThunk(
   "discover/discoverRecipes",
-  async (discover) => {
-    const discoverValue = discover || "Italian";
-    const params = new URLSearchParams();
-    params.append("discover", discoverValue);
+  async ({ discover, offset }) => {
+    try {
+      const params = new URLSearchParams();
+      params.append("discover", discover);
+      params.append("offset", offset);
 
-    return fetch(`/recipes/discover?${params}`)
-      .then((r) => r.json())
-      .then((data) => data);
+      const response = await fetch(`/recipes/discover?${params}`);
+      const data = await response.json();
+
+      return { data, offset };
+    } catch (error) {
+      console.error("Error fetching recipes:", error);
+      throw error;
+    }
   }
 );
 
 const initialState = {
-  category: "Italian",
   recipes: [],
   status: "idle",
+  category: "Italian",
+  offset: 0,
 };
 
 export const discoverSlice = createSlice({
@@ -28,7 +35,11 @@ export const discoverSlice = createSlice({
       state.status = "loading";
     });
     builder.addCase(discoverRecipes.fulfilled, (state, action) => {
-      state.recipes = action.payload;
+      console.log(action);
+      const { data, offset } = action.payload;
+      state.recipes = data;
+      state.offset = offset;
+      state.category = action.meta.arg.category;
       state.status = "idle";
     });
     builder.addCase(discoverRecipes.rejected, (state) => {

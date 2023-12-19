@@ -8,13 +8,8 @@ function RecipeCard({ recipe }) {
   const { title, description, total_time, username, tags, image_format } =
     recipe;
   let image_url;
-  // if (image_format === null) {
-  //   return (image_url = "/Steak.jpg");
-  // } else {
-  //   return (image_url = image_format.url);
-  // };
   image_format ? (image_url = image_format) : (image_url = "/Steak.jpg");
-  const tagsList = tags.map((tag) => ` ${tag.name}`);
+  const tagsList = tags ? tags.map((tag) => ` ${tag.name}`) : [];
   const displayPopup = (
     <div className="text-honey">
       <h1 className="text-honey">{title}</h1>
