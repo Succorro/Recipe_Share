@@ -7,7 +7,7 @@ function ProfileInfo({ setForm }) {
   const user = useSelector((state) => state.user);
   if (user.login === false) return <div></div>;
   if (user.user === null) return <div></div>;
-  const { username, avatar, email, first_name, last_name, bio, recipes, id } =
+  const { username, avatar, email, first_name, last_name, bio, recipes } =
     user.user;
   const avatar_url = avatar;
   let displayRecipes;
@@ -36,7 +36,6 @@ function ProfileInfo({ setForm }) {
           </button>
         </h1>
       ));
-  console.log(id);
   return (
     <div>
       <div className="max-w-4xl flex items-center h-auto lg:h-96 mb-0 flex-wrap mx-auto my-32 lg:my-0">
@@ -48,10 +47,7 @@ function ProfileInfo({ setForm }) {
               </div>
             </div>
 
-            <h1 className="mt-5 text-honey mb-0">
-              {username}
-              {id}
-            </h1>
+            <h1 className="mt-5 text-honey mb-0">{username}</h1>
             <h3 className="text-honey">Name:</h3>
             <p className="text-honey">
               {first_name} {last_name}
