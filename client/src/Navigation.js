@@ -15,7 +15,7 @@ function Navigation() {
   user.user ? (avatar = user.user.avatar) : (avatar = "/default_profile.jpeg");
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(searchRecipes(searchValue));
+    dispatch(searchRecipes({ search: searchValue, offset: 10 }));
     navigate("/~recipes/search");
   }
   const displayImage = user.user ? (

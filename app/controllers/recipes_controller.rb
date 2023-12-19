@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
   skip_before_action :authorize, only: [:index, :show, :search]
 
-  # GET /recipes used as a trending recipes feature
+  # GET /recipes
   def index
     @recipes = Recipe.all.order(created_at: :desc)
 
@@ -15,11 +15,13 @@ class RecipesController < ApplicationController
   end
 
   # GET /recipes/search 
-  def search 
+  def search
     search = params[:search]
-    recipes = Recipe.where("LOWER(title) LIKE ?", "%#{search.downcase}%").limit(10)
+    offset = params[:offset].to_i || 10  
+    recipes = Recipe.where("LOWER(title) LIKE ?", "%#{search.downcase}%").limit(offset)
     render json: recipes, status: :ok
-  end 
+  end
+  
 
   # GET /recipes/discover 
   def discover 
