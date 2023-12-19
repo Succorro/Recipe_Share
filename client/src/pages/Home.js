@@ -49,6 +49,13 @@ function Home() {
             <p className="text-xl text-honey">
               Share your favorite recipes with the world!
             </p>
+            {/* <p>
+              I still think you have issues with showing all the recipes. There
+              is no way to clear the filters to just be able to see all recipes.
+              Is that intentional? You also have 1 recipe with 46 tags
+              (exaggeration) and it shows the same recipe 6 times in the italian
+              section. Does that seem right?
+            </p> */}
           </div>
         </header>
 

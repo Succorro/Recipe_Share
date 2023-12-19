@@ -22,7 +22,7 @@ function Recipe() {
   const recipeId = parseInt(id, 10);
   const recipe = recipes.find((recipe) => recipe.id === recipeId);
   if (!recipe) return <RecipeError />;
-
+  console.log(user.id);
   const {
     title,
     description,

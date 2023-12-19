@@ -14,6 +14,13 @@ function Search() {
   const dispatch = useDispatch();
   const offset = state.offset;
   let displayResults;
+  const capitalizeEachWord = (inputString) => {
+    return inputString
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+  const displaySearch = capitalizeEachWord(search);
 
   function handleClick() {
     dispatch(searchRecipes({ search: search, offset: offset + 10 }));
@@ -53,7 +60,9 @@ function Search() {
       <h1 className=" flex items-center justify-center text-honey">
         Search Results
       </h1>
-      <p>{search}</p>
+      <p className="text-center font-bold text-xl text-gray-600">
+        {displaySearch} Recipes
+      </p>
       {displayResults}
       {searchResults.length > 0 && (
         <button
