@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
 
   # GET /recipes used as a trending recipes feature
   def index
-    @recipes = Recipe.all.order(created_at: :desc).limit(6)
+    @recipes = Recipe.all.order(created_at: :desc)
 
     render json: @recipes, status: :ok
   end

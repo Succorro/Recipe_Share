@@ -6,7 +6,8 @@ import { useSelector } from "react-redux";
 function Home() {
   // Redux store selector to grab recipe state
   const recipesState = useSelector((state) => state.recipes);
-  const recipes = recipesState.recipes;
+  const allRecipes = recipesState.recipes;
+  const recipes = allRecipes.slice(0, 5);
   const status = recipesState.status;
   let displayRecipes;
 
