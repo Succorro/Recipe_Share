@@ -40,7 +40,7 @@ class RecipesController < ApplicationController
               .page(1).per(limit)
               .map { |recipe|  RecipeSerializer.new(recipe).as_json }
       else
-        Recipe.includes(:user, :tags).all.page(1).per(limit).map{RecipeSerializer.new(recipe).as_json}
+        Recipe.all.page(1).per(limit).map{ |recipe| RecipeSerializer.new(recipe).as_json}
       end
     end
   
